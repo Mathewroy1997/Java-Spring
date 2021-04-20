@@ -6,6 +6,6 @@ public class HelloController {
 @RequestMapping("/add")  
     public String display()  
     {  
-        return "display.jsp";  
+        return "display";  
     }     
 }  
