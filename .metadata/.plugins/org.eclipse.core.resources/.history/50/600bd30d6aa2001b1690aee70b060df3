@@ -1,0 +1,10 @@
+<html>
+<body>
+<form action="add">
+Enter your sentence:
+<input type="text" name="t1">hi<br>
+
+<input type="submit">
+</form>
+</body>
+</html>
