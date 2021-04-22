@@ -1,8 +1,10 @@
 <html>
 <body>
 <form action="add">
-Enter your sentence:<br>
+User name:
 <input type="text" name="t1"><br>
+Password:
+<input type="text" name="t2"><br>
 <input type="submit" >
 
 </form>

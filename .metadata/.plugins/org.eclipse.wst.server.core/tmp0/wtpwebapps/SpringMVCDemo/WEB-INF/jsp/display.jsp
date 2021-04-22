@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-Number of letters: <%= request.getAttribute("Number") %>
+ <%= request.getAttribute("Result") %>
 </body>
 </html>
