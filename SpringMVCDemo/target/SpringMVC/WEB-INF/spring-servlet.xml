@@ -16,5 +16,6 @@
   
     <!--Provide support for conversion, formatting and validation -->  
     <mvc:annotation-driven/>  
+    <mvc:resources  location="/resources/" mapping="/resources/**"></mvc:resources>
   
-</beans>  
+</beans>
