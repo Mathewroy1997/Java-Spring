@@ -1,0 +1,24 @@
+
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<html>
+<head>
+
+<link rel="stylesheet" type="text/css" href="css/main.css">
+</head>
+<body>
+	<div class="centre">
+
+		<h2>Enter your credentials:</h2>
+
+
+
+		<form action="add">
+			<h5>User name:</h5>
+			<input type="text" name="t1"><br>
+			<h5>Password:</h5>
+			<input type="text" name="t2"><br> <input type="submit">
+	</div>
+	</form>
+
+</body>
+</html>

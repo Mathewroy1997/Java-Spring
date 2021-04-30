@@ -1,0 +1,42 @@
+    @charset "ISO-8859-1";
+h1{
+    color:red;
+}
+h2{
+	color:brown;
+}
+h5{
+	colour: red;
+}
+body{
+	background-color:#0D7;
+	
+}
+table{
+	width:50%;
+}
+table th{
+	background-color:#8888;
+}
+table tr{
+	background-color:white;
+
+}
+button{
+	background-color:black;
+	color:red;
+	width:12%;
+	height:40px;
+	
+}
+text t1{
+	color:brown;
+}
+.centre{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	background:white;
+	border-radius:10px;
+}
