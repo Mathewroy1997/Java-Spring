@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;  
 import java.sql.*;
 @Controller  
-public class HelloController {  
+public class HelloController { 
+	
 @RequestMapping("/add")  
     public ModelAndView display(HttpServletRequest request, HttpServletRequest response)  
     		throws Exception {  
@@ -53,9 +54,7 @@ public class HelloController {
     
     
     ModelAndView mv=new ModelAndView();
-    
     mv.setViewName("display");
-    
 	mv.addObject("Result", res);
    	return mv;
    	
