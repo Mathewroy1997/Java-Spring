@@ -41,6 +41,7 @@ public ModelAndView login(HttpServletRequest request) {
 	welcomePage.setViewName("welcome");
 	errorPage.setViewName("error");
  String username=request.getParameter("username");
+// String uname=username;
  String password=request.getParameter("password");
 List<Customer>list=dao.getData(username,password);
 if(list.isEmpty()) {
@@ -48,6 +49,7 @@ if(list.isEmpty()) {
 return errorPage;
 }
 else {
+	welcomePage.addObject("username", username);
 return welcomePage;
 
 }	

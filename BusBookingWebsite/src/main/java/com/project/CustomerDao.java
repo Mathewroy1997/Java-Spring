@@ -32,10 +32,10 @@ Customer customer=new Customer();
 
 customer.setUsername(rs.getString("username"));
 customer.setPassword(rs.getString("password"));
-customer.setFirstname(rs.getString("firstname"));
+/*customer.setFirstname(rs.getString("firstname"));
 customer.setLastname(rs.getString("lastname"));
 customer.setEmail(rs.getString("email"));
-customer.setPhone(rs.getString("phone"));
+customer.setPhone(rs.getString("phone"));*/
 
 return customer;
 }

@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-welcome. 
+welcome <%= request.getAttribute("username") %>. 
 
 </body>
 </html>
