@@ -1,5 +1,6 @@
 package com.project;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,12 +8,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.Customer;
 import com.project.CustomerDao;
+import com.project.Route;
+import com.project.RouteDao;
 
 @Controller
 public class LoginController {
@@ -21,10 +25,15 @@ public class LoginController {
 @Autowired
 CustomerDao dao;
 
+RouteDao route=new RouteDao();
+RouteDao route1=new RouteDao();
+@Autowired
+RouteDao routedao=new RouteDao();
 
 
 
-ModelAndView welcomePage=new ModelAndView();
+ModelAndView indexPage=new ModelAndView();
+ModelAndView profilePage=new ModelAndView();
 ModelAndView errorPage=new ModelAndView();
 ModelAndView registraionPage=new ModelAndView();
 
@@ -37,20 +46,37 @@ public ModelAndView registerPage() {
 
 @RequestMapping("/login")
 
-public ModelAndView login(HttpServletRequest request) {
-	welcomePage.setViewName("welcome");
+public ModelAndView login(HttpServletRequest request) throws DataAccessException, SQLException {
 	errorPage.setViewName("error");
+	profilePage.setViewName("welcome");
+	indexPage.setViewName("index");
  String username=request.getParameter("username");
-// String uname=username;
  String password=request.getParameter("password");
 List<Customer>list=dao.getData(username,password);
 if(list.isEmpty()) {
+	String error="Invalid Credentials, try again";
+	errorPage.addObject("error", error);
 	
 return errorPage;
 }
 else {
-	welcomePage.addObject("username", username);
-return welcomePage;
+	String d1 = null;
+	String d2 = null;
+	String d3 = null;
+	String d4 = null;
+	List<Route>list1=routedao.getDeparture(d1, d2, d3, d4);
+	profilePage.addObject("username", username);
+	profilePage.addObject("d1",d1);
+	profilePage.addObject("d2",d2);
+	profilePage.addObject("d3",d3);
+	profilePage.addObject("d4",d4);
+	
+		//route.getDeparture();
+		
+
+	
+	
+return profilePage;
 
 }	
 }
@@ -70,5 +96,12 @@ dao.saveEmployeeByPreparedStatement(customer);
 return "Success";
 
 }
+
+
+
 }
+
+
+
+
 

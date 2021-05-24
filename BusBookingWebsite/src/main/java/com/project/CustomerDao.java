@@ -23,7 +23,7 @@ this.jdbctemplate = jdbctemplate;
 
 
 public List<Customer> getData(String username,String password){
-String query="select * from data where username='"+username+"' and password='"+password+"'";
+String query="select * from userdata where username='"+username+"' and password='"+password+"'";
 
 
 return jdbctemplate.query(query,new RowMapper<Customer>(){
@@ -43,7 +43,7 @@ return customer;
 }
 
 public Boolean saveEmployeeByPreparedStatement(final Customer e){
-String query="insert into data(username,password,firstname,lastname,email,address,phone) values(?,?,?,?,?,?,?)";
+String query="insert into userdata(username,password,firstname,lastname,email,address,phone) values(?,?,?,?,?,?,?)";
 return jdbctemplate.execute(query,new PreparedStatementCallback<Boolean>(){
 public Boolean doInPreparedStatement(PreparedStatement ps)
 throws SQLException, DataAccessException {
