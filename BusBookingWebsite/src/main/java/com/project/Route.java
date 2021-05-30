@@ -3,10 +3,18 @@ package com.project;
 public class Route {
 
 	
-	private String d1;
-	private String d2;
+	public String departure;
+	/*private String d2;
 	private String d3;
-	private String d4;
+	private String d4;*/
+
+	public String getDeparture() {
+		return departure;
+	}
+
+	public void setDeparture(String departure) {
+		this.departure = departure;
+	}
 	
 	//@Override
 	/*public String toString() {
@@ -14,13 +22,8 @@ public class Route {
 	+ lastname + ", address=" + address + ", phone=" + phone + ", email=" + email + ", customer_id="
 	+ customer_id + "]";
 	}*/
-	public String getD1() {
-	return d1;
-	}
-	public void setD1(String d1) {
-	this.d1 = d1;
-	}
-	public String getD2() {
+	
+	/*public String getD2() {
 	return d2;
 	}
 	public void setD2(String d2) {
@@ -38,5 +41,5 @@ public class Route {
 	public String getD4() {
 		return d4;
 		}
-	
+	*/
 }

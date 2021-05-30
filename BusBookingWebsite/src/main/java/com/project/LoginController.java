@@ -10,9 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
+import org.springframework.web.bind.annotation.RequestMethod;
 import com.project.Customer;
 import com.project.CustomerDao;
 import com.project.Route;
@@ -25,13 +26,13 @@ public class LoginController {
 @Autowired
 CustomerDao dao;
 
-RouteDao route=new RouteDao();
-RouteDao route1=new RouteDao();
+/*RouteDao route=new RouteDao();
+RouteDao route1=new RouteDao();*/
 @Autowired
 RouteDao routedao=new RouteDao();
 
 
-
+/*
 ModelAndView indexPage=new ModelAndView();
 ModelAndView profilePage=new ModelAndView();
 ModelAndView errorPage=new ModelAndView();
@@ -41,42 +42,42 @@ ModelAndView registraionPage=new ModelAndView();
 public ModelAndView registerPage() {
 	registraionPage.setViewName("Register");
 	return registraionPage;
-}
+}*/
 
 
-@RequestMapping("/login")
+@RequestMapping(value="/login", method = RequestMethod.GET)
 
-public ModelAndView login(HttpServletRequest request) throws DataAccessException, SQLException {
-	errorPage.setViewName("error");
+public String login(HttpServletRequest request, Model m) throws DataAccessException, SQLException {
+	
+	/*errorPage.setViewName("error");
 	profilePage.setViewName("welcome");
-	indexPage.setViewName("index");
+	indexPage.setViewName("index");*/
  String username=request.getParameter("username");
  String password=request.getParameter("password");
 List<Customer>list=dao.getData(username,password);
+
+/*profilePage.addObject("list", list);
+request.setAttribute("list",list);*/
+
 if(list.isEmpty()) {
 	String error="Invalid Credentials, try again";
-	errorPage.addObject("error", error);
-	
-return errorPage;
+	//errorPage.addObject("error", error);
+	m.addAttribute("error", error);
+return "error";
 }
 else {
-	String d1 = null;
-	String d2 = null;
-	String d3 = null;
-	String d4 = null;
-	List<Route>list1=routedao.getDeparture(d1, d2, d3, d4);
-	profilePage.addObject("username", username);
-	profilePage.addObject("d1",d1);
-	profilePage.addObject("d2",d2);
-	profilePage.addObject("d3",d3);
-	profilePage.addObject("d4",d4);
+	
+	List<Route>list1=routedao.getDeparture();
+//profilePage.addObject("list",list1);
+	//profilePage.addObject("username", username);
+	//profilePage.addObject("password",password);
 	
 		//route.getDeparture();
-		
+		m.addAttribute("list", list1);
 
 	
 	
-return profilePage;
+return "welcome";
 
 }	
 }

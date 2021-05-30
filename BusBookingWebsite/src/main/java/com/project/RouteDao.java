@@ -23,18 +23,18 @@ public class RouteDao {
 		this.jdbctemplate = jdbctemplate;
 		}
 	
-	public List<Route> getDeparture(String d1,String d2,String d3,String d4){
-		String query="select `Departure` from routedata;";
+	public List<Route> getDeparture(){
+		String query="select * from routedata;";
 
 
 		return jdbctemplate.query(query,new RowMapper<Route>(){
 		public Route mapRow(ResultSet rs, int row) throws SQLException {
 		Route route=new Route();
 
-		route.setD1(rs.getString(1));
-		route.setD2(rs.getString(1));
-		route.setD3(rs.getString(1));
-		route.setD4(rs.getString(1));
+		route.setDeparture(rs.getString("Departure"));
+		//route.setD2(rs.getString(1));
+		//route.setD3(rs.getString(1));
+		//route.setD4(rs.getString(1));
 		/*customer.setFirstname(rs.getString("firstname"));
 		customer.setLastname(rs.getString("lastname"));
 		customer.setEmail(rs.getString("email"));
