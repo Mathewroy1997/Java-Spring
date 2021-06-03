@@ -1,7 +1,6 @@
 package com.project;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,13 +11,12 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.RequestMethod;
-import com.project.Customer;
-import com.project.CustomerDao;
-import com.project.Route;
+import com.project.*;
+/*import com.project.Route;
 import com.project.RouteDao;
-
+import com.project.CustomerDao;
+import com.project.RouteData;*/
 @Controller
 public class LoginController {
 	String registrationStatus;	
@@ -66,14 +64,21 @@ if(list.isEmpty()) {
 return "error";
 }
 else {
+	m.addAttribute("username", username);
 	
 	List<Route>list1=routedao.getDeparture();
+	m.addAttribute("list", list1);
+	
+	List<Route>list2=routedao.getDestination();
+	m.addAttribute("list2", list2);
+	
 //profilePage.addObject("list",list1);
 	//profilePage.addObject("username", username);
 	//profilePage.addObject("password",password);
 	
 		//route.getDeparture();
-		m.addAttribute("list", list1);
+		
+		
 
 	
 	

@@ -18,20 +18,24 @@ import com.project.Customer;
 
 public class RouteDao {
 	
+	
 	private JdbcTemplate jdbctemplate;
 	public void setJdbctemplate(JdbcTemplate jdbctemplate) {
 		this.jdbctemplate = jdbctemplate;
 		}
 	
 	public List<Route> getDeparture(){
-		String query="select * from routedata;";
-
+		String query="select * from routedata";
+		
 
 		return jdbctemplate.query(query,new RowMapper<Route>(){
 		public Route mapRow(ResultSet rs, int row) throws SQLException {
-		Route route=new Route();
+			Route route= new Route();
+				 route.setDeparture(rs.getString("Departure"));
+			
+			
+		
 
-		route.setDeparture(rs.getString("Departure"));
 		//route.setD2(rs.getString(1));
 		//route.setD3(rs.getString(1));
 		//route.setD4(rs.getString(1));
@@ -44,4 +48,26 @@ public class RouteDao {
 		}
 		});
 		}
+		public List<Route> getDestination(){
+		String query="select * from routedata;";
+
+
+		return jdbctemplate.query(query,new RowMapper<Route>(){
+		public Route mapRow(ResultSet rs, int row) throws SQLException {
+		
+			Route route1=new Route();	
+		route1.setDestination(rs.getString("Destination"));
+		//route.setD2(rs.getString(1));
+		//route.setD3(rs.getString(1));
+		//route.setD4(rs.getString(1));
+		/*customer.setFirstname(rs.getString("firstname"));
+		customer.setLastname(rs.getString("lastname"));
+		customer.setEmail(rs.getString("email"));
+		customer.setPhone(rs.getString("phone"));*/
+
+		return route1;
+		}
+		});
+		}
+	
 	}

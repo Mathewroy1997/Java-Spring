@@ -4,12 +4,21 @@ public class Route {
 
 	
 	public String departure;
+	public String destination;
 	/*private String d2;
 	private String d3;
 	private String d4;*/
 
 	public String getDeparture() {
 		return departure;
+	}
+
+	public String getDestination() {
+		return destination;
+	}
+
+	public void setDestination(String destination) {
+		this.destination = destination;
 	}
 
 	public void setDeparture(String departure) {

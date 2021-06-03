@@ -4,5 +4,8 @@
     <fullyQualifiedTypeName name="org.springframework.web.servlet.ModelAndView"/>
     <fullyQualifiedTypeName name="org.springframework.jdbc.core.JdbcTemplate"/>
     <fullyQualifiedTypeName name="com.project.Route"/>
+    <fullyQualifiedTypeName name="com.project.Customer"/>
     <fullyQualifiedTypeName name="com.project.RouteDao"/>
+    <fullyQualifiedTypeName name="com.project.CustomerDao"/>
+    <fullyQualifiedTypeName name="com.project.RouteData"/>
 </qualifiedTypeNameHistroy>

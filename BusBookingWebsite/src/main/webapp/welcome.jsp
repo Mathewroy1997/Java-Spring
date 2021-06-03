@@ -19,38 +19,6 @@ welcome back <%= request.getAttribute("username") %>.
 Find your bus: <br>
 Boarding point
 
-
-
-
-<h1>Route  list</h1>
-<table border="2" width="70%" cellpadding="2">
-<tr><th>route</th></tr>
-<c:forEach var="route" items="${list}">
-<tr>
-<td>${route.departure}</td>
-</tr>
-</c:forEach>
-</table>
-<br/>
-
-
-
-
-
-
-
-
-
-
-<select name="departure" id="id">
-    <option value="volvo"><%= request.getAttribute("username") %></option>
-    <option value="saab"><%= request.getAttribute("password") %></option>
-    <option value="opel"><%= request.getAttribute("d3") %></option>
-    <option value="audi"><%= request.getAttribute("d4") %></option>
-
-
-  </select><br>
-  
 <select name="database1">
   <c:forEach items="${list}" var="route">
     <option value="${route.departure}">
@@ -58,17 +26,22 @@ Boarding point
     </option>
   </c:forEach>
 </select>
+<br>
+   Destination   <select name="database2">
+  <c:forEach items="${list2}" var="route1">
+    <option value="${route1.destination}">
+        ${route1.destination}
+    </option>
+  </c:forEach>
+</select>
 
-  
-Destination<select name="departure" id="id">
-    <option value="volvo">Volvo</option>
-    <option value="saab">Saab</option>
-    <option value="opel">Opel</option>
-    <option value="audi">Audi</option>
 
 
-  </select>
-Date<input type="date" name="Date"><br>
+
+
+
+<br>
+<br>Date<input type="date" name="Date"><br>
 No.of tickets<input type="number" name="No.of people" min="1" max="10"><br>
 <input type="submit" value="Find bus"><br>
 </body>
