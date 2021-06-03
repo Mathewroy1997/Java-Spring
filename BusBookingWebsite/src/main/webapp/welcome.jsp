@@ -35,14 +35,9 @@ Boarding point
   </c:forEach>
 </select>
 
+<form action="nextPage">
+<input type="submit" value="Next:">
+</form>
 
-
-
-
-
-<br>
-<br>Date<input type="date" name="Date"><br>
-No.of tickets<input type="number" name="No.of people" min="1" max="10"><br>
-<input type="submit" value="Find bus"><br>
 </body>
 </html>

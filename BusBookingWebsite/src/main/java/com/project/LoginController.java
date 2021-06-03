@@ -102,10 +102,14 @@ dao.saveEmployeeByPreparedStatement(customer);
 return "Success";
 
 }
-
-
-
+@RequestMapping("/nextPage")
+public String nextPage() {
+	
+	return "bookingpage2";
 }
+}
+
+
 
 
 

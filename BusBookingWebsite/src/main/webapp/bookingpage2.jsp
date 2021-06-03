@@ -8,5 +8,9 @@
 </head>
 <body>
 
+Date<input type="date" name="Date"><br>
+No.of tickets<input type="number" name="No.of people" min="1" max="10"><br>
+<input type="submit" value="Find bus"><br>
+
 </body>
 </html>
