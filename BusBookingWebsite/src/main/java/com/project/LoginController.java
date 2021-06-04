@@ -13,10 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import com.project.*;
-/*import com.project.Route;
-import com.project.RouteDao;
-import com.project.CustomerDao;
-import com.project.RouteData;*/
+
 @Controller
 public class LoginController {
 	String registrationStatus;	
@@ -24,42 +21,27 @@ public class LoginController {
 @Autowired
 CustomerDao dao;
 
-/*RouteDao route=new RouteDao();
-RouteDao route1=new RouteDao();*/
+
 @Autowired
 RouteDao routedao=new RouteDao();
 
 
-/*
-ModelAndView indexPage=new ModelAndView();
-ModelAndView profilePage=new ModelAndView();
-ModelAndView errorPage=new ModelAndView();
-ModelAndView registraionPage=new ModelAndView();
-
-@RequestMapping("/register")
-public ModelAndView registerPage() {
-	registraionPage.setViewName("Register");
-	return registraionPage;
-}*/
 
 
 @RequestMapping(value="/login", method = RequestMethod.GET)
 
 public String login(HttpServletRequest request, Model m) throws DataAccessException, SQLException {
 	
-	/*errorPage.setViewName("error");
-	profilePage.setViewName("welcome");
-	indexPage.setViewName("index");*/
+	
  String username=request.getParameter("username");
  String password=request.getParameter("password");
 List<Customer>list=dao.getData(username,password);
 
-/*profilePage.addObject("list", list);
-request.setAttribute("list",list);*/
+
 
 if(list.isEmpty()) {
 	String error="Invalid Credentials, try again";
-	//errorPage.addObject("error", error);
+	
 	m.addAttribute("error", error);
 return "error";
 }
@@ -72,19 +54,14 @@ else {
 	List<Route>list2=routedao.getDestination();
 	m.addAttribute("list2", list2);
 	
-//profilePage.addObject("list",list1);
-	//profilePage.addObject("username", username);
-	//profilePage.addObject("password",password);
-	
-		//route.getDeparture();
-		
-		
 
-	
-	
+
 return "welcome";
 
-}	
+}
+
+
+
 }
 
 @RequestMapping("/submitNewRegistraion")
@@ -102,9 +79,11 @@ dao.saveEmployeeByPreparedStatement(customer);
 return "Success";
 
 }
-@RequestMapping("/nextPage")
-public String nextPage() {
-	
+@RequestMapping(value="/nextPage", method = RequestMethod.GET)
+public String nextPage(HttpServletRequest request) {
+	String departure=request.getParameter("database1");
+	String destination=request.getParameter("database2");
+	List<Route> list3=routedao.getRouteData(departure, destination);
 	return "bookingpage2";
 }
 }

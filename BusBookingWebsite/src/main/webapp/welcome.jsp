@@ -17,25 +17,26 @@ welcome back <%= request.getAttribute("username") %>.
 <input type="submit" value="View your tickets"><br>
 
 Find your bus: <br>
+<form action="nextPage">
 Boarding point
-
-<select name="database1">
-  <c:forEach items="${list}" var="route">
-    <option value="${route.departure}">
+<select  name="database1">
+  <c:forEach items="${list}" var="route"  >
+    <option value="${route.departure}" >
         ${route.departure}
     </option>
   </c:forEach>
 </select>
 <br>
-   Destination   <select name="database2">
-  <c:forEach items="${list2}" var="route1">
+Destination
+<select name="database2" >
+  <c:forEach items="${list2}" var="route1" >
     <option value="${route1.destination}">
         ${route1.destination}
     </option>
   </c:forEach>
 </select>
 
-<form action="nextPage">
+
 <input type="submit" value="Next:">
 </form>
 

@@ -34,15 +34,6 @@ public class RouteDao {
 				 route.setDeparture(rs.getString("Departure"));
 			
 			
-		
-
-		//route.setD2(rs.getString(1));
-		//route.setD3(rs.getString(1));
-		//route.setD4(rs.getString(1));
-		/*customer.setFirstname(rs.getString("firstname"));
-		customer.setLastname(rs.getString("lastname"));
-		customer.setEmail(rs.getString("email"));
-		customer.setPhone(rs.getString("phone"));*/
 
 		return route;
 		}
@@ -57,17 +48,30 @@ public class RouteDao {
 		
 			Route route1=new Route();	
 		route1.setDestination(rs.getString("Destination"));
-		//route.setD2(rs.getString(1));
-		//route.setD3(rs.getString(1));
-		//route.setD4(rs.getString(1));
-		/*customer.setFirstname(rs.getString("firstname"));
-		customer.setLastname(rs.getString("lastname"));
-		customer.setEmail(rs.getString("email"));
-		customer.setPhone(rs.getString("phone"));*/
-
+		
 		return route1;
 		}
 		});
 		}
+		
+		public List<Route> getRouteData(String departure,String destination){
+			
+			String query3="select * from routedata where departure='"+departure+"' and destination='"+destination+"'";
+			return jdbctemplate.query(query3,new RowMapper<Route>(){
+				public Route mapRow(ResultSet rs, int row) throws SQLException {
+					Route route3=new Route();
+						 route3.setDeparture(rs.getString("departure"));
+						 route3.setDestination(rs.getString("destination"));
+						 route3.setRouteID(rs.getInt("route id"));
+						 route3.setRate(rs.getInt("Rate"));
+						 
+					
+					
+				
+				return route3;
+				}
+				});
 	
 	}
+		
+}

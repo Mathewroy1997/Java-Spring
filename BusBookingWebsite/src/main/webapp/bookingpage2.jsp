@@ -10,7 +10,8 @@
 
 Date<input type="date" name="Date"><br>
 No.of tickets<input type="number" name="No.of people" min="1" max="10"><br>
+<form action="findBus">
 <input type="submit" value="Find bus"><br>
-
+</form>
 </body>
 </html>
