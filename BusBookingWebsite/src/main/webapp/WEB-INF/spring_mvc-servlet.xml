@@ -28,6 +28,9 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd
 <bean id="rdao" class="com.project.RouteDao">
 <property name="jdbctemplate" ref="jdbctemplate"></property>
 </bean>
+<bean id="tdao" class="com.project.TripDao">
+<property name="jdbctemplate" ref="jdbctemplate"></property>
+</bean>
 
 
 <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">

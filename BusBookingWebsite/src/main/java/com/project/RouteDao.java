@@ -14,21 +14,21 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.project.Customer;
-
+import com.project.Route;
 
 public class RouteDao {
 	
 	
-	private JdbcTemplate jdbctemplate;
-	public void setJdbctemplate(JdbcTemplate jdbctemplate) {
-		this.jdbctemplate = jdbctemplate;
+	private JdbcTemplate jdbctemplate1;
+	public void setJdbctemplate(JdbcTemplate jdbctemplate1) {
+		this.jdbctemplate1 = jdbctemplate1;
 		}
 	
 	public List<Route> getDeparture(){
 		String query="select * from routedata";
 		
 
-		return jdbctemplate.query(query,new RowMapper<Route>(){
+		return jdbctemplate1.query(query,new RowMapper<Route>(){
 		public Route mapRow(ResultSet rs, int row) throws SQLException {
 			Route route= new Route();
 				 route.setDeparture(rs.getString("Departure"));
@@ -43,7 +43,7 @@ public class RouteDao {
 		String query="select * from routedata;";
 
 
-		return jdbctemplate.query(query,new RowMapper<Route>(){
+		return jdbctemplate1.query(query,new RowMapper<Route>(){
 		public Route mapRow(ResultSet rs, int row) throws SQLException {
 		
 			Route route1=new Route();	
@@ -56,12 +56,12 @@ public class RouteDao {
 		
 		public List<Route> getRouteData(String departure,String destination){
 			
-			String query3="select * from routedata where departure='"+departure+"' and destination='"+destination+"'";
-			return jdbctemplate.query(query3,new RowMapper<Route>(){
+			String query3="select * from routedata where Departure='"+departure+"' and Destination='"+destination+"';";
+			return jdbctemplate1.query(query3,new RowMapper<Route>(){
 				public Route mapRow(ResultSet rs, int row) throws SQLException {
 					Route route3=new Route();
-						 route3.setDeparture(rs.getString("departure"));
-						 route3.setDestination(rs.getString("destination"));
+						 route3.setDeparture(rs.getString("Departure"));
+						 route3.setDestination(rs.getString("Destination"));
 						 route3.setRouteID(rs.getInt("route id"));
 						 route3.setRate(rs.getInt("Rate"));
 						 

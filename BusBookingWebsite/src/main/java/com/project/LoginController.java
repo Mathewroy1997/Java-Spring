@@ -24,6 +24,8 @@ CustomerDao dao;
 
 @Autowired
 RouteDao routedao=new RouteDao();
+@Autowired
+TripDao tripDao=new TripDao();
 
 
 
@@ -39,10 +41,12 @@ List<Customer>list=dao.getData(username,password);
 
 
 
+
 if(list.isEmpty()) {
 	String error="Invalid Credentials, try again";
 	
 	m.addAttribute("error", error);
+
 return "error";
 }
 else {
@@ -80,10 +84,15 @@ return "Success";
 
 }
 @RequestMapping(value="/nextPage", method = RequestMethod.GET)
-public String nextPage(HttpServletRequest request) {
+public String nextPage(HttpServletRequest request, Model m) {
 	String departure=request.getParameter("database1");
 	String destination=request.getParameter("database2");
 	List<Route> list3=routedao.getRouteData(departure, destination);
+	List<Trip> trip1=tripDao.getAvailableSeats();
+Trip seats=trip1.get(0);
+int seatnumber=seats.seats;
+
+m.addAttribute("seatnumber",seatnumber);
 	return "bookingpage2";
 }
 }
