@@ -95,6 +95,17 @@ int seatnumber=seats.seats;
 m.addAttribute("seatnumber",seatnumber);
 	return "bookingpage2";
 }
+
+@RequestMapping(value="/findBus", method = RequestMethod.GET)
+public String page2(HttpServletRequest request, Model m) {
+	String date1=request.getParameter("date");
+	String date=request.getParameter("date");
+	int ticket=Integer.parseInt(request.getParameter("tickets"));
+
+	return "bookingpage3";
+}
+
+
 }
 
 

@@ -8,10 +8,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-Available tickets:<%= request.getAttribute("seatnumber") %>
-<br>Date: <input type="date">
-<br>No.of tickets<input type="number" name="No.of people" min="1" max="50"><br>
 <form action="findBus">
+Available tickets:<%= request.getAttribute("seatnumber") %>
+<br>Date: <input type="date" name="date">
+<br>No.of tickets<input type="number" name="tickets" min="1" max="50"><br>
+
 <input type="submit" value="Find bus"><br>
 </form>
 </body>
