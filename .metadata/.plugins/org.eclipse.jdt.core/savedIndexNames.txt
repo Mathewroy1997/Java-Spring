@@ -66,7 +66,6 @@ INDEX VERSION 1.131+C:\Users\USER\eclipse-workspace\.metadata\.plugins\org.eclip
 703589930.index
 1338397245.index
 3383775654.index
-34343119.index
 1410661977.index
 1500444764.index
 2952488648.index

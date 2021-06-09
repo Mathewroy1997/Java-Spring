@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+No trip available in selected date.<br>
 <form action="findBus">
 Available tickets:${seats}
 <br>Date: <input type="date" name="date">

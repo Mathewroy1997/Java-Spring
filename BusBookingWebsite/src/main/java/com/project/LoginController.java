@@ -88,21 +88,31 @@ public String nextPage(HttpServletRequest request, Model m) {
 	String departure=request.getParameter("database1");
 	String destination=request.getParameter("database2");
 	List<Route> list3=routedao.getRouteData(departure, destination);
-	List<Trip> trip1=tripDao.getAvailableSeats();
-Trip seats=trip1.get(0);
-int seatnumber=seats.seats;
+	Route route4=list3.get(0);
+	int route_id=route4.routeID;
+	//List<Trip> trip1=tripDao.getAvailableSeats(route_id);
+	int seats=Integer.parseInt(tripDao.getSeats(route_id));
+	
+	m.addAttribute("route_id",route_id);
+//Trip seats=trip1.get(0);
+//int seatnumber=seats.seats;
 
-m.addAttribute("seatnumber",seatnumber);
+m.addAttribute("seats",seats);
 	return "bookingpage2";
 }
 
 @RequestMapping(value="/findBus", method = RequestMethod.GET)
 public String page2(HttpServletRequest request, Model m) {
-	String date1=request.getParameter("date");
 	String date=request.getParameter("date");
 	int ticket=Integer.parseInt(request.getParameter("tickets"));
-
-	return "bookingpage3";
+	List<Trip>findTrip=tripDao.CheckDate(date, ticket);
+	if(findTrip.isEmpty()) {
+		return "bookingpage4";
+	}
+	else {
+		return "bookingpage3";
+	}
+	
 }
 
 
