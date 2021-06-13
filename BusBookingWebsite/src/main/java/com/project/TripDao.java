@@ -44,29 +44,18 @@ route.getRouteID();
 		String seat = jdbctemplate.queryForObject(sql, new Object[] { id }, String.class);
 		return seat;
 		}
-	public List<Trip> CheckDate(String date, final int ticket){
+	public List<Trip> CheckDate(String date, int routeID){
 		
-		String query="select * from tripdata where Date=\""+date+"\" and routeID="+routeid1+";";
+		String query="select * from tripdata where Date=\""+date+"\" and routeID="+routeID+";";
 		
 		return jdbctemplate.query(query,new RowMapper<Trip>(){
 		public Trip mapRow(ResultSet rs, int row) throws SQLException {
-		
-int vacantSeats=rs.getInt("Seats");
-		
-		if(ticket<vacantSeats) {
-			RouteDao dao=new RouteDao();
-			int pricePerTicket1=dao.getPricePerTicket();
-			int totalprice=pricePerTicket1*ticket;
-		
 			Trip trip=new Trip();
-			trip.setTotalprice(totalprice);
-			trip.setTripID(rs.getInt("trip_id"));
-			return trip;
-		}
-		else {
-			Trip trip=new Trip();
-			return trip;
-		}
+			trip.setSeats(rs.getInt("seats"));
+			trip.setDate(rs.getString("date"));
+            return trip;
+		
+		
 		
 		}
 		});

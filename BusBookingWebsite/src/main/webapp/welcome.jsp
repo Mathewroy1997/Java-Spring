@@ -35,7 +35,7 @@ Destination
     </option>
   </c:forEach>
 </select>
-
+<br>Date: <input type="date" name="date">
 
 <input type="submit" value="Next:">
 </form>
