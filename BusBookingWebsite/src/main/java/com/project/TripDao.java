@@ -9,7 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-
+import com.project.RouteDao;
+import com.project.Route;
 public class TripDao {
 	
 	
@@ -46,14 +47,19 @@ route.getRouteID();
 	public List<Trip> CheckDate(String date, final int ticket){
 		
 		String query="select * from tripdata where Date=\""+date+"\" and routeID="+routeid1+";";
-		String h;
+		
 		return jdbctemplate.query(query,new RowMapper<Trip>(){
 		public Trip mapRow(ResultSet rs, int row) throws SQLException {
 		
 int vacantSeats=rs.getInt("Seats");
 		
 		if(ticket<vacantSeats) {
+			RouteDao dao=new RouteDao();
+			int pricePerTicket1=dao.getPricePerTicket();
+			int totalprice=pricePerTicket1*ticket;
+		
 			Trip trip=new Trip();
+			trip.setTotalprice(totalprice);
 			trip.setTripID(rs.getInt("trip_id"));
 			return trip;
 		}

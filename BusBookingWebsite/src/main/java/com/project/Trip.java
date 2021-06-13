@@ -5,6 +5,7 @@ public class Trip {
 	int tripID;
 	int seats;
 	String date;
+	public int totalPrice;
 	public int getTripID() {
 		return tripID;
 	}
@@ -22,5 +23,8 @@ public class Trip {
 	}
 	public void setDate(String date) {
 		this.date = date;
+	}
+	public void setTotalprice(int totalPrice) {
+		this.totalPrice=totalPrice;
 	}
 }

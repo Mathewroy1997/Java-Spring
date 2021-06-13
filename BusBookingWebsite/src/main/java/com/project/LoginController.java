@@ -87,12 +87,19 @@ return "Success";
 public String nextPage(HttpServletRequest request, Model m) {
 	String departure=request.getParameter("database1");
 	String destination=request.getParameter("database2");
+	
 	List<Route> list3=routedao.getRouteData(departure, destination);
+	if(list3.isEmpty()) {
+		return "unknownRoute";
+	}
 	Route route4=list3.get(0);
 	int route_id=route4.routeID;
+	int rate=route4.rate;
 	//List<Trip> trip1=tripDao.getAvailableSeats(route_id);
 	int seats=Integer.parseInt(tripDao.getSeats(route_id));
-	
+	m.addAttribute("departure",departure);
+	m.addAttribute("destination",destination);
+	m.addAttribute("rate",rate);
 	m.addAttribute("route_id",route_id);
 //Trip seats=trip1.get(0);
 //int seatnumber=seats.seats;
@@ -110,6 +117,10 @@ public String page2(HttpServletRequest request, Model m) {
 		return "bookingpage4";
 	}
 	else {
+		Trip trip=new Trip();
+		trip=findTrip.get(0);
+		int totalPrice=trip.totalPrice;
+		m.addAttribute("TotalPrice",totalPrice);
 		return "bookingpage3";
 	}
 	

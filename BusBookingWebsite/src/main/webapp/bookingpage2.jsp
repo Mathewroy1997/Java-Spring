@@ -1,4 +1,6 @@
 <%@ page isELIgnored="false"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -9,7 +11,12 @@
 </head>
 <body>
 <form action="findBus">
-Available tickets:${seats}
+
+Departure: <%= request.getAttribute("departure") %>&emsp;
+Destination: <%= request.getAttribute("destination") %>&emsp;
+Price per seat:<%= request.getAttribute("rate") %>&emsp;
+Available tickets:${seats}&emsp;
+<p>
 <br>Date: <input type="date" name="date">
 <br>No.of tickets<input type="number" name="tickets" min="1" max="50"><br>
 
