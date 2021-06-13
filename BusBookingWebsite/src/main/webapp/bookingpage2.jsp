@@ -15,7 +15,7 @@
 Departure: <%= request.getAttribute("departure") %>&emsp;
 Destination: <%= request.getAttribute("destination") %>&emsp;
 Price per seat:<%= request.getAttribute("rate") %>&emsp;
-Available tickets:${seats}&emsp;
+Available tickets:<%=request.getAttribute("seats") %>&emsp;
 <p>
 <br>Date: <input type="date" name="date">
 <br>No.of tickets<input type="number" name="tickets" min="1" max="50"><br>

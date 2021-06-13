@@ -96,7 +96,7 @@ public String nextPage(HttpServletRequest request, Model m) {
 	int route_id=route4.routeID;
 	int rate=route4.rate;
 	//List<Trip> trip1=tripDao.getAvailableSeats(route_id);
-	//int seats=Integer.parseInt(tripDao.getSeats(route_id));
+	
 	m.addAttribute("departure",departure);
 	m.addAttribute("destination",destination);
 	m.addAttribute("rate",rate);
@@ -108,7 +108,11 @@ public String nextPage(HttpServletRequest request, Model m) {
 		return "bookingpage4";
 	}
 	else {
+		Trip trip=new Trip();
+		trip=findTrip.get(0);
+		int seatsAvailable=trip.seats;
 		
+		m.addAttribute("seats",seatsAvailable);
 		return "bookingpage3";
 	}
 	
@@ -116,7 +120,7 @@ public String nextPage(HttpServletRequest request, Model m) {
 //Trip seats=trip1.get(0);
 //int seatnumber=seats.seats;
 
-//m.addAttribute("seats",seats);
+//
 	
 }
 
