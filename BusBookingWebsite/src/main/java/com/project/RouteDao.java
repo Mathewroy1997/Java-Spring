@@ -17,7 +17,7 @@ import com.project.Customer;
 import com.project.Route;
 
 public class RouteDao {
-	 int pricePerTicket;
+	int pricePerTicket;
 	int trial;
 	int math;
 	public void setPricePerTicket(int pricePerTicket) {
@@ -74,8 +74,10 @@ public class RouteDao {
 						 route3.setDestination(rs.getString("Destination"));
 						 route3.setRouteID(rs.getInt("route id"));
 						 route3.setRate(rs.getInt("Rate"));
-						
-						  pricePerTicket=route3.rate;
+						int trial=route3.rate;
+						RouteDao dao1=new RouteDao();
+						dao1.setPricePerTicket(trial);
+			
 						
 						 trial=route3.routeID;
 						 math=route3.routeID;
@@ -86,5 +88,10 @@ public class RouteDao {
 				});
 	
 	}
+		public int totalPrice(int tickets, int rate) { 
+
+			int totalPrice=tickets*rate;
+			return totalPrice;
+		}
 		
 }

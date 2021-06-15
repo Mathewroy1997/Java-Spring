@@ -48,7 +48,7 @@ route.getRouteID();
 		
 		String query="select * from tripdata where Date=\""+date+"\" and routeID="+routeID+";";
 		
-		return jdbctemplate.query(query,new RowMapper<Trip>(){
+		return jdbctemplate.query(query,new  RowMapper<Trip>(){
 		public Trip mapRow(ResultSet rs, int row) throws SQLException {
 			Trip trip=new Trip();
 			trip.setSeats(rs.getInt("seats"));
@@ -60,6 +60,7 @@ route.getRouteID();
 		}
 		});
 		}
+	
 
 }
 

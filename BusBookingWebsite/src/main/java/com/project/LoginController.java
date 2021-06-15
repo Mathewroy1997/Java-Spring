@@ -16,6 +16,7 @@ import com.project.*;
 
 @Controller
 public class LoginController {
+	int rate;
 	String registrationStatus;	
 	
 @Autowired
@@ -83,6 +84,15 @@ dao.saveEmployeeByPreparedStatement(customer);
 return "Success";
 
 }
+@RequestMapping(value="/bookingpage")
+public String DirectToBookingPage(Model m){
+	List<Route>list1=routedao.getDeparture();
+	m.addAttribute("list", list1);
+	
+	List<Route>list2=routedao.getDestination();
+	m.addAttribute("list2", list2);
+	return "newbooking";
+}
 @RequestMapping(value="/nextPage", method = RequestMethod.GET)
 public String nextPage(HttpServletRequest request, Model m) {
 	String departure=request.getParameter("database1");
@@ -94,13 +104,13 @@ public String nextPage(HttpServletRequest request, Model m) {
 	}
 	Route route4=list3.get(0);
 	int route_id=route4.routeID;
-	int rate=route4.rate;
+	rate=route4.rate;
 	//List<Trip> trip1=tripDao.getAvailableSeats(route_id);
 	
 	m.addAttribute("departure",departure);
 	m.addAttribute("destination",destination);
 	m.addAttribute("rate",rate);
-	m.addAttribute("route_id",route_id);
+	m.addAttribute("route_id",route_id); 
 	
 	String date=request.getParameter("date");
 	List<Trip>findTrip=tripDao.CheckDate(date,route_id);
@@ -111,10 +121,10 @@ public String nextPage(HttpServletRequest request, Model m) {
 		Trip trip=new Trip();
 		trip=findTrip.get(0);
 		int seatsAvailable=trip.seats;
-		
 		m.addAttribute("seats",seatsAvailable);
-		return "bookingpage3";
+		return "bookingpage3"; 
 	}
+	
 	
 	
 //Trip seats=trip1.get(0);
@@ -122,6 +132,14 @@ public String nextPage(HttpServletRequest request, Model m) {
 
 //
 	
+}
+@RequestMapping(value="/totalPrice", method = RequestMethod.GET)
+public String getPassengerInfo(HttpServletRequest request, Model m) {
+	RouteDao dao =new RouteDao();
+	int tickets=Integer.parseInt(request.getParameter("tickets"));
+	int totalprice=dao.totalPrice(tickets,rate);
+	m.addAttribute("totalPrice",totalprice);
+	return "passengerInfoPage";
 }
 
 /*
