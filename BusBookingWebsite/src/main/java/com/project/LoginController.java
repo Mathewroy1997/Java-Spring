@@ -139,6 +139,7 @@ public String getPassengerInfo(HttpServletRequest request, Model m) {
 	int tickets=Integer.parseInt(request.getParameter("tickets"));
 	int totalprice=dao.totalPrice(tickets,rate);
 	m.addAttribute("totalPrice",totalprice);
+	m.addAttribute("tickets",tickets);
 	return "passengerInfoPage";
 }
 
