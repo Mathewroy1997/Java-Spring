@@ -1,5 +1,9 @@
 package com.project;
 
+/**
+ * @author Mathew's PC
+ *
+ */
 public class Customer {
 
 private String username;
@@ -9,19 +13,22 @@ private String lastname;
 private String address;
 private String phone;
 private String email;
-private int customer_id;
+private int userid;
 @Override
 public String toString() {
 return "Customer [username=" + username + ", password=" + password + ", firstname=" + firstname + ", lastname="
 + lastname + ", address=" + address + ", phone=" + phone + ", email=" + email + ", customer_id="
-+ customer_id + "]";
++ userid + "]";
 }
-public int getCustomer_id() {
-return customer_id;
+
+public int getUserid() {
+	return userid;
 }
-public void setCustomer_id(int customer_id) {
-this.customer_id = customer_id;
+
+public void setUserid(int userid) {
+	this.userid = userid;
 }
+
 public String getEmail() {
 return email;
 }

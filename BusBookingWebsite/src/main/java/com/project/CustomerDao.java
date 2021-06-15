@@ -32,7 +32,7 @@ Customer customer=new Customer();
 
 customer.setUsername(rs.getString("username"));
 customer.setPassword(rs.getString("password"));
-
+customer.setUserid(rs.getInt("userid"));
 return customer;
 }
 });
@@ -54,4 +54,25 @@ ps.setString(7,e.getPhone());
 return ps.execute();
 
 }
-});}}
+});}
+
+
+public int setPassengerData(String name, int age, int id, int userid) {
+	String sql="insert into passengerdata(userid,name,age,id) values("+userid+","+"'"+name+"'"+","+age+","+id+")";    
+    return jdbctemplate.update(sql);
+	
+}
+
+
+public List<Passenger> getPassengerData(int userid) {
+		String  query="select * from passengerdata where userid='"+userid+"'"; return
+			  jdbctemplate.query(query,new RowMapper<Passenger>(){
+				  public Passenger mapRow(ResultSet rs, int row) throws SQLException {
+					  Passenger passenger=new Passenger(); 
+					  passenger.setUserid(rs.getInt("userid"));
+					  passenger.setName(rs.getString("name"));
+					  passenger.setAge(rs.getInt("age"));
+					  passenger.setId(rs.getInt("id"));
+			  return passenger;} }); 
+	
+}}

@@ -18,10 +18,10 @@ import com.project.*;
 public class LoginController {
 	int rate;
 	String registrationStatus;	
-	
+	List<Passenger> pass;
 @Autowired
 CustomerDao dao;
-
+Customer customer;
 
 @Autowired
 RouteDao routedao=new RouteDao();
@@ -39,7 +39,7 @@ public String login(HttpServletRequest request, Model m) throws DataAccessExcept
  String username=request.getParameter("username");
  String password=request.getParameter("password");
 List<Customer>list=dao.getData(username,password);
-
+customer=list.get(0);
 
 
 
@@ -141,6 +141,24 @@ public String getPassengerInfo(HttpServletRequest request, Model m) {
 	m.addAttribute("totalPrice",totalprice);
 	m.addAttribute("tickets",tickets);
 	return "passengerInfoPage";
+}
+@RequestMapping("/getpassenger")
+public String getPassengerData(HttpServletRequest request, Model m) {
+	String name=request.getParameter("name");
+	int age=Integer.parseInt(request.getParameter("age"));
+	int id=Integer.parseInt(request.getParameter("id"));
+	int userid=customer.getUserid();
+	dao.setPassengerData(name,age,id,userid);
+	
+	return "/passengerInfoPage";
+}
+@RequestMapping("/confirmEntries")
+public String finalConfirm(Model m) {
+	int userid=customer.getUserid();
+	List<Passenger> passenger=dao.getPassengerData(userid);
+	pass=passenger;
+	m.addAttribute("passenger",pass);
+	return "finalConfirm";
 }
 
 /*
