@@ -75,4 +75,17 @@ public List<Passenger> getPassengerData(int userid) {
 					  passenger.setId(rs.getInt("id"));
 			  return passenger;} }); 
 	
+}
+
+
+public List<Temp> callData() {
+	String  query="select * from temp "; return
+			  jdbctemplate.query(query,new RowMapper<Temp>(){
+				  public Temp mapRow(ResultSet rs, int row) throws SQLException {
+					  Temp temp1=new Temp(); 
+					  
+					  temp1.setName(rs.getString("name"));
+					  temp1.setAge(rs.getString("age"));
+					  temp1.setId(rs.getString("id"));
+			  return temp1;} });
 }}

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import com.project.*;
@@ -18,6 +19,8 @@ import com.project.*;
 public class LoginController {
 	int rate;
 	String registrationStatus;	
+	int tickets;
+	int totalprice;
 	List<Passenger> pass;
 @Autowired
 CustomerDao dao;
@@ -133,24 +136,27 @@ public String nextPage(HttpServletRequest request, Model m) {
 //
 	
 }
-@RequestMapping(value="/totalPrice", method = RequestMethod.GET)
-public String getPassengerInfo(HttpServletRequest request, Model m) {
-	RouteDao dao =new RouteDao();
-	int tickets=Integer.parseInt(request.getParameter("tickets"));
-	int totalprice=dao.totalPrice(tickets,rate);
-	m.addAttribute("totalPrice",totalprice);
-	m.addAttribute("tickets",tickets);
-	return "passengerInfoPage";
-}
+
+	/*
+	 * @RequestMapping(value="/totalPrice", method = RequestMethod.GET) public
+	 * String getPassengerInfo(HttpServletRequest request, Model m) { RouteDao dao
+	 * =new RouteDao(); int
+	 * tickets=Integer.parseInt(request.getParameter("tickets")); int
+	 * totalprice=dao.totalPrice(tickets,rate);
+	 * m.addAttribute("totalPrice",totalprice); m.addAttribute("tickets",tickets);
+	 * return "passengerInfoPage"; }
+	 */
 @RequestMapping("/getpassenger")
+
 public String getPassengerData(HttpServletRequest request, Model m) {
-	String name=request.getParameter("name");
-	int age=Integer.parseInt(request.getParameter("age"));
-	int id=Integer.parseInt(request.getParameter("id"));
-	int userid=customer.getUserid();
-	dao.setPassengerData(name,age,id,userid);
+	String name1=request.getParameter("name");
+	int age1=Integer.parseInt(request.getParameter("age"));
+	int id1=Integer.parseInt(request.getParameter("id"));
+	int userid1=customer.getUserid();
+	dao.setPassengerData(name1,age1,id1,userid1);
 	
-	return "/passengerInfoPage";
+	return "redirect:/call";
+	
 }
 @RequestMapping("/confirmEntries")
 public String finalConfirm(Model m) {
@@ -160,29 +166,23 @@ public String finalConfirm(Model m) {
 	m.addAttribute("passenger",pass);
 	return "finalConfirm";
 }
-
-/*
-public String page2(HttpServletRequest request, Model m) {
-	String date=request.getParameter("date");
-	int ticket=Integer.parseInt(request.getParameter("tickets"));
-	List<Trip>findTrip=tripDao.CheckDate(date);
-	if(findTrip.isEmpty()) {
-		return "bookingpage4";
-	}
-	else {
-		Trip trip=new Trip();
-		trip=findTrip.get(0);
-		int totalPrice=trip.totalPrice;
-		m.addAttribute("TotalPrice",totalPrice);
-		return "bookingpage3";
-	}
+@RequestMapping("/call")
+public String call(Model m, HttpServletRequest request) {
 	
+	m.addAttribute("totalPrice",totalprice);
+	m.addAttribute("tickets",tickets);
+	List<Temp> temp= dao.callData();
+	m.addAttribute("temp",temp);
+	return "passengerInfoPage";
 }
-*/
-
+@RequestMapping("/get")
+public String getPrice(HttpServletRequest request, Model m) {
+	RouteDao dao1 =new RouteDao();
+	 tickets=Integer.parseInt(request.getParameter("tickets"));
+	 totalprice=dao1.totalPrice(tickets,rate);
+	return "redirect:/call";
 }
-
-
+}
 
 
 
