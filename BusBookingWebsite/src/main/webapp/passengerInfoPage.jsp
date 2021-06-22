@@ -26,7 +26,18 @@ ID No.<input type="text" name="id" placeholder="ID">
 <input type="submit" value="add"></form>
 <br /><p>
       </c:forEach>
-
+      
+<table border="2" width="70%" cellpadding="2">  
+<tr><th>Name</th><th>Age</th><th>Id</th></tr>  
+   <c:forEach var="temp1" items="${listtemppass}">   
+   <tr>  
+    
+   <td>${temp1.name}</td>  
+   <td>${temp1.age}</td> 
+    <td>${temp1.id}</td>     
+   </tr>  
+   </c:forEach>  
+   </table>  
 
 
          

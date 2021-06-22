@@ -22,6 +22,8 @@ public class LoginController {
 	int tickets;
 	int totalprice;
 	List<Passenger> pass;
+	List<TempPass> listtemppass;
+	ViewBookedData viewdata=new ViewBookedData();
 @Autowired
 CustomerDao dao;
 Customer customer;
@@ -105,6 +107,8 @@ public String nextPage(HttpServletRequest request, Model m) {
 	if(list3.isEmpty()) {
 		return "unknownRoute";
 	}
+	viewdata.setDeparture(departure);
+	viewdata.setDestination(destination);
 	Route route4=list3.get(0);
 	int route_id=route4.routeID;
 	rate=route4.rate;
@@ -121,6 +125,7 @@ public String nextPage(HttpServletRequest request, Model m) {
 		return "bookingpage4";
 	}
 	else {
+		viewdata.setDate(date);
 		Trip trip=new Trip();
 		trip=findTrip.get(0);
 		int seatsAvailable=trip.seats;
@@ -153,7 +158,14 @@ public String getPassengerData(HttpServletRequest request, Model m) {
 	int age1=Integer.parseInt(request.getParameter("age"));
 	int id1=Integer.parseInt(request.getParameter("id"));
 	int userid1=customer.getUserid();
+dao.saveToTemp(name1,age1,id1);
+listtemppass=dao.getFromtemp();
+
 	dao.setPassengerData(name1,age1,id1,userid1);
+	//int userid=customer.getUserid();
+	List<Passenger> passenger=dao.getPassengerData(userid1);
+	pass=passenger;
+	m.addAttribute("passenger",pass);
 	
 	return "redirect:/call";
 	
@@ -173,12 +185,14 @@ public String call(Model m, HttpServletRequest request) {
 	m.addAttribute("tickets",tickets);
 	List<Temp> temp= dao.callData();
 	m.addAttribute("temp",temp);
+	m.addAttribute("listtemppass",listtemppass);
 	return "passengerInfoPage";
 }
 @RequestMapping("/get")
 public String getPrice(HttpServletRequest request, Model m) {
 	RouteDao dao1 =new RouteDao();
 	 tickets=Integer.parseInt(request.getParameter("tickets"));
+	 viewdata.setTickets(tickets);
 	 totalprice=dao1.totalPrice(tickets,rate);
 	return "redirect:/call";
 }

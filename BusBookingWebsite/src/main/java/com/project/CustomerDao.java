@@ -88,4 +88,25 @@ public List<Temp> callData() {
 					  temp1.setAge(rs.getString("age"));
 					  temp1.setId(rs.getString("id"));
 			  return temp1;} });
+}
+
+
+public int saveToTemp(String name1, int age1, int id1) {
+	String sql="insert into temppass(name,age,id) values("+"'"+name1+"'"+","+age1+","+id1+")";   
+    return jdbctemplate.update(sql);
+	
+}
+
+
+public List<TempPass> getFromtemp() {
+	String  query="select * from temppass "; return
+			  jdbctemplate.query(query,new RowMapper<TempPass>(){
+				  public TempPass mapRow(ResultSet rs, int row) throws SQLException {
+					  TempPass temp1=new TempPass(); 
+					  
+					  temp1.setName(rs.getString("name"));
+					  temp1.setAge(rs.getInt("age"));
+					  temp1.setId(rs.getInt("id"));
+			  return temp1;} });
+	
 }}
