@@ -7,7 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-Registration Successfull.
-<jsp:include page="/index.jsp"></jsp:include>  
+<form action="updateRoute">
+<input type="submit" value="Update Route">
+</form>
 </body>
 </html>

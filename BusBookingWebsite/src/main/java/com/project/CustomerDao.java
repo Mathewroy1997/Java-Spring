@@ -91,8 +91,8 @@ public List<Temp> callData() {
 }
 
 
-public int saveToTemp(String name1, int age1, int id1) {
-	String sql="insert into temppass(name,age,id) values("+"'"+name1+"'"+","+age1+","+id1+")";   
+public int saveToTemp(int userid,String date,int tripid,String name1, int age1, int id1) {
+	String sql="insert into temppass(userid,date,tripid,name,age,id) values("+""+userid+",'"+date+"'"+","+tripid+",'"+name1+"'"+","+age1+","+id1+")";   
     return jdbctemplate.update(sql);
 	
 }
@@ -109,4 +109,58 @@ public List<TempPass> getFromtemp() {
 					  temp1.setId(rs.getInt("id"));
 			  return temp1;} });
 	
-}}
+}
+
+
+public int setViewData(ViewBookedData viewdata) {
+	int userid=viewdata.userid;
+	String date=viewdata.date;
+	String departure=viewdata.departure;
+	String destination=viewdata.destination;
+	int tickets=viewdata.tickets;
+	String sql="insert into viewdata(userid,date,departure,destination,tickets) values("+userid+","+"'"+date+"'"+",'"+departure+"'"+",'"+destination+"'"+","+tickets+")";
+	return jdbctemplate.update(sql);
+}
+
+
+public List<ViewBookedData> setBookedHistory(int userid) {
+	String  query="select * from viewdata where userid="+userid+""; return
+			  jdbctemplate.query(query,new RowMapper<ViewBookedData>(){
+				  public ViewBookedData mapRow(ResultSet rs, int row) throws SQLException {
+					  ViewBookedData view1= new ViewBookedData();
+				
+					  view1.setDate(rs.getString("date"));
+					  view1.setDeparture(rs.getString("departure"));
+					  view1.setDestination(rs.getString("destination"));
+					  view1.setTickets(rs.getInt("tickets"));
+			  return view1;} }); 
+	
+}
+
+
+public int setMasterTable(MasterPassengerTable master) {
+	int userid=master.userid;
+	String date=master.date;
+	int tripid=master.tripid;
+	String name=master.name;
+	int age=master.age;
+	int id=master.id;
+	String sql="insert into masterpassenger(userid,date,tripid,name,age,id) values("+""+userid+",'"+date+"'"+","+tripid+",'"+name+"'"+","+age+","+id+")";   
+    return jdbctemplate.update(sql);	
+	
+}
+
+
+public int TruncateTemppass() {
+	String sql="Truncate table temppass";   
+    return jdbctemplate.update(sql);
+	
+}
+
+
+public int ReduceSeats(int tickets, MasterPassengerTable master) {
+	String sql="update tripdata set Seats=Seats-"+tickets+" where trip_id="+master.tripid;   
+    return jdbctemplate.update(sql);	
+	
+}
+}

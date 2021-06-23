@@ -94,4 +94,39 @@ public class RouteDao {
 			return totalPrice;
 		}
 		
+		public List<Route> getRouteTable(){
+			String query3="select * from routedata";
+			return jdbctemplate1.query(query3,new RowMapper<Route>(){
+				public Route mapRow(ResultSet rs, int row) throws SQLException {
+					Route route3=new Route();
+					
+						 route3.setDeparture(rs.getString("Departure"));
+						 route3.setDestination(rs.getString("Destination"));
+						 route3.setRouteID(rs.getInt("routeid"));
+						 route3.setRate(rs.getInt("Rate"));
+	
+					
+				
+				return route3;
+				}
+				});
+		}
+		public Boolean addNewRoute(final Route newRoute) {
+			String query="insert into routedata(routeid,Departure,Destination,Rate) values(?,?,?,?)";
+			return jdbctemplate1.execute(query,new PreparedStatementCallback<Boolean>(){
+			public Boolean doInPreparedStatement(PreparedStatement ps)
+			throws SQLException, DataAccessException {
+
+			ps.setInt(1,newRoute.getRouteID());
+			ps.setString(2,newRoute.getDeparture());
+			ps.setString(3,newRoute.getDestination());
+			ps.setInt(4,newRoute.getRate());
+			
+			return ps.execute();
+
+			}
+			});
+			
+		}
+		
 }

@@ -53,6 +53,7 @@ route.getRouteID();
 			Trip trip=new Trip();
 			trip.setSeats(rs.getInt("seats"));
 			trip.setDate(rs.getString("date"));
+			trip.setTripID(rs.getInt("trip_id"));
             return trip;
 		
 		

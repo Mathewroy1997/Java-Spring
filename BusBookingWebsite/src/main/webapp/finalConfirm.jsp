@@ -10,17 +10,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-<table border="2" width="70%" cellpadding="2">  
-<tr><th>User Id</th><th>Name</th><th>Age</th><th>Id</th></tr>  
-   <c:forEach var="passenger" items="${passenger}">   
-   <tr>  
-   <td>${passenger.userid}</td>  
-   <td>${passenger.name}</td>  
-   <td>${passenger.age}</td> 
-    <td>${passenger.id}</td>     
-   </tr>  
-   </c:forEach>  
-   </table>  
+
+
+Booking Successfull!
+ 
    <br/>
 </body>
 </html>

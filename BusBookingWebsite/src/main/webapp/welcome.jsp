@@ -14,7 +14,9 @@ welcome back <%= request.getAttribute("username") %>. <br>
 
 <h2>Holiday Travels</h2>
 <input type="submit" value="Update profile">
+<form action="bookingHistory">
 <input type="submit" value="View your tickets">
+</form>
 <form action="bookingpage">
 <input type="submit" value="Book New ticket">
 </form>

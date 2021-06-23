@@ -13,19 +13,20 @@
 </head>
 <body>
 Price=${totalPrice}<br>
-Add passenger details:<br><p>
-
-<c:forEach var = "i" begin = "1" end = "${tickets}">
+<br><p>
 
 
-          Passenger No.${i}<br>
+
+
+         Add Passenger: <br>
+          
           <form action="getpassenger">
 Name<input type="text" name="name" placeholder="Name">
 Age<input type="text" name="age" placeholder="Age">
-ID No.<input type="text" name="id" placeholder="ID">
+ID Proof No.<input type="text" name="id" placeholder="ID">
 <input type="submit" value="add"></form>
 <br /><p>
-      </c:forEach>
+      
       
 <table border="2" width="70%" cellpadding="2">  
 <tr><th>Name</th><th>Age</th><th>Id</th></tr>  
@@ -42,6 +43,6 @@ ID No.<input type="text" name="id" placeholder="ID">
 
          
           
-    <form action="confirmEntries">  <input type="submit" value="Submit"></form>
+    <form action="confirmEntries">  <input type="submit" value="Proceed to Payment"></form>
 </body>
 </html>
