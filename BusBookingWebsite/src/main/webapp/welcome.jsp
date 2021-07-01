@@ -21,6 +21,5 @@ welcome back <%= request.getAttribute("username") %>. <br>
 <input type="submit" value="Book New ticket">
 </form>
 
-
 </body>
 </html>

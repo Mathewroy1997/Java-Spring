@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,8 +26,10 @@ public class LoginController {
 	List<Passenger> pass;
 	List<TempPass> listtemppass;
 	ViewBookedData viewdata=new ViewBookedData();
-	MasterPassengerTable master=new MasterPassengerTable()
-;@Autowired
+	MasterPassengerTable master=new MasterPassengerTable();
+	Route route= new Route();
+	Trip trip = new Trip();
+	@Autowired
 CustomerDao dao;
 Customer customer;
 
@@ -85,7 +88,9 @@ return "Register";
 @RequestMapping("/updateRoute")
 public String updateRoute(Model m) {
 	List<Route> routeTable=routedao.getRouteTable();
+	route=routeTable.get(1);
 	m.addAttribute("routeTable",routeTable);
+	
 	return "modifyRoute";
 }
 @RequestMapping("/addRoute")
@@ -100,6 +105,52 @@ public String addNewRoute(HttpServletRequest request, Model m) {
 	return "redirect:/updateRoute";	
 	
 }
+@RequestMapping("/deleteRoute")
+public String deleteRoute() {
+	//HttpServletRequest request = null;
+	Model m;
+	//int id=Integer.parseInt(request.getParameter("route"));
+	int routeid=route.routeID;
+	try {
+		dao.deleteRoute(routeid);
+		return "redirect:/updateRoute";
+	} catch (DataIntegrityViolationException e) {
+		return "admin_routeidexception";
+	}
+	
+}
+@RequestMapping("/backToRouteIDUpdation")
+public String returnToRouteIDUpdation()
+{
+	return "redirect:/updateRoute";
+}
+
+@RequestMapping("updateTrip")
+public String updateTrip(Model m) {
+	
+	List<Trip> tripTable=dao.getTripData();
+	trip=tripTable.get(0);
+	m.addAttribute("tripTable",tripTable);
+	return "admin_modifyTrip";
+}
+@RequestMapping("deleteTrip")
+public String deleteTrip() {
+	int tripid=trip.tripID;
+	dao.deleteTrip(tripid);
+	return "redirect:/updateTrip";
+}
+
+@RequestMapping("addTrip")
+public String addNewTrip(HttpServletRequest request, Model m) {
+	Trip trip =new Trip();
+	trip.setTripID(Integer.parseInt(request.getParameter("tripid")));
+	trip.setDate(request.getParameter("date"));
+	trip.setRouteID(Integer.parseInt(request.getParameter("routeid")));
+	trip.setSeats(Integer.parseInt(request.getParameter("seats")));
+	dao.addNewTrip(trip);
+	return "redirect:/updateTrip";
+	}
+
 
 @RequestMapping("/submitNewRegistraion")
 public String registerprocess(HttpServletRequest request,HttpServletResponse response) {
@@ -163,22 +214,11 @@ public String nextPage(HttpServletRequest request, Model m) {
 	
 	
 	
-//Trip seats=trip1.get(0);
-//int seatnumber=seats.seats;
 
-//
 	
 }
 
-	/*
-	 * @RequestMapping(value="/totalPrice", method = RequestMethod.GET) public
-	 * String getPassengerInfo(HttpServletRequest request, Model m) { RouteDao dao
-	 * =new RouteDao(); int
-	 * tickets=Integer.parseInt(request.getParameter("tickets")); int
-	 * totalprice=dao.totalPrice(tickets,rate);
-	 * m.addAttribute("totalPrice",totalprice); m.addAttribute("tickets",tickets);
-	 * return "passengerInfoPage"; }
-	 */
+
 @RequestMapping("/getpassenger")
 
 public String getPassengerData(HttpServletRequest request, Model m) {
@@ -196,7 +236,7 @@ dao.saveToTemp(userid,date,tripid,name1,age1,id1);
 listtemppass=dao.getFromtemp();
 
 	dao.setPassengerData(name1,age1,id1,userid1);
-	//int userid=customer.getUserid();
+	
 	List<Passenger> passenger=dao.getPassengerData(userid1);
 	pass=passenger;
 	m.addAttribute("passenger",pass);
@@ -245,8 +285,6 @@ public String showBookingHistory(Model m){
 }
 
 }
-
-
 
 
 

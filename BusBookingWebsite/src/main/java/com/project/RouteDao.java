@@ -72,7 +72,7 @@ public class RouteDao {
 					
 						 route3.setDeparture(rs.getString("Departure"));
 						 route3.setDestination(rs.getString("Destination"));
-						 route3.setRouteID(rs.getInt("route id"));
+						 route3.setRouteID(rs.getInt("routeid"));
 						 route3.setRate(rs.getInt("Rate"));
 						int trial=route3.rate;
 						RouteDao dao1=new RouteDao();

@@ -7,11 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="updateRoute">
-<input type="submit" value="Update Route">
-</form>
-<form action="updateTrip">
-<input type="submit" value="Update Bus">
+Action cannot be completed. Check Tripdata and delete linked routeid's.
+<form action="backToRouteIDUpdation">
+<input type="submit" value="Go back">
 </form>
 </body>
 </html>

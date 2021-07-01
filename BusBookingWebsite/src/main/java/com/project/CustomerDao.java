@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
 //import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCallback;
@@ -149,6 +150,20 @@ public int setMasterTable(MasterPassengerTable master) {
     return jdbctemplate.update(sql);	
 	
 }
+public List<MasterPassengerTable> getFromMasterPassenger() {   
+    return jdbctemplate.query("select * from  masterpassenger",new RowMapper<MasterPassengerTable>(){    
+        public MasterPassengerTable mapRow(ResultSet rs, int row) throws SQLException {    
+        	MasterPassengerTable details=new MasterPassengerTable(); 
+            details.setUserid(rs.getInt("userid"));
+            details.setDate(rs.getString("date"));    
+            details.setTripid(rs.getInt("tripid"));    
+            details.setName(rs.getString("name"));
+            details.setAge(rs.getInt("age"));
+            details.setId(rs.getInt("id"));
+            return details;    
+        }    
+    });
+}
 
 
 public int TruncateTemppass() {
@@ -159,8 +174,57 @@ public int TruncateTemppass() {
 
 
 public int ReduceSeats(int tickets, MasterPassengerTable master) {
-	String sql="update tripdata set Seats=Seats-"+tickets+" where trip_id="+master.tripid;   
+	String date=master.date;
+	String sql="update tripdata set Seats=Seats-"+tickets+" where trip_id="+master.tripid+" and date='"+date+"';";  
     return jdbctemplate.update(sql);	
 	
 }
+
+
+public int deleteRoute(int routeid) throws DataIntegrityViolationException {
+	String sql="delete from routedata where routeid="+routeid;
+	return jdbctemplate.update(sql) ;
+	
+}
+
+
+public List<Trip> getTripData() {
+	String  query="select * from tripdata"; return
+			  jdbctemplate.query(query,new RowMapper<Trip>(){
+				  public Trip mapRow(ResultSet rs, int row) throws SQLException {
+					  Trip trip=new Trip();
+				trip.setDate(rs.getString("date"));
+				trip.setSeats(rs.getInt("Seats"));
+				trip.setRouteID(rs.getInt("routeID"));
+				trip.setTripID(rs.getInt("trip_id"));
+					  
+			  return trip;} }); 
+	
+}
+
+
+public int deleteTrip(int tripid) {
+	String sql="delete from tripdata where trip_id="+tripid;
+	return jdbctemplate.update(sql) ;
+	
+}
+
+
+public Boolean addNewTrip(final Trip trip) {
+			String query="insert into tripdata(trip_id,date,routeID,Seats) values(?,?,?,?)";
+			return jdbctemplate.execute(query,new PreparedStatementCallback<Boolean>(){
+			public Boolean doInPreparedStatement(PreparedStatement ps)
+			throws SQLException, DataAccessException {
+
+			ps.setInt(1,trip.getTripID());
+			ps.setString(2,trip.getDate());
+			ps.setInt(3,trip.getRouteID());
+			ps.setInt(4,trip.getSeats());
+			
+			return ps.execute();
+
+			}
+			});
+			
+		}
 }

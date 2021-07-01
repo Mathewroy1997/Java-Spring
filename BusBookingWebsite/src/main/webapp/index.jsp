@@ -1,16 +1,24 @@
+
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<link rel="stylesheet" type="text/css" href="css/index.css">
 <html>
 <body>
+<h1>Holiday Travels</h1>
+<div class="centre">
 
-<h2>Holiday Travels</h2>
+
 <form action="login">
-<input type="text" name="username" placeholder="username">
-<input type="password" name="password" placeholder="password">
-
+<div class="txt">
+<input type="text" name="username" placeholder="username" >
+</div>
+<div class="txt">
+<input type="password" name="password" placeholder="password" >
+</div>
 <input type="submit" value="login">
 </form>
 <form action="register">
 <input type="submit" value="register">
 </form>
-
+</div>
 </body>
 </html>
