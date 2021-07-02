@@ -20,5 +20,8 @@
 <input type="submit" value="register">
 </form>
 </div>
+<form action="covidStatus">
+<input type="submit" value="Covid Status">
+</form>
 </body>
 </html>
