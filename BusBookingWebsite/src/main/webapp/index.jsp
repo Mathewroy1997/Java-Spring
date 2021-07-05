@@ -3,10 +3,22 @@
 <link rel="stylesheet" type="text/css" href="css/index.css">
 <html>
 <body>
-<h1>Holiday Travels</h1>
+<div class="container">
+<h1>Holiday Travels</h1><p>
+
+</div>
+
+
+
+
+<div class="topnav">
+<a href="hello">Covid Status</a> 
+</div>
+
 <div class="centre">
-
-
+<div class="loginSignup">
+<h3>Login || Signup</h3>
+</div>
 <form action="login">
 <div class="txt">
 <input type="text" name="username" placeholder="username" >
@@ -14,14 +26,10 @@
 <div class="txt">
 <input type="password" name="password" placeholder="password" >
 </div>
-<input type="submit" value="login">
+<input type="submit" value="Login">
 </form>
-<form action="register">
-<input type="submit" value="register">
-</form>
+<div class=signup>New User?<a href="signUp">Sign Up</a></div>
 </div>
-<form action="covidStatus">
-<input type="submit" value="Covid Status">
-</form>
+
 </body>
 </html>

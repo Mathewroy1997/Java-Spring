@@ -80,7 +80,7 @@ return "welcome";
 }
 }
 
-@RequestMapping("/register")
+@RequestMapping("signUp")
 public String registrationPage() {
 return "Register";
 }

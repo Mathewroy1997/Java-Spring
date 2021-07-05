@@ -18,7 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class ApiController {
-	@RequestMapping(value="/covidStatus")
+	@RequestMapping(value="/hello")
 	public ModelAndView getCovidStatus(Model m, ModelMap map) {
 		ModelAndView model= new ModelAndView();
 		final String uri = "https://api.apify.com/v2/key-value-stores/toDWvRj1JpTXiM8FF/records/LATEST?disableRedirect=true";
