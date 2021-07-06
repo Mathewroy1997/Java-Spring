@@ -49,12 +49,11 @@ public String login(HttpServletRequest request, Model m) throws DataAccessExcept
  String username=request.getParameter("username");
  String password=request.getParameter("password");
 List<Customer>list=dao.getData(username,password);
-customer=list.get(0);
-viewdata.userid=customer.getUserid();
+
 
 
 if(list.isEmpty()) {
-	String error="Invalid Credentials, try again";
+	String error="Invalid Credentials";
 	
 	m.addAttribute("error", error);
 
@@ -65,6 +64,8 @@ else if(username.contentEquals("admin") && password.contentEquals("1234")) {
 	
 }
 else {
+	customer=list.get(0);
+	viewdata.userid=customer.getUserid();
 	listtemppass=null;
 	m.addAttribute("username", username);
 	
@@ -88,7 +89,7 @@ return "Register";
 @RequestMapping("/updateRoute")
 public String updateRoute(Model m) {
 	List<Route> routeTable=routedao.getRouteTable();
-	route=routeTable.get(1);
+	route=routeTable.get(0);
 	m.addAttribute("routeTable",routeTable);
 	
 	return "modifyRoute";
@@ -105,12 +106,16 @@ public String addNewRoute(HttpServletRequest request, Model m) {
 	return "redirect:/updateRoute";	
 	
 }
-@RequestMapping("/deleteRoute")
-public String deleteRoute() {
-	//HttpServletRequest request = null;
-	Model m;
+@RequestMapping("{route3.routeID}")
+public String deleteRoute(HttpServletRequest request) {
+	
+	
 	//int id=Integer.parseInt(request.getParameter("route"));
-	int routeid=route.routeID;
+	String path = request.getServletPath();
+	
+	int routeid=Integer.parseInt(path.replaceAll("[\\D]", ""));
+	Model m;
+	
 	try {
 		dao.deleteRoute(routeid);
 		return "redirect:/updateRoute";

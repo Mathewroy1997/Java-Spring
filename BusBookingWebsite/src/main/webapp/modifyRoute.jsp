@@ -3,6 +3,7 @@
     pageEncoding="ISO-8859-1"%>
      <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<link rel="stylesheet" type="text/css" href="css/general.css">
 <%! int i = 0; %> 
 <!DOCTYPE html>
 <html>
@@ -10,7 +11,10 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
-<body>
+<body><div class="holiday">
+<h1>Holiday Travels</h1><p>
+
+</div>
 Current Routes:
 <table border="2" width="70%" cellpadding="2">  
 <tr><th>Route ID</th><th>Departure</th><th>Destination</th><th>Rate</th><th>Action</th></tr>  
@@ -23,7 +27,7 @@ Current Routes:
     <td>${route3.destination}</td> 
      <td>${route3.rate}</td>    
      
-     <td><form action="deleteRoute"><input type="submit" value="Delete" name="route"  > </form></td> 
+     <td><a href="${route3.routeID}">Delete Route</a></td> 
       </tr>  
     
   

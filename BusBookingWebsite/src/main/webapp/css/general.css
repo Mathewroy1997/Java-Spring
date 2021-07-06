@@ -1,0 +1,41 @@
+@charset "ISO-8859-1";
+body {
+	
+	background: linear-gradient(315deg, #173c54, #b0c0cf);
+
+}
+.holiday{
+    position:relative;
+    left:450px;    
+}
+
+.holiday h1{
+    font-family: cursive;
+    font-weight: 500;
+    display: inline-block;
+    color: #FFFFFF;
+    font-size: 65px;
+    line-height: 48px;
+    margin-bottom: 26px;
+    position: top;
+}
+.topnav {
+  overflow: hidden;
+  background-color: #9eb6cd;
+}
+
+/* Style the topnav links */
+.topnav a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change color on hover */
+.topnav a:hover {
+  background-color: #000000;
+  color: #ffffff;
+}

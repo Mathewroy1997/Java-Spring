@@ -1,22 +1,40 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" isELIgnored="false"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
-<%= request.getAttribute("error") %>
-<h2>Holiday Travels</h2>
-<form action="login">
-<input type="text" name="username" placeholder="username">
-<input type="text" name="password" placeholder="password">
 
-<input type="submit" value="login">
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<html>
+<body><div class="holiday">
+<h1>Holiday Travels</h1><p>
+
+</div>
+<div class="container">
+<h1>Holiday Travels</h1><p>
+
+</div>
+
+
+
+
+<div class="topnav">
+<a href="hello">Covid Status</a> 
+</div>
+
+<div class="centre">
+<div class="loginSignup">
+<h3>Login || Signup</h3>
+</div>
+<form action="login">
+<div class="txt">
+<input type="text" name="username" placeholder="username" >
+</div>
+<div class="txt">
+<input type="password" name="password" placeholder="password" >
+</div>
+<input type="submit" value="Login">
 </form>
-<form action="register">
-<input type="submit" value="register">
-</form>
+<div class="invalidCred">
+<%= request.getAttribute("error") %></div>
+<div class=signup>New User?<a href="signUp">Sign Up</a></div>
+</div>
+
 </body>
 </html>

@@ -3,7 +3,7 @@
 <link rel="stylesheet" type="text/css" href="css/index.css">
 <html>
 <body>
-<div class="container">
+<div class="holiday">
 <h1>Holiday Travels</h1><p>
 
 </div>

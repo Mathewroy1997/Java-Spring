@@ -9,7 +9,10 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
-<body>
+<body><div class="holiday">
+<h1>Holiday Travels</h1><p>
+
+</div>
 No trip in selected route. Change departure/destination.
 
 </body>

@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <link rel="stylesheet" type="text/css" href="css/general.css">
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +11,10 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div class="holiday">
+<h1>Holiday Travels</h1><p>
+
+</div>
 Current Buses:
 <table border="2" width="70%" cellpadding="2">  
 <tr><th>Trip ID</th><th>Date</th><th>Route ID</th><th>Seats</th><th>Action</th></tr>  
