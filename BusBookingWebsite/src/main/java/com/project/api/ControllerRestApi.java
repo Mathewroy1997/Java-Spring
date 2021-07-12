@@ -1,4 +1,4 @@
-package com.project;
+package com.project.api;
 
 import java.util.List;
 
@@ -8,6 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.project.dao.CustomerDao;
+import com.project.models.MasterPassengerTable;
 
 @RestController
 public class ControllerRestApi {

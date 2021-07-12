@@ -17,7 +17,7 @@
 
 <div class="centre">
 <div class="loginSignup">
-<h3>Login || Signup</h3>
+<h3>Login || SignUp</h3>
 </div>
 <form action="login">
 <div class="txt">
@@ -28,7 +28,7 @@
 </div>
 <input type="submit" value="Login">
 </form>
-<div class=signup>New User?<a href="signUp">Sign Up</a></div>
+<div class=signup>New User?<a href="signUp">Sign  Up</a></div>
 </div>
 
 </body>

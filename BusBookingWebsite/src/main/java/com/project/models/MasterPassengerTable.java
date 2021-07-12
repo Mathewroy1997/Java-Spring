@@ -1,12 +1,12 @@
-package com.project;
+package com.project.models;
 
 public class MasterPassengerTable {
-	int userid;
-	String date;
-	int tripid;
-	String name;
-	int age;
-	int id;
+	public int userid;
+	public String date;
+	public int tripid;
+	public String name;
+	public int age;
+	public int id;
 	public int getUserid() {
 		return userid;
 	}

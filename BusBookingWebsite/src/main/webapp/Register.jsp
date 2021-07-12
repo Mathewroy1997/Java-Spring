@@ -11,6 +11,9 @@
 <h1>Holiday Travels</h1><p>
 
 </div>
+<div class="topnav">
+<a href="logout" >Sign-out</a>
+</div>
  Enter username: <input type="text" name="username"><br>
 Enter password: <input type="text" name="password"><br>
 Enter first name: <input type="text" name="firstname"><br>

@@ -14,6 +14,9 @@
 <h1>Holiday Travels</h1><p>
 
 </div>
+<div class="topnav">
+<a href="logout" >Sign-out</a>
+</div>
 <table border="2" width="70%" cellpadding="2">  
 <tr><th>Date</th><th>Departure</th><th>Destination</th><th>Tickets</th></tr>  
      <c:forEach var="view1" items="${list}">   

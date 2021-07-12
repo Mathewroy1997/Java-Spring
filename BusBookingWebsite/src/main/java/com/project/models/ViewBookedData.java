@@ -1,14 +1,14 @@
-package com.project;
+package com.project.models;
 
 public class ViewBookedData {
-	int userid;
+	public int userid;
 
-String date;
-String departure;
-String destination;
-int tickets;
+	public String date;
+	public String departure;
+	public String destination;
+	public int tickets;
 
-int tripid;
+	public int tripid;
 
 
 public int getTripid() {

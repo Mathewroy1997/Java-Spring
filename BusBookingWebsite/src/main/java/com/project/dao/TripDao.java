@@ -1,4 +1,4 @@
-package com.project;
+package com.project.dao;
 
 import java.net.http.HttpRequest;
 import java.sql.ResultSet;
@@ -9,8 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import com.project.RouteDao;
-import com.project.Route;
+
+import com.project.models.Route;
+import com.project.models.Trip;
 public class TripDao {
 	
 	

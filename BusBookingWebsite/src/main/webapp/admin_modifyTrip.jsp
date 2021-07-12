@@ -15,6 +15,9 @@
 <h1>Holiday Travels</h1><p>
 
 </div>
+<div class="topnav">
+<a href="logout" >Sign-out</a>
+</div>
 Current Buses:
 <table border="2" width="70%" cellpadding="2">  
 <tr><th>Trip ID</th><th>Date</th><th>Route ID</th><th>Seats</th><th>Action</th></tr>  
@@ -27,7 +30,7 @@ Current Buses:
     <td>${trip.routeID}</td> 
      <td>${trip.seats}</td>    
      
-     <td><form action="deleteTrip"><input type="submit" value="Delete" name="trip"> </form></td> 
+     <td><a href="trip/${trip.tripID}">Delete Trip</a></td> 
       </tr>  
     
   

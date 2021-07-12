@@ -11,7 +11,9 @@
 </head>
 <body><div class="holiday">
 <h1>Holiday Travels</h1><p>
-
+</div>
+<div class="topnav">
+<a href="logout" >Sign-out</a>
 </div>
 No trip in selected route. Change departure/destination.
 

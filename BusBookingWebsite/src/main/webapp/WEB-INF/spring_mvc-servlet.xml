@@ -33,7 +33,7 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd
 <property name="jdbctemplate" ref="jdbctemplate"></property>
 </bean>
 
-
+<bean id="service" class="com.project.service.ServiceClass"/> 
 <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
  
 <property name="prefix" value="/"></property>

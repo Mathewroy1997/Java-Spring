@@ -1,4 +1,4 @@
-package com.project;
+package com.project.controllers;
 
 import java.net.http.HttpRequest;
 import java.sql.SQLException;
@@ -16,6 +16,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import com.project.*;
+import com.project.dao.CustomerDao;
+import com.project.dao.RouteDao;
+import com.project.dao.TripDao;
+import com.project.models.Customer;
+import com.project.models.MasterPassengerTable;
+import com.project.models.Passenger;
+import com.project.models.Route;
+import com.project.models.Temp;
+import com.project.models.TempPass;
+import com.project.models.Trip;
+import com.project.models.ViewBookedData;
+import com.project.service.ServiceClass;
 
 @Controller
 public class LoginController {
@@ -37,33 +49,39 @@ Customer customer;
 RouteDao routedao=new RouteDao();
 @Autowired
 TripDao tripDao=new TripDao();
+@Autowired
+ServiceClass serviceClass;
 
 
 
 
 @RequestMapping(value="/login", method = RequestMethod.GET)
 
-public String login(HttpServletRequest request, Model m) throws DataAccessException, SQLException {
+public String login(HttpServletRequest request, Model m)  {
 	
 	
- String username=request.getParameter("username");
- String password=request.getParameter("password");
+String username=request.getParameter("username");
+ 
+String password=request.getParameter("password");
+
+int flag=serviceClass.login(username, password);
+
 List<Customer>list=dao.getData(username,password);
 
 
 
-if(list.isEmpty()) {
+if(flag==0) {
 	String error="Invalid Credentials";
 	
 	m.addAttribute("error", error);
 
 return "error";
 }
-else if(username.contentEquals("admin") && password.contentEquals("1234")) {
+else if(flag==1) {
 	return "adminHome";
 	
 }
-else {
+else  {
 	customer=list.get(0);
 	viewdata.userid=customer.getUserid();
 	listtemppass=null;
@@ -84,6 +102,10 @@ return "welcome";
 @RequestMapping("signUp")
 public String registrationPage() {
 return "Register";
+}
+@RequestMapping("logout")
+public String backToIndex() {
+	return "index";
 }
 
 @RequestMapping("/updateRoute")
@@ -106,7 +128,7 @@ public String addNewRoute(HttpServletRequest request, Model m) {
 	return "redirect:/updateRoute";	
 	
 }
-@RequestMapping("{route3.routeID}")
+@RequestMapping("route/{route3.routeID}")
 public String deleteRoute(HttpServletRequest request) {
 	
 	
@@ -138,9 +160,10 @@ public String updateTrip(Model m) {
 	m.addAttribute("tripTable",tripTable);
 	return "admin_modifyTrip";
 }
-@RequestMapping("deleteTrip")
-public String deleteTrip() {
-	int tripid=trip.tripID;
+@RequestMapping("trip/{trip.tripID}")
+public String deleteTrip(HttpServletRequest request) {
+	String path = request.getServletPath();
+	int tripid=Integer.parseInt(path.replaceAll("[\\D]", ""));
 	dao.deleteTrip(tripid);
 	return "redirect:/updateTrip";
 }

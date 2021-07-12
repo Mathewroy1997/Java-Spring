@@ -15,6 +15,9 @@
 <h1>Holiday Travels</h1><p>
 
 </div>
+<div class="topnav">
+<a href="logout" >Sign-out</a>
+</div>
 Current Routes:
 <table border="2" width="70%" cellpadding="2">  
 <tr><th>Route ID</th><th>Departure</th><th>Destination</th><th>Rate</th><th>Action</th></tr>  
@@ -27,7 +30,7 @@ Current Routes:
     <td>${route3.destination}</td> 
      <td>${route3.rate}</td>    
      
-     <td><a href="${route3.routeID}">Delete Route</a></td> 
+     <td><a href="route/${route3.routeID}">Delete Route</a></td> 
       </tr>  
     
   

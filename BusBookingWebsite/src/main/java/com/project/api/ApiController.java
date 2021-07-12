@@ -1,4 +1,4 @@
-package com.project;
+package com.project.api;
 
 import java.io.BufferedReader;
 import java.io.IOException;

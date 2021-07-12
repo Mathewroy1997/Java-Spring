@@ -1,4 +1,4 @@
-package com.project;
+package com.project.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,7 +14,13 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 //import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 
-import com.project.Customer;
+import com.project.models.Customer;
+import com.project.models.MasterPassengerTable;
+import com.project.models.Passenger;
+import com.project.models.Temp;
+import com.project.models.TempPass;
+import com.project.models.Trip;
+import com.project.models.ViewBookedData;
 public class CustomerDao {
 private JdbcTemplate jdbctemplate;
 

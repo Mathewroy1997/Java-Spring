@@ -1,12 +1,12 @@
-package com.project;
+package com.project.models;
 
 public class Trip {
 
 	
 int routeID;
-	int tripID;
-	int seats;
-	String date;
+	public int tripID;
+	public int seats;
+	public String date;
 	public int totalPrice;
 	public int getRouteID() {
 		return routeID;
