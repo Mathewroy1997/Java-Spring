@@ -6,13 +6,7 @@
 <h1>Holiday Travels</h1><p>
 
 </div>
-<div class="container">
-<h1>Holiday Travels</h1><p>
 
-</div>
-<div class="topnav">
-<a href="logout" >Sign-out</a>
-</div>
 
 
 
@@ -24,13 +18,14 @@
 <div class="loginSignup">
 <h3>Login || Signup</h3>
 </div>
-<form action="login">
+<form action="login" method="post">
 <div class="txt">
 <input type="text" name="username" placeholder="username" >
 </div>
 <div class="txt">
 <input type="password" name="password" placeholder="password" >
 </div>
+Login as admin<input type="checkbox" name="adminCheck">
 <input type="submit" value="Login">
 </form>
 <div class="invalidCred">

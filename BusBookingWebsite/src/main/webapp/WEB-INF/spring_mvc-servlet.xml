@@ -32,6 +32,9 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd
 <bean id="tdao" class="com.project.dao.TripDao">
 <property name="jdbctemplate" ref="jdbctemplate"></property>
 </bean>
+<bean id="adminDao" class="com.project.dao.AdminDao">
+<property name="jdbctemplate" ref="jdbctemplate"></property>
+</bean>
 
 <bean id="service" class="com.project.service.ServiceClass"/> 
 <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">

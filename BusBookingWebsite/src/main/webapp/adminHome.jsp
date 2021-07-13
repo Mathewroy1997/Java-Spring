@@ -21,6 +21,8 @@
 <form action="updateTrip">
 <input type="submit" value="Update Bus">
 </form>
-
+<form action="updateAdmin">
+<input type="submit" value="Add Admin">
+</form>
 </body>
 </html>

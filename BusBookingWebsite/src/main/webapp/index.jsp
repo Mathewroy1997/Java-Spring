@@ -26,8 +26,10 @@
 <div class="txt">
 <input type="password" name="password" placeholder="password" >
 </div>
+Login as admin<input type="checkbox" name="adminCheck">
 <input type="submit" value="Login">
 </form>
+
 <div class=signup>New User?<a href="signUp">Sign  Up</a></div>
 </div>
 
