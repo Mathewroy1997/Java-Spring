@@ -41,21 +41,22 @@ public class LoginController {
 	MasterPassengerTable master=new MasterPassengerTable();
 	Route route= new Route();
 	Trip trip = new Trip();
-	@Autowired
-CustomerDao dao;
-Customer customer;
+	Customer customer;
+	
+@Autowired
+CustomerDao customerDao;
 
 @Autowired
-RouteDao routedao=new RouteDao();
+RouteDao routeDao;
 @Autowired
-TripDao tripDao=new TripDao();
+TripDao tripDao;
 @Autowired
 ServiceClass serviceClass;
 
 
 
 
-@RequestMapping(value="/login", method = RequestMethod.GET)
+@RequestMapping(value="/login", method = RequestMethod.POST)
 
 public String login(HttpServletRequest request, Model m)  {
 	
@@ -66,7 +67,7 @@ String password=request.getParameter("password");
 
 int flag=serviceClass.login(username, password);
 
-List<Customer>list=dao.getData(username,password);
+List<Customer>userIDlist=customerDao.getData(username,password);
 
 
 
@@ -82,16 +83,18 @@ else if(flag==1) {
 	
 }
 else  {
-	customer=list.get(0);
+	customer=userIDlist.get(0);
 	viewdata.userid=customer.getUserid();
 	listtemppass=null;
 	m.addAttribute("username", username);
 	
-	List<Route>list1=routedao.getDeparture();
-	m.addAttribute("list", list1);
-	
-	List<Route>list2=routedao.getDestination();
-	m.addAttribute("list2", list2);
+			/*
+			 * List<Route>departureList=routeDao.getDeparture(); m.addAttribute("list",
+			 * departureList);
+			 * 
+			 * List<Route>destinationList=routeDao.getDestination(); m.addAttribute("list2",
+			 * destinationList);
+			 */
 	
 
 
@@ -110,7 +113,7 @@ public String backToIndex() {
 
 @RequestMapping("/updateRoute")
 public String updateRoute(Model m) {
-	List<Route> routeTable=routedao.getRouteTable();
+	List<Route> routeTable=routeDao.getRouteTable();
 	route=routeTable.get(0);
 	m.addAttribute("routeTable",routeTable);
 	
@@ -124,7 +127,7 @@ public String addNewRoute(HttpServletRequest request, Model m) {
 	newRoute.setDestination(request.getParameter("destination"));
 	newRoute.setRate(Integer.parseInt(request.getParameter("rate")));
 	
-	routedao.addNewRoute(newRoute);
+	routeDao.addNewRoute(newRoute);
 	return "redirect:/updateRoute";	
 	
 }
@@ -139,7 +142,7 @@ public String deleteRoute(HttpServletRequest request) {
 	Model m;
 	
 	try {
-		dao.deleteRoute(routeid);
+		customerDao.deleteRoute(routeid);
 		return "redirect:/updateRoute";
 	} catch (DataIntegrityViolationException e) {
 		return "admin_routeidexception";
@@ -155,7 +158,7 @@ public String returnToRouteIDUpdation()
 @RequestMapping("updateTrip")
 public String updateTrip(Model m) {
 	
-	List<Trip> tripTable=dao.getTripData();
+	List<Trip> tripTable=customerDao.getTripData();
 	trip=tripTable.get(0);
 	m.addAttribute("tripTable",tripTable);
 	return "admin_modifyTrip";
@@ -164,7 +167,7 @@ public String updateTrip(Model m) {
 public String deleteTrip(HttpServletRequest request) {
 	String path = request.getServletPath();
 	int tripid=Integer.parseInt(path.replaceAll("[\\D]", ""));
-	dao.deleteTrip(tripid);
+	customerDao.deleteTrip(tripid);
 	return "redirect:/updateTrip";
 }
 
@@ -175,13 +178,13 @@ public String addNewTrip(HttpServletRequest request, Model m) {
 	trip.setDate(request.getParameter("date"));
 	trip.setRouteID(Integer.parseInt(request.getParameter("routeid")));
 	trip.setSeats(Integer.parseInt(request.getParameter("seats")));
-	dao.addNewTrip(trip);
+	customerDao.addNewTrip(trip);
 	return "redirect:/updateTrip";
 	}
 
 
 @RequestMapping("/submitNewRegistraion")
-public String registerprocess(HttpServletRequest request,HttpServletResponse response) {
+public String newUserRegistration(HttpServletRequest request,HttpServletResponse response) {
 Customer customer =new Customer();
 customer.setUsername(request.getParameter("username"));
 customer.setPassword(request.getParameter("password"));
@@ -190,34 +193,34 @@ customer.setLastname(request.getParameter("lastname"));
 customer.setEmail(request.getParameter("email"));
 customer.setAddress(request.getParameter("address"));
 customer.setPhone(request.getParameter("phone"));
-dao.saveEmployeeByPreparedStatement(customer);
+customerDao.addNewUser(customer);
 
-return "Success";
+return "newUserAdded";
 
 }
-@RequestMapping(value="/bookingpage")
-public String DirectToBookingPage(Model m){
-	List<Route>list1=routedao.getDeparture();
-	m.addAttribute("list", list1);
+@RequestMapping(value="/newBookingPage")
+public String homeToBookingPage(Model m){
+	List<Route>departurePointsList=routeDao.getDeparture();
+	m.addAttribute("departurePointsList", departurePointsList);
 	
-	List<Route>list2=routedao.getDestination();
-	m.addAttribute("list2", list2);
-	return "newbooking";
+	List<Route>destinationPointsList=routeDao.getDestination();
+	m.addAttribute("destinationPointsList", destinationPointsList);
+	return "bookingNew";
 }
-@RequestMapping(value="/nextPage", method = RequestMethod.GET)
+@RequestMapping(value="/checkRouteAndDateAvailability", method = RequestMethod.POST)
 public String nextPage(HttpServletRequest request, Model m) {
-	String departure=request.getParameter("database1");
-	String destination=request.getParameter("database2");
+	String departure=request.getParameter("userSelectedDeparture");
+	String destination=request.getParameter("userSelectedDestination");
 	
-	List<Route> list3=routedao.getRouteData(departure, destination);
-	if(list3.isEmpty()) {
+	List<Route> userSelectedRouteInfoList=routeDao.getRouteData(departure, destination);
+	if(userSelectedRouteInfoList.isEmpty()) {
 		return "unknownRoute";
 	}
 	viewdata.setDeparture(departure);
 	viewdata.setDestination(destination);
-	Route route4=list3.get(0);
-	int route_id=route4.routeID;
-	rate=route4.rate;
+	Route userSelectedRouteInfo=userSelectedRouteInfoList.get(0);
+	int route_id=userSelectedRouteInfo.routeID;
+	rate=userSelectedRouteInfo.rate;
 	//List<Trip> trip1=tripDao.getAvailableSeats(route_id);
 	
 	m.addAttribute("departure",departure);
@@ -228,7 +231,7 @@ public String nextPage(HttpServletRequest request, Model m) {
 	String date=request.getParameter("date");
 	List<Trip>findTrip=tripDao.CheckDate(date,route_id);
 	if(findTrip.isEmpty()) {
-		return "bookingpage4";
+		return "returnToNewBooking";
 	}
 	else {
 		viewdata.setDate(date);
@@ -237,7 +240,7 @@ public String nextPage(HttpServletRequest request, Model m) {
 		viewdata.tripid=trip.tripID;
 		int seatsAvailable=trip.seats;
 		m.addAttribute("seats",seatsAvailable);
-		return "bookingpage3"; 
+		return "bookingSeatSelection"; 
 	}
 	
 	
@@ -260,12 +263,12 @@ public String getPassengerData(HttpServletRequest request, Model m) {
 	master.age=age1;
 	master.id=id1;
 	int userid1=customer.getUserid();
-dao.saveToTemp(userid,date,tripid,name1,age1,id1);
-listtemppass=dao.getFromtemp();
+customerDao.saveToTemp(userid,date,tripid,name1,age1,id1);
+listtemppass=customerDao.getFromtemp();
 
-	dao.setPassengerData(name1,age1,id1,userid1);
+	customerDao.setPassengerData(name1,age1,id1,userid1);
 	
-	List<Passenger> passenger=dao.getPassengerData(userid1);
+	List<Passenger> passenger=customerDao.getPassengerData(userid1);
 	pass=passenger;
 	m.addAttribute("passenger",pass);
 	
@@ -278,10 +281,10 @@ public String finalConfirm(Model m) {
 	master.date=viewdata.date;
 	master.tripid=viewdata.tripid;
 	
-	dao.setViewData(viewdata);
-	dao.setMasterTable( master);
-	dao.TruncateTemppass();
-	dao.ReduceSeats(tickets, master);
+	customerDao.setViewData(viewdata);
+	customerDao.setMasterTable( master);
+	customerDao.TruncateTemppass();
+	customerDao.ReduceSeats(tickets, master);
 	int userid=customer.getUserid();
 		
 	return "finalConfirm";
@@ -291,23 +294,23 @@ public String call(Model m, HttpServletRequest request) {
 	
 	m.addAttribute("totalPrice",totalprice);
 	m.addAttribute("tickets",tickets);
-	List<Temp> temp= dao.callData();
-	m.addAttribute("temp",temp);
+	List<Temp> temp= customerDao.callData();
+	m.addAttribute("temp",temp); 
 	m.addAttribute("listtemppass",listtemppass);
 	return "passengerInfoPage";
 }
-@RequestMapping("/get")
+@RequestMapping("/bookingGetPassengerInfo")
 public String getPrice(HttpServletRequest request, Model m) {
-	RouteDao dao1 =new RouteDao();
+	
 	 tickets=Integer.parseInt(request.getParameter("tickets"));
 	 viewdata.setTickets(tickets);
-	 totalprice=dao1.totalPrice(tickets,rate);
+	 totalprice=routeDao.totalPrice(tickets,rate);
 	return "redirect:/call";
 }
 @RequestMapping("/bookingHistory")
 public String showBookingHistory(Model m){
 	
-	List<ViewBookedData> listBookedHistory=dao.setBookedHistory(viewdata.userid);
+	List<ViewBookedData> listBookedHistory=customerDao.setBookedHistory(viewdata.userid);
 	m.addAttribute("list",listBookedHistory);
 	return "bookingHistory";
 }

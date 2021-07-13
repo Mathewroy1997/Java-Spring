@@ -45,7 +45,7 @@ return customer;
 });
 }
 
-public Boolean saveEmployeeByPreparedStatement(final Customer e){
+public Boolean addNewUser(final Customer e){
 String query="insert into userdata(username,password,firstname,lastname,email,address,phone) values(?,?,?,?,?,?,?)";
 return jdbctemplate.execute(query,new PreparedStatementCallback<Boolean>(){
 public Boolean doInPreparedStatement(PreparedStatement ps)

@@ -23,13 +23,13 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd
 <bean id="jdbctemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 <property name="dataSource" ref="ds"></property>
 </bean>
-<bean id="cdao" class="com.project.CustomerDao">
+<bean id="cdao" class="com.project.dao.CustomerDao">
 <property name="jdbctemplate" ref="jdbctemplate"></property>
 </bean>
-<bean id="rdao" class="com.project.RouteDao">
+<bean id="rdao" class="com.project.dao.RouteDao">
 <property name="jdbctemplate" ref="jdbctemplate"></property>
 </bean>
-<bean id="tdao" class="com.project.TripDao">
+<bean id="tdao" class="com.project.dao.TripDao">
 <property name="jdbctemplate" ref="jdbctemplate"></property>
 </bean>
 

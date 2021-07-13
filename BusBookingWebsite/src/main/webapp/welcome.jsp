@@ -28,7 +28,7 @@ welcome back <%= request.getAttribute("username") %>. <br>
 <form action="bookingHistory">
 <input type="submit" value="View your tickets">
 </form>
-<form action="bookingpage">
+<form action="newBookingPage">
 <input type="submit" value="Book New ticket">
 </form>
 

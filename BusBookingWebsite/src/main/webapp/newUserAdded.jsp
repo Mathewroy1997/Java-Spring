@@ -14,6 +14,6 @@
 <a href="logout" >Sign-out</a>
 </div>
 Registration Successfull.
-<jsp:include page="/index.jsp"></jsp:include>  
+
 </body>
 </html>

@@ -17,10 +17,10 @@
 <a href="logout" >Sign-out</a>
 </div>
 Find your bus: <br>
-<form action="nextPage">
+<form action="checkRouteAndDateAvailability" method="POST">
 Boarding point
-<select  name="database1">
-  <c:forEach items="${list}" var="route"  >
+<select  name="userSelectedDeparture">
+  <c:forEach items="${departurePointsList}" var="route"  >
     <option value="${route.departure}" >
         ${route.departure}
     </option>
@@ -28,8 +28,8 @@ Boarding point
 </select>
 <br>
 Destination
-<select name="database2" >
-  <c:forEach items="${list2}" var="route1" >
+<select name="userSelectedDestination" >
+  <c:forEach items="${destinationPointsList}" var="route1" >
     <option value="${route1.destination}">
         ${route1.destination}
     </option>

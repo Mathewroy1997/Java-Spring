@@ -19,7 +19,7 @@
 <div class="loginSignup">
 <h3>Login || SignUp</h3>
 </div>
-<form action="login">
+<form action="login" method="POST">
 <div class="txt">
 <input type="text" name="username" placeholder="username" >
 </div>
