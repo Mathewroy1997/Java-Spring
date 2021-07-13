@@ -24,5 +24,8 @@
 <form action="updateAdmin">
 <input type="submit" value="Add Admin">
 </form>
+<form action="manageUsers">
+<input type="submit" value="User Management">
+</form>
 </body>
 </html>

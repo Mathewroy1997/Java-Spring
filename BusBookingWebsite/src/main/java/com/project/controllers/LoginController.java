@@ -144,7 +144,6 @@ public class LoginController {
 	@RequestMapping("route/{route3.routeID}")
 	public String deleteRoute(HttpServletRequest request) {
 
-		// int id=Integer.parseInt(request.getParameter("route"));
 		String path = request.getServletPath();
 
 		int routeid = Integer.parseInt(path.replaceAll("[\\D]", ""));
@@ -211,6 +210,22 @@ public class LoginController {
 		return "adminHome";
 	}
 
+	@RequestMapping("manageUsers")
+	public String manageUsers(Model usersList) {
+		List<Customer> userData = serviceClass.getCustomerData();
+		usersList.addAttribute("userData", userData);
+		return "admin_userManagement";
+	}
+
+	@RequestMapping("customer/{customer.userid}")
+	public String deleteUser(HttpServletRequest request) {
+		String path = request.getServletPath();
+		int userID = Integer.parseInt(path.replaceAll("[\\D]", ""));
+		serviceClass.deleteUser(userID);
+
+		return "redirect:/manageUsers";
+	}
+
 	@RequestMapping("/submitNewRegistraion")
 	public String newUserRegistration(HttpServletRequest request, HttpServletResponse response) {
 		Customer customer = new Customer();
@@ -224,6 +239,21 @@ public class LoginController {
 		customerDao.addNewUser(customer);
 
 		return "newUserAdded";
+
+	}
+
+	@RequestMapping("addUserFromAdmin")
+	public String addUserFromAdmin(HttpServletRequest request) {
+
+		String username = request.getParameter("username");
+		String firstName = request.getParameter("firstName");
+		String lastName = request.getParameter("lastName");
+		String email = request.getParameter("email");
+		String address = request.getParameter("address");
+		String phone = request.getParameter("phone");
+		String password = request.getParameter("password");
+		serviceClass.setUserDetails(username, firstName, lastName, email, address, phone, password);
+		return "redirect:/manageUsers";
 
 	}
 

@@ -15,20 +15,19 @@ import com.project.models.Route;
 public class ServiceClass {
 	HttpServletRequest request;
 	@Autowired
-	CustomerDao dao;
+	CustomerDao customerDao;
 
 	@Autowired
 	AdminDao adminDao;
 
 	public int login(String username, String password) {
-		List<Customer> list = dao.getData(username, password);
+		List<Customer> list = customerDao.getData(username, password);
 		int flag;
 
 		if (list.isEmpty()) {
 
 			return flag = 0;
-		} 
-		else {
+		} else {
 
 			return flag = 2;
 
@@ -55,5 +54,30 @@ public class ServiceClass {
 			return flag = 1;
 
 		}
+	}
+
+	public List<Customer> getCustomerData() {
+		List<Customer> userData = customerDao.getAllUserData();
+
+		return userData;
+	}
+
+	public void deleteUser(int userID) {
+		customerDao.deleteUser(userID);
+
+	}
+
+	public void setUserDetails(String username, String firstName, String lastName, String email, String address,
+			String phone, String Password) {
+		Customer customer = new Customer();
+
+		customer.setUsername(username);
+		customer.setFirstname(firstName);
+		customer.setLastname(lastName);
+		customer.setAddress(address);
+		customer.setEmail(email);
+		customer.setPhone(phone);
+
+		customerDao.addNewUserFromAdmin(customer);
 	}
 }
