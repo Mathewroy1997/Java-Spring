@@ -12,7 +12,7 @@ import com.project.models.AdminData;
 import com.project.models.Customer;
 import com.project.models.Route;
 
-public class ServiceClass {
+public class CustomerService {
 	HttpServletRequest request;
 	@Autowired
 	CustomerDao customerDao;
@@ -77,6 +77,7 @@ public class ServiceClass {
 		customer.setAddress(address);
 		customer.setEmail(email);
 		customer.setPhone(phone);
+		customer.setPassword(Password);
 
 		customerDao.addNewUserFromAdmin(customer);
 	}

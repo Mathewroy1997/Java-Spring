@@ -36,4 +36,22 @@ public class AdminDao {
 		}
 		});
 	}
+	public List<AdminData> getAllAdminData() {
+		String query = "select * from admindata ";
+
+		return jdbctemplate.query(query, new RowMapper<AdminData>() {
+			public AdminData mapRow(ResultSet rs, int row) throws SQLException {
+				AdminData adminData=new AdminData();
+				adminData.setAdminID(rs.getInt("AdminID"));
+				adminData.setAdminName(rs.getString("AdminName"));
+				adminData.setUsername(rs.getString("Username"));
+				return adminData;
+			}
+		});
+	}
+	public int deleteUser(int adminID) {
+		String sql = "delete from admindata where AdminID=" + adminID;
+		return jdbctemplate.update(sql);
+		
+	}
 }

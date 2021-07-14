@@ -55,11 +55,11 @@
 
 		First Name<input type="text" name="firstName"> Last Name<input
 			type="text" name="lastName"> Username<input type="text"
-			name="userName"> Password<input type="text" name="userName">
+			name="username"> Password<input type="text" name="password">
 		E-Mail ID<input type="text" name="emailID"> Address<input
 			type="text" name="address"> Phone<input type="text"
 			name="phone">
-
+<input type="submit" value="Add New User">
 
 	</form>
 
