@@ -68,9 +68,12 @@ public class BookingController {
 		model.addAttribute("availableBusList",availableBusList);
 		model.addAttribute("userId",userId);
 		model.addAttribute("date",date);
+		model.addAttribute("departure",departure);
+		model.addAttribute("destination",destination);
+		model.addAttribute("totalKm",totalKm);
 		
 		
-		int i;
+		
 		
 		 
 

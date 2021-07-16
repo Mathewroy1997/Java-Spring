@@ -18,9 +18,13 @@
 <div class="topnav">
 <a href="logout" >Sign-out</a>
 </div>
-Available Buses:<p>
 
-
+Date=${date }&emsp;&emsp;
+Departure:${departure }&emsp;&emsp;
+Destination:${destination }&emsp;&emsp;
+Total Distance:${totalKm }km&emsp;&emsp;
+<p>
+Available Buses:
 
 
 <table border="2" width="70%" cellpadding="2">  
