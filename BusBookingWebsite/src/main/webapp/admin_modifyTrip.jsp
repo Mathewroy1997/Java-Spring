@@ -38,8 +38,10 @@ Current Buses:
    </table>  
   Add new trip:<br>
   <form action="addTrip">
-  Trip ID:<input type="text" name="tripid"> Date:<input type="date" name="date">
-  Route ID:<input type="text" name="routeid"> Seats: <input type="text" name ="seats"> 
+  Trip ID:<input type="text" name="tripid" required> 
+  Date:<input type="date" name="date" required>
+  Route ID:<input type="text" name="routeid" required> 
+  Seats: <input type="text" name ="seats" required> 
    <br>
    <input type="submit" value="Add Bus">
    </form>

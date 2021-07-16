@@ -31,7 +31,8 @@ import com.project.service.CustomerService;
 @Controller
 public class CustomerController {
 
-	int userTickets;
+	 int userTickets;
+	 
 
 	@Autowired
 	CustomerDao customerDao;
@@ -40,7 +41,6 @@ public class CustomerController {
 
 	@Autowired
 	TripDao tripDao;
-
 
 	@Autowired
 	CustomerService serviceClass;
@@ -52,13 +52,13 @@ public class CustomerController {
 		customer.setPassword(request.getParameter("password"));
 		customer.setFirstname(request.getParameter("firstName"));
 		customer.setLastname(request.getParameter("lastName"));
-		customer.setEmail(request.getParameter("emailID"));
+		customer.setEmail(request.getParameter("emailId"));
 		customer.setAddress(request.getParameter("address"));
 		customer.setPhone(request.getParameter("phone"));
 		try {
 			customerDao.addNewUser(customer);
 			return "newUserAdded";
-		} catch (DuplicateKeyException e) {
+		} catch (Exception e) {
 
 			String duplicateError = "Username already exist.Try again";
 			model.addAttribute("duplicateMessage", duplicateError);

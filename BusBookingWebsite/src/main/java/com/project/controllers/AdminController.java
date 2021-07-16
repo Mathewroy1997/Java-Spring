@@ -62,10 +62,15 @@ public class AdminController {
 		route.setDeparture(request.getParameter("departure"));
 		route.setDestination(request.getParameter("destination"));
 		route.setRate(Integer.parseInt(request.getParameter("rate")));
+		
 
-		adminService.addNewRoute(route);
+		try {
+			adminService.addNewRoute(route);
 
-		return "redirect:/updateRoute";
+			return "redirect:/updateRoute";
+		} catch (Exception e) {
+			return "admin_InvalidEntries";
+		}
 
 	}
 
@@ -115,9 +120,13 @@ public class AdminController {
 		trip.setRouteID(Integer.parseInt(request.getParameter("routeid")));
 		trip.setSeats(Integer.parseInt(request.getParameter("seats")));
 		
-		adminService.addNewTrip(trip);
-		
-		return "redirect:/updateTrip";
+		try {
+			adminService.addNewTrip(trip);
+			
+			return "redirect:/updateTrip";
+		} catch (Exception e) {
+			return "admin_InvalidEntries";
+		}
 	}
 
 	@RequestMapping("updateAdmin")
@@ -137,9 +146,7 @@ public class AdminController {
 			
 			return "admin_newAdminSuccess";
 		} catch (DuplicateKeyException duplicate) {
-			String duplicateMessage = "Username already exist. Try again";
-			model.addAttribute("duplicateMessage", duplicateMessage);
-			return "redirect:/updateAdmin";
+			return "admin_InvalidEntries";
 		}
 	}
 
@@ -176,9 +183,12 @@ public class AdminController {
 		String address = request.getParameter("address");
 		String phone = request.getParameter("phone");
 		String password = request.getParameter("password");
-		adminService.setUserDetails(username, firstName, lastName, email, address, phone, password);
-		//customerService.setUserDetails(username, firstName, lastName, email, address, phone, password);
-		return "redirect:/manageUsers";
+		try {
+			adminService.setUserDetails(username, firstName, lastName, email, address, phone, password);
+			return "redirect:/manageUsers";
+		} catch (Exception  e ) {
+			return "admin_InvalidEntries";
+		}
 
 	}
 
@@ -189,6 +199,10 @@ public class AdminController {
 		adminService.deleteAdmin(adminID);
 
 		return "redirect:/updateAdmin";
+	}
+	@RequestMapping("goBackToAdminHome")
+	public String backToAdminHome() {
+		return "adminHome";
 	}
 
 }

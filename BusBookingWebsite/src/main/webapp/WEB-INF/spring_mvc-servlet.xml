@@ -38,6 +38,7 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd
 
 <bean id="customerService" class="com.project.service.CustomerService"/> 
 <bean id="adminService" class="com.project.service.AdminService"/> 
+<bean id="bookingService" class="com.project.service.BookingService"/> 
 <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
  
 <property name="prefix" value="/"></property>

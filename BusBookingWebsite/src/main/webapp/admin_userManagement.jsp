@@ -53,13 +53,14 @@
 	<br>
 	<form action="addUserFromAdmin">
 
-		First Name<input type="text" name="firstName"> Last Name<input
+		First Name<input type="text" name="firstName" required> Last Name<input
 			type="text" name="lastName"> Username<input type="text"
-			name="username"> Password<input type="text" name="password">
-		E-Mail ID<input type="text" name="emailID"> Address<input
-			type="text" name="address"> Phone<input type="text"
-			name="phone">
-<input type="submit" value="Add New User">
+			name="username" required> Password<input type="text" name="password" required>
+		E-Mail ID<input type="text" name="emailID" required> Address<input
+			type="text" name="address" required> Phone<input type="text"
+			name="phone" required>
+			
+			 <input type="submit" value="Add New User">
 
 	</form>
 

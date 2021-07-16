@@ -15,13 +15,13 @@
 <a href="logout" >Sign-out</a>
 </div>
 ${duplicateMessage }<p>
- Enter username: <input type="text" name="username"><br>
-Enter password: <input type="text" name="password"><br>
-Enter first name: <input type="text" name="firstname"><br>
-Enter last name: <input type="text" name="lastname"><br>
-Enter email address: <input type="text" name="email"><br>
-Enter address:  <input type="text" name="address"><br>
-Enter mob.number:<input type="text" name="phone"><br>
+ Enter username: <input type="text" name="username" required><br>
+Enter password: <input type="text" name="password" required><br>
+Enter first name: <input type="text" name="firstName" required><br>
+Enter last name: <input type="text" name="lastName" required><br>
+Enter email address: <input type="text" name="emailId" required><br>
+Enter address:  <input type="text" name="address" required><br>
+Enter mob.number:<input type="text" name="phone" required><br>
                          <input type="submit"><br>
                          </form>
 </body>

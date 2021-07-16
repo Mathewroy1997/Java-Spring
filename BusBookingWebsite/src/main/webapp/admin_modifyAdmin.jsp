@@ -12,7 +12,7 @@
 <body>
 Current Admins:
 <table border="2" width="70%" cellpadding="2">  
-<tr><th>Admin ID</th><th>Username</th><th>Admin-Name</th><th>Action</th></tr>  
+<tr><th>Admin ID</th><th>Admin-Name</th><th>Username</th><th>Action</th></tr>  
    <c:forEach var="adminData" items="${adminList}"> 
      
    <tr>  
@@ -32,9 +32,9 @@ Current Admins:
 ${duplicateMessage }<p>
 Add new Admins:<br>
 <form action="addAdmin">
-Admin Name:<input type="text" name="newAdminName">&emsp;
-Username<input type="text" name="newAdminUsername">&emsp;
-Password<input type="text" name="newAdminPassword">&emsp;
+Admin Name:<input type="text" name="newAdminName" required>&emsp;
+Username<input type="text" name="newAdminUsername" required>&emsp;
+Password<input type="text" name="newAdminPassword" required>&emsp;
 
 <input type="submit" value="Add New Admin">
 </form>

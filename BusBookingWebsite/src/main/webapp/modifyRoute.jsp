@@ -38,13 +38,16 @@ Current Routes:
    </table>  
 Add new Route:<br>   
  <form action ="addRoute">
- Route ID<input type="text" name="routeid">
-  Departure<input type="text" name="departure">
-   Destination<input type="text" name="destination">
-    Rate<input type="text" name="rate">
+ Route ID<input type="text" name="routeid" required>
+  Departure<input type="text" name="departure" required>
+   Destination<input type="text" name="destination" required>
+    Rate<input type="text" name="rate" required>
     
     <input type ="submit" value="add">
  </form>
+ <form action="goBackToAdminHome">
+<input type="submit" value="Back To Home">
+</form>
    
 </body>
 </html>
