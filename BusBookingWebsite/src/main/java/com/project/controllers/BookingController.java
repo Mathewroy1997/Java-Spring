@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.project.models.AvailableBuses;
+import com.project.models.BusDetails;
 import com.project.models.Route;
 import com.project.models.RouteDetails;
 import com.project.models.Trip;
@@ -45,7 +47,7 @@ public class BookingController {
 	 * @return
 	 */
 	@RequestMapping(value = "/checkRouteAndDateAvailability", method = RequestMethod.POST)
-	public String nextPage( HttpServletRequest request, Model m) {
+	public String nextPage( HttpServletRequest request, Model model) {
 		int userId=Integer.parseInt(request.getParameter("userId"));
 		String departure = request.getParameter("userSelectedDeparture");
 		String destination = request.getParameter("userSelectedDestination");
@@ -57,21 +59,22 @@ public class BookingController {
 		}
 		RouteDetails routeDetails=userSelectedRouteDetailsList.get(0);
 		int routeId=routeDetails.getRouteId();
+		int totalKm=routeDetails.getTotalDistanceInKm();
 		List<TripDetails> tripListInUserSelectedDate=bookingService.checkDateWithRouteId(routeId,date);
-		int numberOfTrips=tripListInUserSelectedDate.size();
-		List<TripDetails> tripListToGetBusDetails=new ArrayList<TripDetails>();
-		for(int i=0;i<numberOfTrips;i++) {
-			
-			TripDetails tripDetails=tripListInUserSelectedDate.get(i);
-			tripListToGetBusDetails.add(tripDetails);
+		
+		List<BusDetails> busDetailsList=bookingService.getBusDetails(tripListInUserSelectedDate);
+		List<AvailableBuses> availableBusList=bookingService.getAvailableBuses( busDetailsList,tripListInUserSelectedDate,totalKm);
+		
+		model.addAttribute("availableBusList",availableBusList);
+		model.addAttribute("userId",userId);
+		model.addAttribute("date",date);
+		
+		
+		int i;
+		
+		 
 
-			int j=0;
-			int g=j;
-		}
-		List<TripDetails> list=tripListToGetBusDetails;
-		int f;
-
-		return "bookingSeatSelection";
+		return "bookingShowAvailableBuses";
 
 		/*RouteDetails userSelectedRouteInfo = userSelectedRouteDetailsList.get(0);
 		int routeId = userSelectedRouteInfo.getRouteID();

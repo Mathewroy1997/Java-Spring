@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
+import com.project.models.BusDetails;
 import com.project.models.Route;
 import com.project.models.RouteDetails;
 import com.project.models.TripDetails;
@@ -90,6 +91,30 @@ public class BookingDao {
 				
 			
 			return tripDetails;
+			}
+			});
+	}
+
+	
+
+	public List<BusDetails> getBusDetails(int busId) {
+		String query="select * from busdetails where busId='" + busId + "'";
+		return jdbctemplate.query(query,new RowMapper<BusDetails>(){
+			public BusDetails mapRow(ResultSet resultSet, int row) throws SQLException {
+				BusDetails busDetails=new BusDetails();
+				
+					busDetails.setBusId(resultSet.getInt("busId"));
+					busDetails.setBusType(resultSet.getString("category"));
+					 busDetails.setBusRatePerKm(resultSet.getInt("rate/km"));
+					 busDetails.setBusTotalSeats(resultSet.getInt("seats"));
+					 
+					 
+					 
+					
+			
+				
+			
+			return busDetails;
 			}
 			});
 	}
