@@ -33,7 +33,6 @@ public class CustomerController {
 
 	 int userTickets;
 	 
-
 	@Autowired
 	CustomerDao customerDao;
 	@Autowired
@@ -67,7 +66,7 @@ public class CustomerController {
 
 	}
 
-	@RequestMapping(value = "newBookingPage", method=RequestMethod.POST)
+	@RequestMapping(value = "newBookingPage1", method=RequestMethod.POST)
 	public String homeToBookingPage(HttpServletRequest request, Model m) {
 		
 		int userId=Integer.parseInt(request.getParameter("userId"));
@@ -81,7 +80,7 @@ public class CustomerController {
 		return "bookingNew";
 	}
 
-	@RequestMapping(value = "/checkRouteAndDateAvailability", method = RequestMethod.POST)
+	@RequestMapping(value = "/checkRouteAndDateAvailability1", method = RequestMethod.POST)
 	public String nextPage( HttpServletRequest request, Model m) {
 		int userId=Integer.parseInt(request.getParameter("userId"));
 		String departure = request.getParameter("userSelectedDeparture");

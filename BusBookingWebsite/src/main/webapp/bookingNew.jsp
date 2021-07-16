@@ -21,18 +21,18 @@ Find your bus: <br>
 <input type="hidden" name="userId" value=${userId }>
 Boarding point
 <select  name="userSelectedDeparture">
-  <c:forEach items="${departurePointsList}" var="route"  >
-    <option value="${route.departure}" >
-        ${route.departure}
+  <c:forEach items="${departurePointsList}" var="routeDetails"  >
+    <option value="${routeDetails.departure}" >
+        ${routeDetails.departure}
     </option>
   </c:forEach>
 </select>
 <br>
 Destination
 <select name="userSelectedDestination" >
-  <c:forEach items="${destinationPointsList}" var="route1" >
-    <option value="${route1.destination}">
-        ${route1.destination}
+  <c:forEach items="${destinationPointsList}" var="routeDetails" >
+    <option value="${routeDetails.destination}">
+        ${routeDetails.destination}
     </option>
   </c:forEach>
 </select>
