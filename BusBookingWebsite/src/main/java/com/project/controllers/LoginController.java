@@ -25,7 +25,7 @@ import com.project.models.MasterPassengerTable;
 import com.project.models.Passenger;
 import com.project.models.Route;
 import com.project.models.Temp;
-import com.project.models.TempPass;
+import com.project.models.TemperoryPassenger;
 import com.project.models.Trip;
 import com.project.models.ViewBookedData;
 import com.project.service.CustomerService;
@@ -34,16 +34,8 @@ import com.project.*;
 @Controller
 public class LoginController {
 	
-	String registrationStatus;
-	
-	List<Passenger> pass;
-	List<TempPass> listtemppass;
-	ViewBookedData viewdata = new ViewBookedData();
-	MasterPassengerTable master = new MasterPassengerTable();
 	
 	
-	Customer customer;
-
 	@Autowired
 	CustomerDao customerDao;
 
@@ -96,15 +88,19 @@ public class LoginController {
 			m.addAttribute("error", error);
 
 			return "invalidLoginAttempt";
-		} else if (flag == 1) {
-			return "adminHome";
-
-		} else {
+		} 
+		/*
+			 * else if (flag == 1) { return "adminHome";
+			 * 
+			 * }
+			 */ 
+		else {
+			
+			Customer customer;
 			customer = userIDlist.get(0);
-			viewdata.userid = customer.getUserid();
-			listtemppass = null;
 			m.addAttribute("username", username);
-
+			m.addAttribute("userId",customer.getUserid());
+			m.addAttribute("customer",customer);
 			return "welcome";
 		}
 	}
@@ -114,22 +110,13 @@ public class LoginController {
 		return "Register";
 	}
 
-	@RequestMapping("logout")
+	@RequestMapping(value="logout")
 	public String backToIndex() {
 		return "index";
 	}
 
 	
 
-	
-
-	
-
-	
-
-	
-
-	
 
 	
 }

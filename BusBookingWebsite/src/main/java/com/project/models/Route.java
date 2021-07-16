@@ -2,10 +2,10 @@ package com.project.models;
 
 public class Route {
 
-	public int routeID;
-	public int rate;
-	public String departure;
-	public String destination;
+	private int routeID;
+	private int rate;
+	private String departure;
+	private String destination;
 	
 	
 	public int getRouteID() {

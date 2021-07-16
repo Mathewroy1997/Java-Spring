@@ -14,10 +14,11 @@
 
 </div>
 <div class="topnav">
-<a href="logout" >Sign-out</a>
+<a href="logout" method="post">Sign-out</a>
 </div>
 Find your bus: <br>
-<form action="checkRouteAndDateAvailability" method="POST">
+<form action="checkRouteAndDateAvailability" method="post">
+<input type="hidden" name="userId" value=${userId }>
 Boarding point
 <select  name="userSelectedDeparture">
   <c:forEach items="${departurePointsList}" var="route"  >

@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.jasper.tagplugins.jstl.core.Catch;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
 //import org.springframework.dao.DataAccessException;
@@ -19,7 +20,7 @@ import com.project.models.Customer;
 import com.project.models.MasterPassengerTable;
 import com.project.models.Passenger;
 import com.project.models.Temp;
-import com.project.models.TempPass;
+import com.project.models.TemperoryPassenger;
 import com.project.models.Trip;
 import com.project.models.ViewBookedData;
 
@@ -99,23 +100,23 @@ public class CustomerDao {
 		});
 	}
 
-	public int saveToTemp(int userid, String date, int tripid, String name1, int age1, int id1) {
-		String sql = "insert into temppass(userid,date,tripid,name,age,id) values(" + "" + userid + ",'" + date + "'"
+	public int saveToTemporaryPassengers(int userid, String date, int tripid, String name1, int age1, int id1) {
+		String sql = "insert into temporary_passengers(userid,date,tripid,name,age,id) values(" + "" + userid + ",'" + date + "'"
 				+ "," + tripid + ",'" + name1 + "'" + "," + age1 + "," + id1 + ")";
 		return jdbctemplate.update(sql);
 
 	}
 
-	public List<TempPass> getFromtemp() {
-		String query = "select * from temppass ";
-		return jdbctemplate.query(query, new RowMapper<TempPass>() {
-			public TempPass mapRow(ResultSet rs, int row) throws SQLException {
-				TempPass temp1 = new TempPass();
+	public List<TemperoryPassenger> getFromTemporaryPassenger() {
+		String query = "select * from temporary_passengers ";
+		return jdbctemplate.query(query, new RowMapper<TemperoryPassenger>() {
+			public TemperoryPassenger mapRow(ResultSet rs, int row) throws SQLException {
+				TemperoryPassenger passenger = new TemperoryPassenger();
 
-				temp1.setName(rs.getString("name"));
-				temp1.setAge(rs.getInt("age"));
-				temp1.setId(rs.getInt("id"));
-				return temp1;
+				passenger.setName(rs.getString("name"));
+				passenger.setAge(rs.getInt("age"));
+				passenger.setId(rs.getInt("id"));
+				return passenger;
 			}
 		});
 
@@ -176,15 +177,15 @@ public class CustomerDao {
 		});
 	}
 
-	public int TruncateTemppass() {
-		String sql = "Truncate table temppass";
+	public int TruncateTemporaryTable() {
+		String sql = "Truncate table temporary_passengers";
 		return jdbctemplate.update(sql);
 
 	}
 
-	public int ReduceSeats(int tickets, MasterPassengerTable master) {
-		String date = master.date;
-		String sql = "update tripdata set Seats=Seats-" + tickets + " where trip_id=" + master.tripid + " and date='"
+	public int ReduceSeats(int tickets, int tripId, String date) {
+		
+		String sql = "update tripdata set Seats=Seats-" + tickets + " where trip_id=" +tripId + " and date='"
 				+ date + "';";
 		return jdbctemplate.update(sql);
 
@@ -254,8 +255,8 @@ public class CustomerDao {
 		});
 	}
 
-	public int deleteUser(int userID) {
-		String sql = "delete from userdata where userid=" + userID;
+	public int deleteCustomer(int userId) {
+		String sql = "delete from userdata where userid=" + userId;
 		return jdbctemplate.update(sql);
 
 	}
@@ -277,5 +278,11 @@ public class CustomerDao {
 			}
 		});
 
+	}
+
+	public int moveDataFromTemporaryToMaster() {
+		String sql = "INSERT INTO masterpassenger SELECT * FROM temporary_passengers;";
+		return jdbctemplate.update(sql);
+		
 	}
 }

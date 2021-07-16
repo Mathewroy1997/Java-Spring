@@ -3,11 +3,12 @@ package com.project.models;
 public class Trip {
 
 	
-int routeID;
-	public int tripID;
-	public int seats;
-	public String date;
-	public int totalPrice;
+private int routeID;
+	private int tripID;
+	private int seats;
+	private String date;
+	private int totalPrice;
+	
 	public int getRouteID() {
 		return routeID;
 	}

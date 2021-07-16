@@ -68,22 +68,22 @@ public class RouteDao {
 			String query3="select * from routedata where Departure='"+departure+"' and Destination='"+destination+"';";
 			return jdbctemplate1.query(query3,new RowMapper<Route>(){
 				public Route mapRow(ResultSet rs, int row) throws SQLException {
-					Route route3=new Route();
+					Route userRoute=new Route();
 					
-						 route3.setDeparture(rs.getString("Departure"));
-						 route3.setDestination(rs.getString("Destination"));
-						 route3.setRouteID(rs.getInt("routeid"));
-						 route3.setRate(rs.getInt("Rate"));
-						int trial=route3.rate;
-						RouteDao dao1=new RouteDao();
-						dao1.setPricePerTicket(trial);
-			
+						 userRoute.setDeparture(rs.getString("Departure"));
+						 userRoute.setDestination(rs.getString("Destination"));
+						 userRoute.setRouteID(rs.getInt("routeid"));
+						 userRoute.setRate(rs.getInt("Rate"));
 						
-						 trial=route3.routeID;
-						 math=route3.routeID;
+				/*
+				 * RouteDao dao1=new RouteDao(); dao1.setPricePerTicket(trial);
+				 * 
+				 * 
+				 * trial=userRoute.routeID; math=userRoute.routeID;
+				 */
 					
 				
-				return route3;
+				return userRoute;
 				}
 				});
 	

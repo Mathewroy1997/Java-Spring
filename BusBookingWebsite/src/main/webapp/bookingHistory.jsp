@@ -24,14 +24,11 @@
    <td>${view1.date}</td>  
    <td>${view1.departure}</td> 
     <td>${view1.destination}</td>   
-    <td>${view1.tickets}" </td>  
+    <td>${view1.tickets} </td>  
    </tr>  
    
        </c:forEach>
    </table> 
-   <form action="check">
-<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-   <a href="BusBookingWebsite/trialpage">check</a>
-   </form>
+   
 </body>
 </html>

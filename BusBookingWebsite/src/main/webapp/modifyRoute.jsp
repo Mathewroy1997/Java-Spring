@@ -21,16 +21,16 @@
 Current Routes:
 <table border="2" width="70%" cellpadding="2">  
 <tr><th>Route ID</th><th>Departure</th><th>Destination</th><th>Rate</th><th>Action</th></tr>  
-   <c:forEach var="route3" items="${routeTable}"> 
+   <c:forEach var="route" items="${routeTable}"> 
      
    <tr>  
     
-   <td>${route3.routeID}</td>  
-   <td>${route3.departure}</td> 
-    <td>${route3.destination}</td> 
-     <td>${route3.rate}</td>    
+   <td>${route.routeID}</td>  
+   <td>${route.departure}</td> 
+    <td>${route.destination}</td> 
+     <td>${route.rate}</td>    
      
-     <td><a href="route/${route3.routeID}">Delete Route</a></td> 
+     <td><a href="route/${route.routeID}">Delete Route</a></td> 
       </tr>  
     
   

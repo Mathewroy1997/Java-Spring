@@ -1,6 +1,6 @@
 package com.project.models;
 
-public class TempPass {
+public class TemperoryPassenger {
 	String name;
 	int age;
 	int id;

@@ -29,7 +29,7 @@ Current Admins:
    </c:forEach>  
    </table>  
 
-
+${duplicateMessage }<p>
 Add new Admins:<br>
 <form action="addAdmin">
 Admin Name:<input type="text" name="newAdminName">&emsp;

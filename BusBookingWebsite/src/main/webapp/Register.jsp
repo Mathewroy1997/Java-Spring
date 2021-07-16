@@ -14,6 +14,7 @@
 <div class="topnav">
 <a href="logout" >Sign-out</a>
 </div>
+${duplicateMessage }<p>
  Enter username: <input type="text" name="username"><br>
 Enter password: <input type="text" name="password"><br>
 Enter first name: <input type="text" name="firstname"><br>

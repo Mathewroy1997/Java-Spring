@@ -6,8 +6,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -20,23 +23,16 @@ import com.project.models.MasterPassengerTable;
 import com.project.models.Passenger;
 import com.project.models.Route;
 import com.project.models.Temp;
-import com.project.models.TempPass;
+import com.project.models.TemperoryPassenger;
 import com.project.models.Trip;
 import com.project.models.ViewBookedData;
 import com.project.service.CustomerService;
 
 @Controller
 public class CustomerController {
-	
-	int rate;
-	ViewBookedData viewdata = new ViewBookedData();
-	MasterPassengerTable master = new MasterPassengerTable();
-	Customer customer;
-	List<Passenger> pass;
-	List<TempPass> listtemppass;
-	int tickets;
-	int totalprice;
-	
+
+	int userTickets;
+
 	@Autowired
 	CustomerDao customerDao;
 	@Autowired
@@ -45,14 +41,12 @@ public class CustomerController {
 	@Autowired
 	TripDao tripDao;
 
-	@Autowired
-	AdminDao adminDao;
 
 	@Autowired
 	CustomerService serviceClass;
 
 	@RequestMapping("/submitNewRegistraion")
-	public String newUserRegistration(HttpServletRequest request, HttpServletResponse response) {
+	public String newUserRegistration(HttpServletRequest request, HttpServletResponse response, Model model) {
 		Customer customer = new Customer();
 		customer.setUsername(request.getParameter("username"));
 		customer.setPassword(request.getParameter("password"));
@@ -61,24 +55,35 @@ public class CustomerController {
 		customer.setEmail(request.getParameter("emailID"));
 		customer.setAddress(request.getParameter("address"));
 		customer.setPhone(request.getParameter("phone"));
-		customerDao.addNewUser(customer);
+		try {
+			customerDao.addNewUser(customer);
+			return "newUserAdded";
+		} catch (DuplicateKeyException e) {
 
-		return "newUserAdded";
+			String duplicateError = "Username already exist.Try again";
+			model.addAttribute("duplicateMessage", duplicateError);
+			return "Register";
+		}
 
 	}
 
-	@RequestMapping(value = "/newBookingPage")
-	public String homeToBookingPage(Model m) {
+	@RequestMapping(value = "newBookingPage", method=RequestMethod.POST)
+	public String homeToBookingPage(HttpServletRequest request, Model m) {
+		
+		int userId=Integer.parseInt(request.getParameter("userId"));
+
 		List<Route> departurePointsList = routeDao.getDeparture();
 		m.addAttribute("departurePointsList", departurePointsList);
 
 		List<Route> destinationPointsList = routeDao.getDestination();
 		m.addAttribute("destinationPointsList", destinationPointsList);
+		m.addAttribute("userId", userId);
 		return "bookingNew";
 	}
-	
+
 	@RequestMapping(value = "/checkRouteAndDateAvailability", method = RequestMethod.POST)
-	public String nextPage(HttpServletRequest request, Model m) {
+	public String nextPage( HttpServletRequest request, Model m) {
+		int userId=Integer.parseInt(request.getParameter("userId"));
 		String departure = request.getParameter("userSelectedDeparture");
 		String destination = request.getParameter("userSelectedDestination");
 
@@ -86,101 +91,150 @@ public class CustomerController {
 		if (userSelectedRouteInfoList.isEmpty()) {
 			return "unknownRoute";
 		}
-		viewdata.setDeparture(departure);
-		viewdata.setDestination(destination);
+
 		Route userSelectedRouteInfo = userSelectedRouteInfoList.get(0);
-		int route_id = userSelectedRouteInfo.routeID;
-		rate = userSelectedRouteInfo.rate;
-		
+		int routeId = userSelectedRouteInfo.getRouteID();
+		int ratePerTicket = userSelectedRouteInfo.getRate();
 
 		m.addAttribute("departure", departure);
 		m.addAttribute("destination", destination);
-		m.addAttribute("rate", rate);
-		m.addAttribute("route_id", route_id);
+		m.addAttribute("rate", ratePerTicket);
+		m.addAttribute("routeId", routeId);
+		m.addAttribute("userId", userId);
 
 		String date = request.getParameter("date");
-		List<Trip> findTrip = tripDao.CheckDate(date, route_id);
+		List<Trip> findTrip = tripDao.CheckDate(date, routeId);
 		if (findTrip.isEmpty()) {
 			return "returnToNewBooking";
 		} else {
-			viewdata.setDate(date);
+
 			Trip trip = new Trip();
 			trip = findTrip.get(0);
-			viewdata.tripid = trip.tripID;
-			int seatsAvailable = trip.seats;
+
+			int seatsAvailable = trip.getSeats();
+			m.addAttribute("date", date);
 			m.addAttribute("seats", seatsAvailable);
+			m.addAttribute("tripId", trip.getTripID());
 			return "bookingSeatSelection";
 		}
 
 	}
-	
-	@RequestMapping("/getpassenger")
-	public String getPassengerData(HttpServletRequest request, Model m) {
-		int userid = viewdata.userid;
-		String date = viewdata.date;
-		int tripid = viewdata.tripid;
-		String name1 = request.getParameter("name");
-		int age1 = Integer.parseInt(request.getParameter("age"));
-		int id1 = Integer.parseInt(request.getParameter("id"));
-		master.name = name1;
-		master.age = age1;
-		master.id = id1;
-		int userid1 = customer.getUserid();
-		customerDao.saveToTemp(userid, date, tripid, name1, age1, id1);
-		listtemppass = customerDao.getFromtemp();
 
-		customerDao.setPassengerData(name1, age1, id1, userid1);
+	@RequestMapping(value = "/bookingGetPassengerInfo", method=RequestMethod.GET)
+	public String getPrice( HttpServletRequest request, Model model) {
+		
+		int userId=Integer.parseInt(request.getParameter("userId"));
+		int routeId=Integer.parseInt(request.getParameter("routeId"));
+		String date=request.getParameter("date");
+		int rate=Integer.parseInt(request.getParameter("rate"));
+		int tripId=Integer.parseInt(request.getParameter("tripId"));
+		
+		userTickets = Integer.parseInt(request.getParameter("userEntryTickets"));
 
-		List<Passenger> passenger = customerDao.getPassengerData(userid1);
-		pass = passenger;
-		m.addAttribute("passenger", pass);
+		int totalPrice = routeDao.totalPrice(userTickets, rate);
+		model.addAttribute("userTickets",userTickets);
+		model.addAttribute("totalPrice", totalPrice);
+		
+		model.addAttribute("userId",userId);
+		model.addAttribute("date",date);
+		model.addAttribute("rate",rate);
+		model.addAttribute("tripId",tripId);
+		model.addAttribute("routeId",routeId);
+		
 
-		return "redirect:/call";
-
+		return "redirect:/reloadGetPassenger";
 	}
 	
-	@RequestMapping("/confirmEntries")
-	public String finalConfirm(Model m) {
-		master.userid = viewdata.userid;
-		master.date = viewdata.date;
-		master.tripid = viewdata.tripid;
 
-		customerDao.setViewData(viewdata);
-		customerDao.setMasterTable(master);
-		customerDao.TruncateTemppass();
-		customerDao.ReduceSeats(tickets, master);
-		int userid = customer.getUserid();
+	@RequestMapping(value="/reloadGetPassenger", method=RequestMethod.GET)
+	public String call( Model model, HttpServletRequest request) {
+		
+		
+		int i=0;
+		int j=i;
+		int userId=Integer.parseInt(request.getParameter("userId"));
+		int routeId=Integer.parseInt(request.getParameter("routeId"));
+		String date=request.getParameter("date");
+		int rate=Integer.parseInt(request.getParameter("rate"));
+		int tripId=Integer.parseInt(request.getParameter("tripId"));
+		int totalPrice=Integer.parseInt(request.getParameter("totalPrice"));
+		
 
-		return "finalConfirm";
-	}
+		model.addAttribute("userId", userId);
+		model.addAttribute("routeId", routeId);
+		model.addAttribute("date", date);
+		model.addAttribute("tripId", tripId);
+		model.addAttribute("totalPrice", totalPrice);
+		model.addAttribute("rate", rate);
+		
 
-	@RequestMapping("/call")
-	public String call(Model m, HttpServletRequest request) {
-
-		m.addAttribute("totalPrice", totalprice);
-		m.addAttribute("tickets", tickets);
-		List<Temp> temp = customerDao.callData();
-		m.addAttribute("temp", temp);
-		m.addAttribute("listtemppass", listtemppass);
+		List<TemperoryPassenger> listTemporaryPassengers = customerDao.getFromTemporaryPassenger();
+		model.addAttribute("listTemporaryPassengers", listTemporaryPassengers);
 		return "passengerInfoPage";
 	}
 
-	@RequestMapping("/bookingGetPassengerInfo")
-	public String getPrice(HttpServletRequest request, Model m) {
+	@RequestMapping(value = "/getpassenger", method=RequestMethod.GET)
+	public String getPassengerData( HttpServletRequest request, Model model) {
+		
+		String name1 = request.getParameter("name");
+		int age1 = Integer.parseInt(request.getParameter("age"));
+		int id1 = Integer.parseInt(request.getParameter("id"));
+		
+		int userId=Integer.parseInt(request.getParameter("userId"));
+		int routeId=Integer.parseInt(request.getParameter("routeId"));
+		String date=request.getParameter("date");
+		int rate=Integer.parseInt(request.getParameter("rate"));
+		int tripId=Integer.parseInt(request.getParameter("tripId"));
+		int totalPrice=Integer.parseInt(request.getParameter("totalPrice"));
+		
 
-		tickets = Integer.parseInt(request.getParameter("tickets"));
-		viewdata.setTickets(tickets);
-		totalprice = routeDao.totalPrice(tickets, rate);
-		return "redirect:/call";
+		customerDao.saveToTemporaryPassengers(userId, date, tripId, name1, age1, id1);
+
+		
+		  model.addAttribute("userId", userId); 
+		  model.addAttribute("routeId", routeId);
+		  model.addAttribute("date", date); 
+		  model.addAttribute("tripId", tripId);
+		  model.addAttribute("totalPrice", totalPrice);
+		  model.addAttribute("rate",rate);
+		  
+		 
+		return "redirect:/reloadGetPassenger";
+	
+
+	}
+
+	@RequestMapping(value = "/confirmEntries", method = RequestMethod.POST)
+	public String finalConfirm(HttpServletRequest request, Model model) {
+		
+	
+		int userId=Integer.parseInt(request.getParameter("userId"));
+		int routeId=Integer.parseInt(request.getParameter("routeId"));
+		String date=request.getParameter("date");
+		int rate=Integer.parseInt(request.getParameter("rate"));
+		int tripId=Integer.parseInt(request.getParameter("tripId"));
+		int totalPrice=Integer.parseInt(request.getParameter("totalPrice"));
+		
+		
+		model.addAttribute("userId", userId);
+		model.addAttribute("routeId", routeId);
+		model.addAttribute("date", date);
+		model.addAttribute("tripId", tripId);
+		model.addAttribute("totalPrice", totalPrice);
+		model.addAttribute("rate", rate);
+		
+		customerDao.moveDataFromTemporaryToMaster();
+		customerDao.TruncateTemporaryTable();
+		customerDao.ReduceSeats(userTickets, tripId, date);
+		int j;
+
+		return "finalConfirm";
 	}
 
 	@RequestMapping("/bookingHistory")
 	public String showBookingHistory(Model m) {
 
-		List<ViewBookedData> listBookedHistory = customerDao.setBookedHistory(viewdata.userid);
-		m.addAttribute("list", listBookedHistory);
 		return "bookingHistory";
 	}
-
 
 }

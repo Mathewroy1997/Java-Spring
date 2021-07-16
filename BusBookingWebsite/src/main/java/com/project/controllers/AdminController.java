@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,10 +25,7 @@ import com.project.service.CustomerService;
 
 @Controller
 public class AdminController {
-	
-	Route route = new Route();
-	Trip trip = new Trip();
-	
+
 	@Autowired
 	CustomerDao customerDao;
 
@@ -42,42 +40,45 @@ public class AdminController {
 
 	@Autowired
 	CustomerService customerService;
-	
+
 	@Autowired
 	AdminService adminService;
-	
+
 	@RequestMapping("/updateRoute")
-	public String updateRoute(Model m) {
-		List<Route> routeTable = routeDao.getRouteTable();
-		route = routeTable.get(0);
-		m.addAttribute("routeTable", routeTable);
+	public String updateRoute(Model model) {
+
+		List<Route> routeTable = adminService.getRouteTable();
+
+		model.addAttribute("routeTable", routeTable);
 
 		return "modifyRoute";
 	}
 
 	@RequestMapping("/addRoute")
 	public String addNewRoute(HttpServletRequest request, Model m) {
-		Route newRoute = new Route();
-		newRoute.setRouteID(Integer.parseInt(request.getParameter("routeid")));
-		newRoute.setDeparture(request.getParameter("departure"));
-		newRoute.setDestination(request.getParameter("destination"));
-		newRoute.setRate(Integer.parseInt(request.getParameter("rate")));
+		Route route = new Route();
 
-		routeDao.addNewRoute(newRoute);
+		route.setRouteID(Integer.parseInt(request.getParameter("routeid")));
+		route.setDeparture(request.getParameter("departure"));
+		route.setDestination(request.getParameter("destination"));
+		route.setRate(Integer.parseInt(request.getParameter("rate")));
+
+		adminService.addNewRoute(route);
+
 		return "redirect:/updateRoute";
 
 	}
 
-	@RequestMapping("route/{route3.routeID}")
+	@RequestMapping("route/{route.routeID}")
 	public String deleteRoute(HttpServletRequest request) {
 
-		String path = request.getServletPath();  
+		String path = request.getServletPath();
 
-		int routeid = Integer.parseInt(path.replaceAll("[\\D]", ""));
-		Model m;
-
+		int routeId = Integer.parseInt(path.replaceAll("[\\D]", ""));
+		
 		try {
-			customerDao.deleteRoute(routeid);
+			adminService.deleteRoute(routeId);
+
 			return "redirect:/updateRoute";
 		} catch (DataIntegrityViolationException e) {
 			return "admin_routeidexception";
@@ -92,18 +93,17 @@ public class AdminController {
 
 	@RequestMapping("updateTrip")
 	public String updateTrip(Model m) {
-
-		List<Trip> tripTable = customerDao.getTripData();
-		trip = tripTable.get(0);
-		m.addAttribute("tripTable", tripTable);
+		
+		List<Trip> tripTable1=adminService.getTripData();
+		m.addAttribute("tripTable", tripTable1);
 		return "admin_modifyTrip";
 	}
 
 	@RequestMapping("trip/{trip.tripID}")
 	public String deleteTrip(HttpServletRequest request) {
 		String path = request.getServletPath();
-		int tripid = Integer.parseInt(path.replaceAll("[\\D]", ""));
-		customerDao.deleteTrip(tripid);
+		int tripId = Integer.parseInt(path.replaceAll("[\\D]", ""));
+		customerDao.deleteTrip(tripId);
 		return "redirect:/updateTrip";
 	}
 
@@ -114,24 +114,33 @@ public class AdminController {
 		trip.setDate(request.getParameter("date"));
 		trip.setRouteID(Integer.parseInt(request.getParameter("routeid")));
 		trip.setSeats(Integer.parseInt(request.getParameter("seats")));
-		customerDao.addNewTrip(trip);
+		
+		adminService.addNewTrip(trip);
+		
 		return "redirect:/updateTrip";
 	}
 
 	@RequestMapping("updateAdmin")
-	public String updateAdmin(Model adminModel) {
+	public String updateAdmin(Model adminModel, Model model) {
 		List<AdminData> adminList = adminService.getAdminData();
 		adminModel.addAttribute("adminList", adminList);
 		return "admin_modifyAdmin";
 	}
 
 	@RequestMapping(value = "addAdmin", method = RequestMethod.GET)
-	public String addNewAdmin(HttpServletRequest request) {
+	public String addNewAdmin(HttpServletRequest request, Model model) {
 		String newAdminName = request.getParameter("newAdminName");
 		String newUsername = request.getParameter("newAdminUsername");
 		String newPassword = request.getParameter("newAdminPassword");
-		customerService.addAdmin(newAdminName, newUsername, newPassword);
-		return "admin_newAdminSuccess";
+		try {
+			adminService.insertNewAdmin(newAdminName, newUsername, newPassword);
+			
+			return "admin_newAdminSuccess";
+		} catch (DuplicateKeyException duplicate) {
+			String duplicateMessage = "Username already exist. Try again";
+			model.addAttribute("duplicateMessage", duplicateMessage);
+			return "redirect:/updateAdmin";
+		}
 	}
 
 	@RequestMapping(value = "backToAdminHome")
@@ -141,7 +150,8 @@ public class AdminController {
 
 	@RequestMapping("/manageUsers")
 	public String manageUsers(Model usersList) {
-		List<Customer> userData = customerService.getCustomerData();
+		List<Customer> userData=adminService.getCustomerData();
+		//List<Customer> userData = customerService.getCustomerData();
 		usersList.addAttribute("userData", userData);
 		return "admin_userManagement";
 	}
@@ -149,13 +159,13 @@ public class AdminController {
 	@RequestMapping("customer/{customer.userid}")
 	public String deleteUser(HttpServletRequest request) {
 		String path = request.getServletPath();
-		int userID = Integer.parseInt(path.replaceAll("[\\D]", ""));
-		customerService.deleteUser(userID);
+		int userId = Integer.parseInt(path.replaceAll("[\\D]", ""));
+		adminService.deleteCustomer(userId);
+		//customerService.deleteUser(userId);
 
 		return "redirect:/manageUsers";
 	}
-	
-	
+
 	@RequestMapping("addUserFromAdmin")
 	public String addUserFromAdmin(HttpServletRequest request) {
 
@@ -166,10 +176,12 @@ public class AdminController {
 		String address = request.getParameter("address");
 		String phone = request.getParameter("phone");
 		String password = request.getParameter("password");
-		customerService.setUserDetails(username, firstName, lastName, email, address, phone, password);
+		adminService.setUserDetails(username, firstName, lastName, email, address, phone, password);
+		//customerService.setUserDetails(username, firstName, lastName, email, address, phone, password);
 		return "redirect:/manageUsers";
 
 	}
+
 	@RequestMapping("admin/{adminData.adminID}")
 	public String deleteAdmin(HttpServletRequest request) {
 		String path = request.getServletPath();
@@ -178,6 +190,5 @@ public class AdminController {
 
 		return "redirect:/updateAdmin";
 	}
-	
 
 }

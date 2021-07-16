@@ -35,11 +35,7 @@ public class CustomerService {
 
 	}
 
-	public void addAdmin(String newAdminName, String newUsername, String newPassword) {
-
-		adminDao.insertNewAdmin(newAdminName, newUsername, newPassword);
-
-	}
+	
 
 	public int adminLogin(String username, String password) {
 		List<AdminData> admin = adminDao.getData(username, password);
@@ -62,8 +58,8 @@ public class CustomerService {
 		return userData;
 	}
 
-	public void deleteUser(int userID) {
-		customerDao.deleteUser(userID);
+	public void deleteUser(int userId) {
+		customerDao.deleteCustomer(userId);
 
 	}
 

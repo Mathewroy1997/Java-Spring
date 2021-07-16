@@ -1,14 +1,20 @@
 package com.project.dao;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCallback;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.project.models.AdminData;
 import com.project.models.Customer;
+import com.project.models.Route;
+import com.project.models.Trip;
 
 public class AdminDao {
 	private JdbcTemplate jdbctemplate;
@@ -53,5 +59,121 @@ public class AdminDao {
 		String sql = "delete from admindata where AdminID=" + adminID;
 		return jdbctemplate.update(sql);
 		
+	}
+	public List<Route> getRouteTable() {
+		String query3="select * from routedata";
+		return jdbctemplate.query(query3,new RowMapper<Route>(){
+			public Route mapRow(ResultSet rs, int row) throws SQLException {
+				Route route=new Route();
+				
+					 route.setDeparture(rs.getString("Departure"));
+					 route.setDestination(rs.getString("Destination"));
+					 route.setRouteID(rs.getInt("routeid"));
+					 route.setRate(rs.getInt("Rate"));
+
+				
+			
+			return route;
+			}
+			});
+	}
+	public Boolean addNewRoute(final Route newRoute) {
+			String query="insert into routedata(routeid,Departure,Destination,Rate) values(?,?,?,?)";
+			return jdbctemplate.execute(query,new PreparedStatementCallback<Boolean>(){
+			public Boolean doInPreparedStatement(PreparedStatement ps)
+			throws SQLException, DataAccessException {
+
+			ps.setInt(1,newRoute.getRouteID());
+			ps.setString(2,newRoute.getDeparture());
+			ps.setString(3,newRoute.getDestination());
+			ps.setInt(4,newRoute.getRate());
+			
+			return ps.execute();
+
+			}
+			});
+			
+		}
+	public int deleteRoute(int routeId) throws DataIntegrityViolationException {
+		String sql = "delete from routedata where routeid=" + routeId;
+		return jdbctemplate.update(sql);
+
+	}
+	public List<Trip> getTripData() {
+		String query = "select * from tripdata";
+		return jdbctemplate.query(query, new RowMapper<Trip>() {
+			public Trip mapRow(ResultSet rs, int row) throws SQLException {
+				Trip trip = new Trip();
+				trip.setDate(rs.getString("date"));
+				trip.setSeats(rs.getInt("Seats"));
+				trip.setRouteID(rs.getInt("routeID"));
+				trip.setTripID(rs.getInt("trip_id"));
+
+				return trip;
+			}
+		});
+
+	}
+	public Boolean addNewTrip(final Trip trip) {
+		String query = "insert into tripdata(trip_id,date,routeID,Seats) values(?,?,?,?)";
+		return jdbctemplate.execute(query, new PreparedStatementCallback<Boolean>() {
+			public Boolean doInPreparedStatement(PreparedStatement ps) throws SQLException, DataAccessException {
+
+				ps.setInt(1, trip.getTripID());
+				ps.setString(2, trip.getDate());
+				ps.setInt(3, trip.getRouteID());
+				ps.setInt(4, trip.getSeats());
+
+				return ps.execute();
+
+			}
+		});
+
+	}
+	public int addNewAdmin(String newAdminName,String newUsername,String newPassword) {
+		String sql="insert into admindata(AdminName,Username,Password) values("+"'"+newAdminName+"'"+",'"+newUsername+"'"+",'"+newPassword+"')";   
+	    return jdbctemplate.update(sql);
+		
+	}
+	public List<Customer> getAllUserData() {
+		String query = "select * from userdata ";
+
+		return jdbctemplate.query(query, new RowMapper<Customer>() {
+			public Customer mapRow(ResultSet rs, int row) throws SQLException {
+				Customer customer = new Customer();
+				customer.setUserid(rs.getInt("userid"));
+				customer.setUsername(rs.getString("username"));
+				customer.setPassword(rs.getString("password"));
+				customer.setFirstname(rs.getString("firstname"));
+				customer.setLastname(rs.getString("lastname"));
+				customer.setEmail(rs.getString("email"));
+				customer.setAddress(rs.getString("address"));
+				customer.setPhone(rs.getString("phone"));
+				return customer;
+			}
+		});
+	}
+	public int deleteCustomer(int userId) {
+		String sql = "delete from userdata where userid=" + userId;
+		return jdbctemplate.update(sql);
+
+	}
+	public Boolean addNewUserFromAdmin(final Customer customer) {
+		String query = "insert into userdata(username,firstname,lastname,email,address,phone,password) values(?,?,?,?,?,?,?)";
+		return jdbctemplate.execute(query, new PreparedStatementCallback<Boolean>() {
+			public Boolean doInPreparedStatement(PreparedStatement ps) throws SQLException, DataAccessException {
+
+				ps.setString(1, customer.getUsername());
+				ps.setString(2, customer.getFirstname());
+				ps.setString(3, customer.getLastname());
+				ps.setString(4, customer.getEmail());
+				ps.setString(5, customer.getAddress());
+				ps.setString(6, customer.getEmail());
+				ps.setString(7, customer.getPassword());
+				return ps.execute();
+
+			}
+		});
+
 	}
 }
