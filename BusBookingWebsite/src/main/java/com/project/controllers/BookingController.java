@@ -15,6 +15,7 @@ import com.project.models.AvailableBuses;
 import com.project.models.BusDetails;
 import com.project.models.Route;
 import com.project.models.RouteDetails;
+import com.project.models.TemperoryPassengersDetails;
 import com.project.models.Trip;
 import com.project.models.TripDetails;
 import com.project.service.BookingService;
@@ -115,12 +116,22 @@ public class BookingController {
 		String date=request.getParameter("date");
 		int routeId=Integer.parseInt(request.getParameter("routeId"));
 		int tripId=Integer.parseInt(request.getParameter("tripId"));
+		String departure=request.getParameter("departure");
+		String destination=request.getParameter("destination");
+		int busId=Integer.parseInt(request.getParameter("busId"));
+		String busType=request.getParameter("busType");
+		int totalPrice=Integer.parseInt(request.getParameter("totalPrice"));
 		
 		model.addAttribute("userTickets",userTickets);
 		model.addAttribute("userId", userId);
 		model.addAttribute("date", date);
 		model.addAttribute("routeId",routeId);
 		model.addAttribute("tripId",tripId);
+		model.addAttribute("departure", departure);
+		model.addAttribute("destination", destination);
+		model.addAttribute("busId",busId);
+		model.addAttribute("busType",busType);
+		model.addAttribute("totalPrice",totalPrice);
 		
 		return "bookingAddPassengers";
 	}
@@ -134,8 +145,34 @@ public class BookingController {
 		String date=request.getParameter("date");
 		int routeId=Integer.parseInt(request.getParameter("routeId"));
 		int tripId=Integer.parseInt(request.getParameter("tripId"));
+		String departure=request.getParameter("departure");
+		String destination=request.getParameter("destination");
+		int busId=Integer.parseInt(request.getParameter("busId"));
+		String busType=request.getParameter("busType");
+		int totalPrice=Integer.parseInt(request.getParameter("totalPrice"));
+		int userTickets=Integer.parseInt(request.getParameter("userTickets"));
 		
 		bookingService.setPassengerDetialisToTemperoryTable(userId,date,routeId,tripId,passengerNames,passengerAges,passengerIds);
+		List<TemperoryPassengersDetails> temperoryPassengerList=bookingService.setTemperoryPassengerList(); 
+		model.addAttribute("date", date);
+		model.addAttribute("departure", departure);
+		model.addAttribute("destination", destination);
+		model.addAttribute("busId",busId);
+		model.addAttribute("busType",busType);
+		model.addAttribute("temperoryPassengerList",temperoryPassengerList);
+		model.addAttribute("totalPrice",totalPrice);
+		model.addAttribute("userTickets",userTickets);
+		model.addAttribute("tripId",tripId);
+		
+		return "bookingFinalConfirmation";
+	}
+	@RequestMapping(value="toPayment", method=RequestMethod.POST)
+	public String paymentSection(HttpServletRequest request) {
+		int userTickets=Integer.parseInt(request.getParameter("userTickets"));
+		int tripId=Integer.parseInt(request.getParameter("tripId"));
+		bookingService.reduceSeatsInTripTable(tripId,userTickets);
+		bookingService.movePassengerTemperoryDetailsToPermanaent();
+		bookingService.TruncateTemperoryPassengerTable();
 		return "paymentGateway";
 	}
 

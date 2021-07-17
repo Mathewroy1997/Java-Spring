@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.RowMapper;
 import com.project.models.BusDetails;
 import com.project.models.Route;
 import com.project.models.RouteDetails;
+import com.project.models.TemperoryPassengersDetails;
 import com.project.models.TripDetails;
 
 public class BookingDao {
@@ -123,6 +124,45 @@ public class BookingDao {
 			String passengerName, String passengerAge, String passengerId) {
 		String sql = "insert into temporary_passengersdetails(userid,date,routeId,tripId,name,age,id) values(" + userId + "," + "'" + date + "'," + ""+routeId+","+"" + tripId + ","
 				+ "'" + passengerName + "'," + "'" + passengerAge + "'," +"" +passengerId + ")";
+		return jdbctemplate.update(sql);
+		
+	}
+
+	public List<TemperoryPassengersDetails> getTemperoryPassengersList() {
+		String query="select * from temporary_passengersdetails";
+		return jdbctemplate.query(query,new RowMapper<TemperoryPassengersDetails>(){
+			public TemperoryPassengersDetails mapRow(ResultSet resultSet, int row) throws SQLException {
+				TemperoryPassengersDetails passenger=new TemperoryPassengersDetails();
+				
+					passenger.setPassengerName(resultSet.getString("name"));
+					passenger.setPassengerAge(resultSet.getInt("age"));
+					passenger.setPassengerId(resultSet.getString("id"));
+					 
+					 
+					 
+					
+			
+				
+			
+			return passenger;
+			}
+			});
+	}
+
+	public int reduceSeatsInTripTable(int tripId, int userTickets) {
+		String sql = "update tripdetails set seatsAvailable=seatsAvailable-" + userTickets + " where tripId=" +tripId + " ;";
+		return jdbctemplate.update(sql);
+		
+	}
+
+	public int movePassengerTemperoryDetailsToPermanaent() {
+		String sql = "INSERT INTO completebookingdata SELECT * FROM temporary_passengersdetails;";
+		return jdbctemplate.update(sql);
+		
+	}
+
+	public int TruncateTemperoryPassengerTable() {
+		String sql = "Truncate table temporary_passengersdetails";
 		return jdbctemplate.update(sql);
 		
 	}

@@ -22,18 +22,24 @@
 
 Add Passenger Details:<p>
 <c:forEach var = "i" begin = "1" end = "${userTickets }">
-        <p>Passenger<c:out value = "${i}"/><p>
+        <p>Passenger: <c:out value = "${i}"/><p>
        Name <input type="text" name="passengerName" placeholder="Name" required>
        Age<input type="text" name="passengerAge" placeholder="Age" required>
        Id Proof No.<input type="text" name="passengerId" placeholder="ID" required>
       </c:forEach>
-
-<input type="submit" value="Add Passengers">
+<p>*passengers must carry original ID proof during journey.
+<p><input type="submit" value="Add Passengers">
 
 <input type="hidden" name="userId" value=${userId }  >
 <input type="hidden" name="date" value=${date }  >
 <input type="hidden" name="routeId" value=${routeId }  >
 <input type="hidden" name="tripId" value=${tripId }  >
+<input type="hidden" name="departure" value=${departure }  >
+<input type="hidden" name="destination" value=${destination }  >
+<input type="hidden" name="busId" value=${busId }  >
+<input type="hidden" name="busType" value=${busType }  >
+<input type="hidden" name="totalPrice" value=${totalPrice }  >
+<input type="hidden" name="userTickets" value=${userTickets }  >
 </form>
 </body>
 </html>

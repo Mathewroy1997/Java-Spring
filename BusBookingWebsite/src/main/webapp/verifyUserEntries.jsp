@@ -30,7 +30,14 @@ BusID:${busId }&emsp;&emsp; Bus Category:${busType }&emsp;&emsp; Seats:${userTic
 <input type="hidden" name="userId" value=${userId }  >
 <input type="hidden" name="date" value=${date }  >
 <input type="hidden" name="routeId" value=${routeId }  >
-<input type="hidden" name="tripId" value=${tripId }  >
+<input type="hidden" name="tripId" value=${tripId } >
+<input type="hidden" name="departure" value=${departure }>  
+<input type="hidden" name="destination" value=${destination }>  
+<input type="hidden" name="totalKm" value=${totalKm }   >
+<input type="hidden" name="busId" value=${busId }   >
+<input type="hidden" name="busType" value=${busType }   >
+<input type="hidden" name="totalKm" value=${totalKm }   >
+<input type="hidden" name="totalPrice" value=${totalPrice }   >
 </form>
 </body>
 </html>
