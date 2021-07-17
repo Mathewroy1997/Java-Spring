@@ -69,17 +69,23 @@ public class BookingService {
 			int busRatePerKm=busDetails.getBusRatePerKm();
 			int ratePerTicket=busRatePerKm*totalKm;
 			int availableSeats=tripDetails.getAvailableSeats();
+			int tripId=tripDetails.getTripId();
 			AvailableBuses availableBuses=new AvailableBuses();
 			availableBuses.setBusId(busDetails.getBusId());
 			availableBuses.setBusType(busDetails.getBusType());
 			availableBuses.setRatePerSeat(ratePerTicket);
 			availableBuses.setAvailableSeats(availableSeats);
-			
+			availableBuses.setTripId(tripId);
 			availableBusDetailsList.add(availableBuses);
 			
 			
 		}
 		return availableBusDetailsList;
+	}
+
+	public int setTotalPrice(int userTickets, int ratePerSeat) {
+		int totalPrice=userTickets*ratePerSeat;
+		return totalPrice;
 	}
 
 }

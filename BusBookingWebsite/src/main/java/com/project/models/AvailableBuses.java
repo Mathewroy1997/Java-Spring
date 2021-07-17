@@ -5,6 +5,16 @@ public class AvailableBuses {
 	private String busType;
 	private int ratePerSeat;
 	private int availableSeats;
+	
+	private int tripId;
+
+	public int getTripId() {
+		return tripId;
+	}
+
+	public void setTripId(int tripId) {
+		this.tripId = tripId;
+	}
 
 	public int getBusId() {
 		return busId;

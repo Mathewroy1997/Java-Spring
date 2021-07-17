@@ -33,13 +33,33 @@ Available Buses:
      
    <tr>  
     
-   <td>${availableBuses.busId}</td>  
+   <td>${availableBuses.busId}
+   <input type="hidden" name="tripId" value=${availableBuses.tripId }>
+   </td>  
    <td>${availableBuses.busType}</td> 
     <td>${availableBuses.ratePerSeat}</td> 
      <td>${availableBuses.availableSeats}</td>    
-     
+      <form action="passUserEntries" method="post">
      <td><input type="number" name="userTickets" min="1" max="5"></td> 
-     <td></td>
+     <td>
+    
+     <input type="hidden" name="userId" value=${userId }>
+     <input type="hidden" name="date" value=${date }>
+      <input type="hidden" name="routeId" value=${routeId }>
+     <input type="hidden" name="departure" value=${departure }>
+     <input type="hidden" name="destination" value=${destination }>
+     <input type="hidden" name="totalKm" value=${totalKm }>
+     <input type="hidden" name="busId" value=${availableBuses.busId }>
+     <input type="hidden" name="busType" value=${availableBuses.busType }>
+     <input type="hidden" name="ratePerSeat" value=${availableBuses.ratePerSeat }>
+     <input type="hidden" name="availableSeats" value=${availableBuses.availableSeats }>
+     <input type="hidden" name="tripId" value=${availableBuses.tripId }>
+     <input type="hidden" name="userTickets"  >
+     
+     <input type="submit" value="Book Now">
+     </form>
+
+</td>
       </tr>  
     
   
