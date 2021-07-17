@@ -16,6 +16,7 @@ import com.project.models.BusCategory;
 import com.project.models.BusDetails;
 import com.project.models.Customer;
 import com.project.models.Route;
+import com.project.models.RouteDetails;
 import com.project.models.Trip;
 
 public class AdminDao {
@@ -243,5 +244,22 @@ public class AdminDao {
 		String sql = "UPDATE busdetails SET `ratePerKm` = "+ratePerKm+", `seats` = "+seats+" WHERE (`busId` = "+busId+");" ;
 		return jdbctemplate.update(sql);
 		
+	}
+	public List<RouteDetails> getRouteDetails() {
+		String query="select * from routedetails";
+		return jdbctemplate.query(query,new RowMapper<RouteDetails>(){
+			public RouteDetails mapRow(ResultSet rs, int row) throws SQLException {
+				RouteDetails route=new RouteDetails();
+				
+					 route.setDeparture(rs.getString("departure"));
+					 route.setDestination(rs.getString("destination"));
+					 route.setRouteId(rs.getInt("routeId"));
+					 route.setTotalDistanceInKm(rs.getInt("totalKm"));;
+
+				
+			
+			return route;
+			}
+			});
 	}
 }

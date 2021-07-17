@@ -10,7 +10,6 @@
     <fullyQualifiedTypeName name="org.springframework.jdbc.core.RowMapper"/>
     <fullyQualifiedTypeName name="org.springframework.jdbc.core.ResultSetExtractor"/>
     <fullyQualifiedTypeName name="com.project.Route"/>
-    <fullyQualifiedTypeName name="java.lang.Integer"/>
     <fullyQualifiedTypeName name="com.project.dao.AdminDao"/>
     <fullyQualifiedTypeName name="java.net.http.HttpRequest"/>
     <fullyQualifiedTypeName name="com.project.service.AdminService"/>
@@ -20,8 +19,6 @@
     <fullyQualifiedTypeName name="com.project.controllers.LoginController"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
     <fullyQualifiedTypeName name="com.project.models.Customer"/>
-    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestMethod"/>
-    <fullyQualifiedTypeName name="javax.servlet.http.HttpServletRequest"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestMapping"/>
     <fullyQualifiedTypeName name="java.lang.NumberFormatException"/>
     <fullyQualifiedTypeName name="org.springframework.dao.DataIntegrityViolationException"/>
@@ -29,9 +26,14 @@
     <fullyQualifiedTypeName name="com.project.service.BookingService"/>
     <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
     <fullyQualifiedTypeName name="com.project.dao.BookingDao"/>
-    <fullyQualifiedTypeName name="com.project.models.RouteDetails"/>
-    <fullyQualifiedTypeName name="com.project.models.BusDetails"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="com.project.models.TripDetails"/>
     <fullyQualifiedTypeName name="com.project.models.AvailableBuses"/>
+    <fullyQualifiedTypeName name="com.project.models.TemperoryPassengersDetails"/>
+    <fullyQualifiedTypeName name="com.project.models.BusCategory"/>
+    <fullyQualifiedTypeName name="com.project.models.BusDetails"/>
+    <fullyQualifiedTypeName name="java.lang.Integer"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestMethod"/>
+    <fullyQualifiedTypeName name="javax.servlet.http.HttpServletRequest"/>
+    <fullyQualifiedTypeName name="com.project.models.RouteDetails"/>
 </qualifiedTypeNameHistroy>

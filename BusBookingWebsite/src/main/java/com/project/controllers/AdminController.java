@@ -21,6 +21,7 @@ import com.project.models.BusCategory;
 import com.project.models.BusDetails;
 import com.project.models.Customer;
 import com.project.models.Route;
+import com.project.models.RouteDetails;
 import com.project.models.Trip;
 import com.project.service.AdminService;
 import com.project.service.CustomerService;
@@ -120,8 +121,22 @@ public class AdminController {
 		int busId=Integer.parseInt(request.getParameter("busId"));
 		int ratePerKm=Integer.parseInt(request.getParameter("ratePerKm"));
 		int seats=Integer.parseInt(request.getParameter("seats"));
-		adminService.changeBusDetails(busId,ratePerKm,seats);
-		return "redirect:/updateBusDetails";
+		try {
+			adminService.changeBusDetails(busId,ratePerKm,seats);
+			return "redirect:/updateBusDetails";
+		} catch (Exception e) {
+			return "admin_InvalidEntries";
+		}
+	} 
+	
+	@RequestMapping("updateRouteDetails")
+	public String updateRouteDetails(Model model) {
+
+		List<RouteDetails> routeDetailsList = adminService.getRouteDetails();
+
+		model.addAttribute("routeDetailsList", routeDetailsList);
+
+		return "adminModifyRoute";
 	}
 	
 	

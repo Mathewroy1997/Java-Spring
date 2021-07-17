@@ -22,7 +22,7 @@
 
 
  
-<form action="updateRoute">
+<form action="updateRouteDetails">
 <input type="submit" value="Update Route">
 </form>
 <form action="updateTrip">

@@ -10,6 +10,7 @@ import com.project.models.BusCategory;
 import com.project.models.BusDetails;
 import com.project.models.Customer;
 import com.project.models.Route;
+import com.project.models.RouteDetails;
 import com.project.models.Trip;
 
 public class AdminService {
@@ -115,6 +116,11 @@ public class AdminService {
 	public void changeBusDetails(int busId, int ratePerKm, int seats) {
 		adminDao.changeBusDetails(busId,ratePerKm,seats);
 		
+	}
+
+	public List<RouteDetails> getRouteDetails() {
+		List<RouteDetails> routeDetailsList=adminDao.getRouteDetails();
+		return routeDetailsList;
 	}
 	
 	
