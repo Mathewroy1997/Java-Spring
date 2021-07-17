@@ -119,6 +119,16 @@ public class BookingDao {
 			});
 	}
 
+	public int setPassengerDetialisToTemperoryTable(int userId, String date, int routeId, int tripId,
+			String passengerName, String passengerAge, String passengerId) {
+		String sql = "insert into temporary_passengersdetails(userid,date,routeId,tripId,name,age,id) values(" + userId + "," + "'" + date + "'," + ""+routeId+","+"" + tripId + ","
+				+ "'" + passengerName + "'," + "'" + passengerAge + "'," +"" +passengerId + ")";
+		return jdbctemplate.update(sql);
+		
+	}
+
+	
+
 	
 
 	

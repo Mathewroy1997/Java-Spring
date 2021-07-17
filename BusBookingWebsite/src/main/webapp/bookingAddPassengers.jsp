@@ -18,15 +18,18 @@
 <div class="topnav">
 <a href="logout" >Sign-out</a>
 </div>
-<form action="goToAddPassengerDetials" method="post">
+<form action="addPassengersToTemperoryTable" method="post" >
 
-Verify booking details:<p>
-Date: ${date }&emsp;&emsp; Departure:${departure }&emsp;&emsp; Destination:${destination }&emsp;&emsp; Distance:${totalKm }<p>
-BusID:${busId }&emsp;&emsp; Bus Category:${busType }&emsp;&emsp; Seats:${userTickets }&emsp;&emsp; Total Price:${totalPrice }<p>
+Add Passenger Details:<p>
+<c:forEach var = "i" begin = "1" end = "${userTickets }">
+        <p>Passenger<c:out value = "${i}"/><p>
+       Name <input type="text" name="passengerName" placeholder="Name" required>
+       Age<input type="text" name="passengerAge" placeholder="Age" required>
+       Id Proof No.<input type="text" name="passengerId" placeholder="ID" required>
+      </c:forEach>
 
-<input type="submit" value="Fine, enter passenger details">
+<input type="submit" value="Add Passengers">
 
-<input type="hidden" name="userTickets" value=${userTickets }  >
 <input type="hidden" name="userId" value=${userId }  >
 <input type="hidden" name="date" value=${date }  >
 <input type="hidden" name="routeId" value=${routeId }  >

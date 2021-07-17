@@ -106,5 +106,37 @@ public class BookingController {
 		
 		return "verifyUserEntries";
 	}
+	@RequestMapping(value="goToAddPassengerDetials", method=RequestMethod.POST)
+	public String goToAddPassengerDetails(HttpServletRequest request, Model model) {
+		
+		
+		int userTickets=Integer.parseInt(request.getParameter("userTickets"));
+		int userId=Integer.parseInt(request.getParameter("userId"));
+		String date=request.getParameter("date");
+		int routeId=Integer.parseInt(request.getParameter("routeId"));
+		int tripId=Integer.parseInt(request.getParameter("tripId"));
+		
+		model.addAttribute("userTickets",userTickets);
+		model.addAttribute("userId", userId);
+		model.addAttribute("date", date);
+		model.addAttribute("routeId",routeId);
+		model.addAttribute("tripId",tripId);
+		
+		return "bookingAddPassengers";
+	}
+	@RequestMapping(value="addPassengersToTemperoryTable", method=RequestMethod.POST)
+	public String proceedToPayment(HttpServletRequest request, Model model) {
+		String[] passengerNames = request.getParameterValues("passengerName");
+		String[] passengerAges = request.getParameterValues("passengerAge");
+		String[] passengerIds = request.getParameterValues("passengerId");
+		
+		int userId=Integer.parseInt(request.getParameter("userId"));
+		String date=request.getParameter("date");
+		int routeId=Integer.parseInt(request.getParameter("routeId"));
+		int tripId=Integer.parseInt(request.getParameter("tripId"));
+		
+		bookingService.setPassengerDetialisToTemperoryTable(userId,date,routeId,tripId,passengerNames,passengerAges,passengerIds);
+		return "paymentGateway";
+	}
 
 }
