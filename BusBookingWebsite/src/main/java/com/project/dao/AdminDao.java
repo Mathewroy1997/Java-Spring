@@ -12,6 +12,8 @@ import org.springframework.jdbc.core.PreparedStatementCallback;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.project.models.AdminData;
+import com.project.models.BusCategory;
+import com.project.models.BusDetails;
 import com.project.models.Customer;
 import com.project.models.Route;
 import com.project.models.Trip;
@@ -175,5 +177,71 @@ public class AdminDao {
 			}
 		});
 
+	}
+	public List<BusDetails> getBusDetails() {
+		String query="select * from busdetails";
+		return jdbctemplate.query(query,new RowMapper<BusDetails>(){
+			public BusDetails mapRow(ResultSet resultSet, int row) throws SQLException {
+				BusDetails bus=new BusDetails();
+				
+					 bus.setBusId(resultSet.getInt("busId"));
+					 bus.setBusType(resultSet.getString("category"));
+					 bus.setBusRatePerKm(resultSet.getInt("ratePerKm"));
+					 bus.setBusTotalSeats(resultSet.getInt("seats"));
+
+				
+			
+			return bus;
+			}
+			});
+	}
+	public Boolean addNewBus(BusDetails bus) {
+		String query="insert into busdetails(category,ratePerKm,seats) values(?,?,?)";
+		return jdbctemplate.execute(query,new PreparedStatementCallback<Boolean>(){
+		public Boolean doInPreparedStatement(PreparedStatement ps)
+		throws SQLException, DataAccessException {
+
+		ps.setString(1,bus.getBusType());
+		ps.setInt(2,bus.getBusRatePerKm());
+		ps.setInt(3,bus.getBusTotalSeats());
+		
+		
+		return ps.execute();
+
+		}
+		});
+		
+	}
+	public List<BusCategory> getBusCategories() {
+		String query="select * from buscategories";
+		return jdbctemplate.query(query,new RowMapper<BusCategory>(){
+			public BusCategory mapRow(ResultSet resultSet, int row) throws SQLException {
+				BusCategory busCategory=new BusCategory();
+				
+					
+					 busCategory.setBusCategory(resultSet.getString("busCategory"));
+					 
+
+				
+			
+			return busCategory;
+			}
+			});
+	}
+	public int addNewBusCategory(String category) {
+		String sql="insert into buscategories(busCategory) values("+"'"+category+"')";   
+	    return jdbctemplate.update(sql);
+		
+	}
+	public int deleteBus(int busId) {
+		String sql = "delete from busdetails where busId=" + busId;
+		return jdbctemplate.update(sql);
+
+		
+	}
+	public int changeBusDetails(int busId, int ratePerKm, int seats) {
+		String sql = "UPDATE busdetails SET `ratePerKm` = "+ratePerKm+", `seats` = "+seats+" WHERE (`busId` = "+busId+");" ;
+		return jdbctemplate.update(sql);
+		
 	}
 }

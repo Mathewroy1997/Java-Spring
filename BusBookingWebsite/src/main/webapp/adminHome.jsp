@@ -15,6 +15,13 @@
 <a href="logout" >Sign-out</a>
 </div>
 
+
+<form action="updateBusDetails">
+<input type="submit" value="Update Bus Details">
+</form>
+
+
+ 
 <form action="updateRoute">
 <input type="submit" value="Update Route">
 </form>

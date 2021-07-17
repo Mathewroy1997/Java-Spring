@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.project.dao.AdminDao;
 import com.project.models.AdminData;
+import com.project.models.BusCategory;
+import com.project.models.BusDetails;
 import com.project.models.Customer;
 import com.project.models.Route;
 import com.project.models.Trip;
@@ -79,6 +81,40 @@ public class AdminService {
 		customer.setPassword(Password);
 
 		adminDao.addNewUserFromAdmin(customer);
+	}
+
+	public List<BusDetails> getBusDetails() {
+		List<BusDetails> busDetailsList=adminDao.getBusDetails();
+		return busDetailsList;
+	}
+
+	public void addNewBus(BusDetails bus) {
+		adminDao.addNewBus(bus);
+		
+	}
+
+	public List<BusCategory> getBusCategories() {
+		List<BusCategory> busCategoryList=adminDao.getBusCategories();
+		return busCategoryList;
+	}
+
+	public void addNewBusCategory(BusDetails bus) {
+		adminDao.addNewBus(bus);
+	}
+
+	public void addNewBusCategory(String category) {
+		adminDao.addNewBusCategory(category);
+		
+	}
+
+	public void deleteBus(int busId) {
+		adminDao.deleteBus(busId);
+		
+	}
+
+	public void changeBusDetails(int busId, int ratePerKm, int seats) {
+		adminDao.changeBusDetails(busId,ratePerKm,seats);
+		
 	}
 	
 	
