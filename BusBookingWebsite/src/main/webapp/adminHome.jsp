@@ -13,6 +13,7 @@
 </div>
 <div class="topnav">
 <a href="logout" >Sign-out</a>
+<a href="backToAdminHome" >Home</a>
 </div>
 
 
@@ -25,8 +26,8 @@
 <form action="updateRouteDetails">
 <input type="submit" value="Update Route">
 </form>
-<form action="updateTrip">
-<input type="submit" value="Update Bus">
+<form action="updateTripDetails">
+<input type="submit" value="Update Trip">
 </form>
 <form action="updateAdmin">
 <input type="submit" value="Add Admin">

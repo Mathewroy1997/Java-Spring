@@ -18,6 +18,7 @@ import com.project.models.Customer;
 import com.project.models.Route;
 import com.project.models.RouteDetails;
 import com.project.models.Trip;
+import com.project.models.TripDetails;
 
 public class AdminDao {
 	private JdbcTemplate jdbctemplate;
@@ -179,6 +180,23 @@ public class AdminDao {
 		});
 
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public List<BusDetails> getBusDetails() {
 		String query="select * from busdetails";
 		return jdbctemplate.query(query,new RowMapper<BusDetails>(){
@@ -261,5 +279,69 @@ public class AdminDao {
 			return route;
 			}
 			});
+	}
+	public int deleteRouteDetails(int routeId) {
+		String sql = "delete from routedetails where routeId=" + routeId;
+		return jdbctemplate.update(sql);
+		
+	}
+	public Boolean setNewRouteDetails(RouteDetails route) {
+		String query="insert into routedetails(departure,destination,totalKm) values(?,?,?)";
+		return jdbctemplate.execute(query,new PreparedStatementCallback<Boolean>(){
+		public Boolean doInPreparedStatement(PreparedStatement ps)
+		throws SQLException, DataAccessException {
+
+		ps.setString(1,route.getDeparture());
+		ps.setString(2,route.getDestination());
+		ps.setInt(3,route.getTotalDistanceInKm());
+		
+		
+		return ps.execute();
+
+		}
+		});
+	}
+	public List<TripDetails> getTripDetails() {
+		String query="select * from tripdetails";
+		return jdbctemplate.query(query,new RowMapper<TripDetails>(){
+			public TripDetails mapRow(ResultSet resultSet, int row) throws SQLException {
+				
+				TripDetails trip=new TripDetails();
+				
+				trip.setTripId(resultSet.getInt("tripId"));	
+				trip.setDate(resultSet.getString("date"));
+				trip.setRouteId(resultSet.getInt("routeId"));
+				trip.setBusId(resultSet.getInt("busId"));
+				trip.setAvailableSeats(resultSet.getInt("seatsAvailable"));
+					 
+
+				
+			
+			return trip;
+			}
+			});
+	}
+	public Boolean addNewTripDetails(TripDetails trip) {
+		String query="insert into tripdetails(date,routeId,busId,seatsAvailable) values(?,?,?,?)";
+		return jdbctemplate.execute(query,new PreparedStatementCallback<Boolean>(){
+		public Boolean doInPreparedStatement(PreparedStatement ps)
+		throws SQLException, DataAccessException {
+
+
+		ps.setString(1,trip.getDate());
+		ps.setInt(2,trip.getRouteId());
+		ps.setInt(3,trip.getBusId());
+		ps.setInt(4,trip.getAvailableSeats());
+		
+		return ps.execute();
+
+		}
+		});
+		
+	}
+	public int deleteTripDetails(int tripId) {
+		String sql = "delete from tripdetails where tripId=" + tripId;
+		return jdbctemplate.update(sql);
+		
 	}
 }

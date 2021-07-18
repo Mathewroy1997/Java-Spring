@@ -12,6 +12,7 @@ import com.project.models.Customer;
 import com.project.models.Route;
 import com.project.models.RouteDetails;
 import com.project.models.Trip;
+import com.project.models.TripDetails;
 
 public class AdminService {
 
@@ -83,6 +84,22 @@ public class AdminService {
 
 		adminDao.addNewUserFromAdmin(customer);
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	public List<BusDetails> getBusDetails() {
 		List<BusDetails> busDetailsList=adminDao.getBusDetails();
@@ -121,6 +138,42 @@ public class AdminService {
 	public List<RouteDetails> getRouteDetails() {
 		List<RouteDetails> routeDetailsList=adminDao.getRouteDetails();
 		return routeDetailsList;
+	}
+
+	public void deleteRouteDetails(int routeId) {
+		adminDao.deleteRouteDetails(routeId);
+		
+	}
+
+	public void addNewRouteDetails(String departure, String destination, int totalDistanceInKm) {
+		RouteDetails route=new RouteDetails();
+		route.setDeparture(departure);
+		route.setDestination(destination);
+		route.setTotalDistanceInKm(totalDistanceInKm);
+		adminDao.setNewRouteDetails(route);
+		
+	}
+
+	public List<TripDetails> getTripDetails() {
+		List<TripDetails> tripDetailsList=adminDao.getTripDetails();
+		return tripDetailsList;
+	}
+
+	public void addNewTripDetails(String date, int routeId, int busId, int availableSeats) {
+		TripDetails trip=new TripDetails();
+		trip.setDate(date);
+		trip.setRouteId(routeId);
+		trip.setBusId(busId);
+		trip.setAvailableSeats(availableSeats);
+		
+		adminDao.addNewTripDetails(trip);
+		
+	}
+
+	public void deleteTripDetails(int tripId) {
+		adminDao.deleteTripDetails(tripId);
+		
+		
 	}
 	
 	

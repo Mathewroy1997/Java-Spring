@@ -16,7 +16,9 @@
 
 </div>
 <div class="topnav">
+
 <a href="logout" >Sign-out</a>
+<a href="backToAdminHome" >Home</a>
 </div>
 Current Routes:
 <table border="2" width="70%" cellpadding="2">  
@@ -30,24 +32,25 @@ Current Routes:
     <td>${route.destination}</td> 
      <td>${route.totalDistanceInKm}</td>    
      
-     <td>Delete Route</a></td> 
+     <td><form action="deleteRouteDetails" method="post">
+   <input type="submit" value="Delete Route">
+   <input type="hidden" name="routeId" value=${route.routeId }>
+   </form></td> 
       </tr>  
     
   
    </c:forEach>  
    </table>  
 Add new Route:<br>   
- <form action ="addNewRoute">####last location
+ <form action ="addNewRouteDetails">
 
   Departure<input type="text" name="departure" required>
    Destination<input type="text" name="destination" required>
-    Rate<input type="text" name="rate" required>
+   Distance<input type="text" name="totalKm" required>
     
-    <input type ="submit" value="add">
+    <input type ="submit" value="Add Route">
  </form>
- <form action="goBackToAdminHome">
-<input type="submit" value="Back To Home">
-</form>
+ 
    
 </body>
 </html>

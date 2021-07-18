@@ -16,6 +16,7 @@
 </div>
 <div class="topnav">
 <a href="logout" >Sign-out</a>
+<a href="backToAdminHome" >Home</a>
 </div>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>

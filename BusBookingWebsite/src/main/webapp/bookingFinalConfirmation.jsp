@@ -17,6 +17,7 @@
 </div>
 <div class="topnav">
 <a href="logout" >Sign-out</a>
+
 </div>
 
 Date: ${date }&emsp;&emsp; Departure:${departure }&emsp;&emsp; Destination:${destination }&emsp;&emsp;

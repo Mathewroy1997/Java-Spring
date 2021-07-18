@@ -17,6 +17,7 @@
 </div>
 <div class="topnav">
 <a href="logout" >Sign-out</a>
+<a href="backToAdminHome" >Home</a>
 </div>
 Current Buses:
 <table border="2" width="70%" cellpadding="2">  

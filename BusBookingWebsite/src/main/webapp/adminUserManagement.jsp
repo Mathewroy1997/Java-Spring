@@ -4,7 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <link rel="stylesheet" type="text/css" href="css/general.css">
-<%!int i = 0;%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,6 +18,7 @@
 	</div>
 	<div class="topnav">
 		<a href="logout">Sign-out</a>
+		<a href="backToAdminHome" >Home</a>
 	</div>
 	Current Users:
 	<table border="2" width="70%" cellpadding="2">
