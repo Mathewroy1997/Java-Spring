@@ -5,46 +5,35 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
+
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.project.dao.AdminDao;
-import com.project.dao.CustomerDao;
-import com.project.dao.RouteDao;
-import com.project.dao.TripDao;
+
+
 import com.project.models.AdminData;
 import com.project.models.BusCategory;
 import com.project.models.BusDetails;
 import com.project.models.CompleteBookingDetails;
 import com.project.models.Customer;
-import com.project.models.Route;
+
 import com.project.models.RouteDetails;
-import com.project.models.Trip;
+
 import com.project.models.TripDetails;
 import com.project.service.AdminService;
-import com.project.service.CustomerService;
+
 
 @Controller
 public class AdminController {
 
-	@Autowired
-	CustomerDao customerDao;
+	
 
-	@Autowired
-	RouteDao routeDao;
+	
 
-	@Autowired
-	TripDao tripDao;
-
-	@Autowired
-	AdminDao adminDao;
-
-	@Autowired
-	CustomerService customerService;
+	
 
 	@Autowired
 	AdminService adminService;
@@ -274,84 +263,6 @@ public class AdminController {
 		return "adminBookingHistory";
 	}
 
-	/*
-	 * @RequestMapping("/updateRoute") public String updateRoute(Model model) {
-	 * 
-	 * List<Route> routeTable = adminService.getRouteTable();
-	 * 
-	 * model.addAttribute("routeTable", routeTable);
-	 * 
-	 * return "modifyRoute"; }
-	 * 
-	 * @RequestMapping("/addRoute") public String addNewRoute(HttpServletRequest
-	 * request, Model m) { Route route = new Route();
-	 * 
-	 * route.setRouteID(Integer.parseInt(request.getParameter("routeid")));
-	 * route.setDeparture(request.getParameter("departure"));
-	 * route.setDestination(request.getParameter("destination"));
-	 * route.setRate(Integer.parseInt(request.getParameter("rate")));
-	 * 
-	 * 
-	 * try { adminService.addNewRoute(route);
-	 * 
-	 * return "redirect:/updateRoute"; } catch (Exception e) { return
-	 * "admin_InvalidEntries"; }
-	 * 
-	 * }
-	 * 
-	 * @RequestMapping("route/{route.routeID}") public String
-	 * deleteRoute(HttpServletRequest request) {
-	 * 
-	 * String path = request.getServletPath();
-	 * 
-	 * int routeId = Integer.parseInt(path.replaceAll("[\\D]", ""));
-	 * 
-	 * try { adminService.deleteRoute(routeId);
-	 * 
-	 * return "redirect:/updateRoute"; } catch (DataIntegrityViolationException e) {
-	 * return "admin_routeidexception"; }
-	 * 
-	 * }
-	 * 
-	 * @RequestMapping("/backToRouteIDUpdation") public String
-	 * returnToRouteIDUpdation() { return "redirect:/updateRoute"; }
-	 * 
-	 * @RequestMapping("updateTrip") public String updateTrip(Model m) {
-	 * 
-	 * List<Trip> tripTable1=adminService.getTripData(); m.addAttribute("tripTable",
-	 * tripTable1); return "admin_modifyTrip"; }
-	 * 
-	 * @RequestMapping("trip/{trip.tripID}") public String
-	 * deleteTrip(HttpServletRequest request) { String path =
-	 * request.getServletPath(); int tripId =
-	 * Integer.parseInt(path.replaceAll("[\\D]", ""));
-	 * customerDao.deleteTrip(tripId); return "redirect:/updateTrip"; }
-	 * 
-	 * @RequestMapping("addTrip") public String addNewTrip(HttpServletRequest
-	 * request, Model m) { Trip trip = new Trip();
-	 * trip.setTripID(Integer.parseInt(request.getParameter("tripid")));
-	 * trip.setDate(request.getParameter("date"));
-	 * trip.setRouteID(Integer.parseInt(request.getParameter("routeid")));
-	 * trip.setSeats(Integer.parseInt(request.getParameter("seats")));
-	 * 
-	 * try { adminService.addNewTrip(trip);
-	 * 
-	 * return "redirect:/updateTrip"; } catch (Exception e) { return
-	 * "admin_InvalidEntries"; } }
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * @RequestMapping(value = "backToAdminHome") public String toAdminHome() {
-	 * return "adminHome"; }
-	 * 
-	 * 
-	 */
+	
 
 }

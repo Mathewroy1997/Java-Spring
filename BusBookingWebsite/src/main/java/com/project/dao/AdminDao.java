@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.dao.DataAccessException;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCallback;
 import org.springframework.jdbc.core.RowMapper;
@@ -16,9 +15,9 @@ import com.project.models.BusCategory;
 import com.project.models.BusDetails;
 import com.project.models.CompleteBookingDetails;
 import com.project.models.Customer;
-import com.project.models.Route;
+
 import com.project.models.RouteDetails;
-import com.project.models.Trip;
+
 import com.project.models.TripDetails;
 
 public class AdminDao {
@@ -32,21 +31,7 @@ public class AdminDao {
 		
 	}
 	
-	public List<AdminData> getData(String username, String password) {
-		String query="select * from admindata where username='"+username+"' and password='"+password+"'";
-
-
-		return jdbctemplate.query(query,new RowMapper<AdminData>(){
-		public AdminData mapRow(ResultSet rs, int row) throws SQLException {
-		AdminData adminData=new AdminData();
-
-		adminData.setUsername(rs.getString("username"));
-		adminData.setPassword(rs.getString("password"));
-		
-		return adminData;
-		}
-		});
-	}
+	
 	public List<AdminData> getAllAdminData() {
 		String query = "select * from admindata ";
 
@@ -65,76 +50,7 @@ public class AdminDao {
 		return jdbctemplate.update(sql);
 		
 	}
-	public List<Route> getRouteTable() {
-		String query3="select * from routedata";
-		return jdbctemplate.query(query3,new RowMapper<Route>(){
-			public Route mapRow(ResultSet rs, int row) throws SQLException {
-				Route route=new Route();
-				
-					 route.setDeparture(rs.getString("Departure"));
-					 route.setDestination(rs.getString("Destination"));
-					 route.setRouteID(rs.getInt("routeid"));
-					 route.setRate(rs.getInt("Rate"));
 
-				
-			
-			return route;
-			}
-			});
-	}
-	public Boolean addNewRoute(final Route newRoute) {
-			String query="insert into routedata(routeid,Departure,Destination,Rate) values(?,?,?,?)";
-			return jdbctemplate.execute(query,new PreparedStatementCallback<Boolean>(){
-			public Boolean doInPreparedStatement(PreparedStatement ps)
-			throws SQLException, DataAccessException {
-
-			ps.setInt(1,newRoute.getRouteID());
-			ps.setString(2,newRoute.getDeparture());
-			ps.setString(3,newRoute.getDestination());
-			ps.setInt(4,newRoute.getRate());
-			
-			return ps.execute();
-
-			}
-			});
-			
-		}
-	public int deleteRoute(int routeId) throws DataIntegrityViolationException {
-		String sql = "delete from routedata where routeid=" + routeId;
-		return jdbctemplate.update(sql);
-
-	}
-	public List<Trip> getTripData() {
-		String query = "select * from tripdata";
-		return jdbctemplate.query(query, new RowMapper<Trip>() {
-			public Trip mapRow(ResultSet rs, int row) throws SQLException {
-				Trip trip = new Trip();
-				trip.setDate(rs.getString("date"));
-				trip.setSeats(rs.getInt("Seats"));
-				trip.setRouteID(rs.getInt("routeID"));
-				trip.setTripID(rs.getInt("trip_id"));
-
-				return trip;
-			}
-		});
-
-	}
-	public Boolean addNewTrip(final Trip trip) {
-		String query = "insert into tripdata(trip_id,date,routeID,Seats) values(?,?,?,?)";
-		return jdbctemplate.execute(query, new PreparedStatementCallback<Boolean>() {
-			public Boolean doInPreparedStatement(PreparedStatement ps) throws SQLException, DataAccessException {
-
-				ps.setInt(1, trip.getTripID());
-				ps.setString(2, trip.getDate());
-				ps.setInt(3, trip.getRouteID());
-				ps.setInt(4, trip.getSeats());
-
-				return ps.execute();
-
-			}
-		});
-
-	}
 	public int addNewAdmin(String newAdminName,String newUsername,String newPassword) {
 		String sql="insert into admindata(AdminName,Username,Password) values("+"'"+newAdminName+"'"+",'"+newUsername+"'"+",'"+newPassword+"')";   
 	    return jdbctemplate.update(sql);

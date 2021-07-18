@@ -26,12 +26,7 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd
 <bean id="cdao" class="com.project.dao.CustomerDao">
 <property name="jdbctemplate" ref="jdbctemplate"></property>
 </bean>
-<bean id="rdao" class="com.project.dao.RouteDao">
-<property name="jdbctemplate" ref="jdbctemplate"></property>
-</bean>
-<bean id="tdao" class="com.project.dao.TripDao">
-<property name="jdbctemplate" ref="jdbctemplate"></property>
-</bean>
+
 <bean id="adminDao" class="com.project.dao.AdminDao">
 <property name="jdbctemplate" ref="jdbctemplate"></property>
 </bean>
@@ -41,11 +36,17 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd
 <bean id="apiDao" class="com.project.dao.ApiDao">
 <property name="jdbctemplate" ref="jdbctemplate"></property>
 </bean>
+<bean id="loginDao" class="com.project.dao.LoginDao">
+<property name="jdbctemplate" ref="jdbctemplate"></property>
+</bean>
 
 <bean id="customerService" class="com.project.service.CustomerService"/> 
 <bean id="adminService" class="com.project.service.AdminService"/> 
 <bean id="bookingService" class="com.project.service.BookingService"/> 
 <bean id="apiService" class="com.project.service.ApiService"/> 
+<bean id="loginService" class="com.project.service.LoginService"/> 
+
+
 <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
  
 <property name="prefix" value="/"></property>

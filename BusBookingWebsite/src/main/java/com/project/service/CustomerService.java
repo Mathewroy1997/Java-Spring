@@ -2,56 +2,19 @@ package com.project.service;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.project.dao.AdminDao;
+
 import com.project.dao.CustomerDao;
-import com.project.models.AdminData;
+
 import com.project.models.CompleteBookingDetails;
 import com.project.models.Customer;
-import com.project.models.Route;
 
 public class CustomerService {
-	HttpServletRequest request;
+
 	@Autowired
 	CustomerDao customerDao;
-
-	@Autowired
-	AdminDao adminDao;
-
-	public int login(String username, String password) {
-		List<Customer> list = customerDao.getData(username, password);
-		int flag;
-
-		if (list.isEmpty()) {
-
-			return flag = 0;
-		} else {
-
-			return flag = 2;
-
-		}
-
-	}
-
-	
-
-	public int adminLogin(String username, String password) {
-		List<AdminData> admin = adminDao.getData(username, password);
-
-		int flag;
-
-		if (admin.isEmpty()) {
-
-			return flag = 0;
-		} else {
-
-			return flag = 1;
-
-		}
-	}
 
 	public List<Customer> getCustomerData() {
 		List<Customer> userData = customerDao.getAllUserData();
@@ -79,10 +42,23 @@ public class CustomerService {
 		customerDao.addNewUserFromAdmin(customer);
 	}
 
-
-
 	public List<CompleteBookingDetails> getUserBookingHistory(int userId) {
-		List<CompleteBookingDetails> userBookingDetailsList=customerDao.getUserBookingHistory(userId);
+		List<CompleteBookingDetails> userBookingDetailsList = customerDao.getUserBookingHistory(userId);
 		return userBookingDetailsList;
+	}
+
+	public void addNewUser(String username, String password, String firstName, String lastName, String emailId,
+			String address, String phone) {
+		Customer customer = new Customer();
+		customer.setUsername("username");
+		customer.setPassword(("password"));
+		customer.setFirstname(("firstName"));
+		customer.setLastname(("lastName"));
+		customer.setEmail(("emailId"));
+		customer.setAddress(("address"));
+		customer.setPhone(("phone"));
+
+		customerDao.addNewUser(customer);
+
 	}
 }

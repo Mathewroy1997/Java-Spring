@@ -1,6 +1,5 @@
 package com.project.models;
 
-import java.util.List;
 
 public class TripDetails {
 	private int tripId;

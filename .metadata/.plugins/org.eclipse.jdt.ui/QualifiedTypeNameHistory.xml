@@ -24,16 +24,21 @@
     <fullyQualifiedTypeName name="org.springframework.dao.DataIntegrityViolationException"/>
     <fullyQualifiedTypeName name="org.springframework.stereotype.Controller"/>
     <fullyQualifiedTypeName name="com.project.service.BookingService"/>
-    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
     <fullyQualifiedTypeName name="com.project.dao.BookingDao"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
-    <fullyQualifiedTypeName name="com.project.models.TripDetails"/>
     <fullyQualifiedTypeName name="com.project.models.AvailableBuses"/>
-    <fullyQualifiedTypeName name="com.project.models.TemperoryPassengersDetails"/>
     <fullyQualifiedTypeName name="com.project.models.BusCategory"/>
     <fullyQualifiedTypeName name="com.project.models.BusDetails"/>
     <fullyQualifiedTypeName name="java.lang.Integer"/>
-    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestMethod"/>
-    <fullyQualifiedTypeName name="javax.servlet.http.HttpServletRequest"/>
     <fullyQualifiedTypeName name="com.project.models.RouteDetails"/>
+    <fullyQualifiedTypeName name="com.project.models.TripDetails"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestMethod"/>
+    <fullyQualifiedTypeName name="com.project.models.TemperoryPassengersDetails"/>
+    <fullyQualifiedTypeName name="com.project.service.ApiService"/>
+    <fullyQualifiedTypeName name="com.project.models.CompleteBookingDetails"/>
+    <fullyQualifiedTypeName name="com.project.dao.ApiDao"/>
+    <fullyQualifiedTypeName name="com.project.service.LoginService"/>
+    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+    <fullyQualifiedTypeName name="com.project.dao.LoginDao"/>
+    <fullyQualifiedTypeName name="javax.servlet.http.HttpServletRequest"/>
 </qualifiedTypeNameHistroy>

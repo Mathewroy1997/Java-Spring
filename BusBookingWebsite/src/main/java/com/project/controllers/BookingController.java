@@ -1,6 +1,6 @@
 package com.project.controllers;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.project.models.AvailableBuses;
 import com.project.models.BusDetails;
-import com.project.models.Route;
+
 import com.project.models.RouteDetails;
 import com.project.models.TemperoryPassengersDetails;
-import com.project.models.Trip;
+
 import com.project.models.TripDetails;
 import com.project.service.BookingService;
 
@@ -98,7 +98,7 @@ public class BookingController {
 		int totalKm=Integer.parseInt(request.getParameter("totalKm"));
 		int busId=Integer.parseInt(request.getParameter("busId"));
 		String busType=request.getParameter("busType");
-		int availableSeats=Integer.parseInt(request.getParameter("availableSeats"));
+		//int availableSeats=Integer.parseInt(request.getParameter("availableSeats"));
 		int userTickets=Integer.parseInt(request.getParameter("userTickets"));
 		int ratePerSeat=Integer.parseInt(request.getParameter("ratePerSeat"));
 		int tripId=Integer.parseInt(request.getParameter("tripId"));

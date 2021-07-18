@@ -3,7 +3,6 @@ package com.project.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.dao.DataAccessException;
@@ -12,7 +11,7 @@ import org.springframework.jdbc.core.PreparedStatementCallback;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.project.models.BusDetails;
-import com.project.models.Route;
+
 import com.project.models.RouteDetails;
 import com.project.models.TemperoryPassengersDetails;
 import com.project.models.TripDetails;

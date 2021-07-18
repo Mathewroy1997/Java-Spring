@@ -42,7 +42,7 @@ Current Routes:
    </c:forEach>  
    </table>  
 Add new Route:<br>   
- <form action ="addNewRouteDetails">
+ <form action ="addNewRouteDetails" method="post">
 
   Departure<input type="text" name="departure" required>
    Destination<input type="text" name="destination" required>

@@ -1,9 +1,5 @@
 package com.project.models;
 
-/**
- * @author Mathew's PC
- *
- */
 public class Customer {
 
 	private String username;

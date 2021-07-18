@@ -1,7 +1,6 @@
 
-package com.project.api;
+package com.project.models;
 
-import java.util.List;
 
 public class CovidNationalStatus {
 

@@ -10,9 +10,9 @@ import com.project.models.BusCategory;
 import com.project.models.BusDetails;
 import com.project.models.CompleteBookingDetails;
 import com.project.models.Customer;
-import com.project.models.Route;
+
 import com.project.models.RouteDetails;
-import com.project.models.Trip;
+
 import com.project.models.TripDetails;
 
 public class AdminService {
@@ -22,7 +22,7 @@ public class AdminService {
 	
 	public List<AdminData> getAdminData() {
 		List<AdminData> adminList = adminDao.getAllAdminData();
-		int i;
+	
 		return adminList;
 	}
 
@@ -31,30 +31,7 @@ public class AdminService {
 		
 	}
 
-	public List<Route> getRouteTable() {
-		List<Route> routeTable=adminDao.getRouteTable();
-		return routeTable;
-	}
-
-	public void addNewRoute(Route route) {
-		adminDao.addNewRoute(route);
-		
-	}
-
-	public void deleteRoute(int routeId) {
-		adminDao.deleteRoute(routeId);
-		
-	}
-
-	public List<Trip> getTripData() {
-		List<Trip> tripData=adminDao.getTripData();
-		return tripData;
-	}
-
-	public void addNewTrip(Trip trip) {
-		adminDao.addNewTrip(trip);
-		
-	}
+	
 
 	public void insertNewAdmin(String newAdminName, String newUsername, String newPassword) {
 		adminDao.addNewAdmin(newAdminName, newUsername, newPassword);
