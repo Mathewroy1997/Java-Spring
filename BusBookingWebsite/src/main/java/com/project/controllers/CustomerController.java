@@ -18,6 +18,7 @@ import com.project.dao.AdminDao;
 import com.project.dao.CustomerDao;
 import com.project.dao.RouteDao;
 import com.project.dao.TripDao;
+import com.project.models.CompleteBookingDetails;
 import com.project.models.Customer;
 import com.project.models.MasterPassengerTable;
 import com.project.models.Passenger;
@@ -42,7 +43,44 @@ public class CustomerController {
 	TripDao tripDao;
 
 	@Autowired
-	CustomerService serviceClass;
+	CustomerService customerService;
+	
+	
+	@RequestMapping(value="userBookingHistory", method=RequestMethod.POST)
+	public String userBookingHistory(HttpServletRequest request, Model model) {
+		int userId=Integer.parseInt(request.getParameter("userId"));
+		List<CompleteBookingDetails> userBookingDetailsList=customerService.getUserBookingHistory(userId);
+		model.addAttribute("userBookingDetailsList",userBookingDetailsList);
+		return "userBookingHistory";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	@RequestMapping("/submitNewRegistraion")
 	public String newUserRegistration(HttpServletRequest request, HttpServletResponse response, Model model) {

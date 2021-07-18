@@ -20,9 +20,6 @@
 <form action="updateBusDetails">
 <input type="submit" value="Update Bus Details">
 </form>
-
-
- 
 <form action="updateRouteDetails">
 <input type="submit" value="Update Route">
 </form>
@@ -34,6 +31,9 @@
 </form>
 <form action="manageUsers">
 <input type="submit" value="User Management">
+</form>
+<form action="adminBookingHistory">
+<input type="submit" value="Booking History">
 </form>
 </body>
 </html>

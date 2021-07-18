@@ -19,6 +19,7 @@ import com.project.dao.TripDao;
 import com.project.models.AdminData;
 import com.project.models.BusCategory;
 import com.project.models.BusDetails;
+import com.project.models.CompleteBookingDetails;
 import com.project.models.Customer;
 import com.project.models.Route;
 import com.project.models.RouteDetails;
@@ -268,6 +269,12 @@ public class AdminController {
 			return "admin_InvalidEntries";
 		}
 
+	}
+	@RequestMapping("adminBookingHistory")
+	public String bookingHistory(Model model) {
+		List<CompleteBookingDetails> bookingDetailsList=adminService.getBookingHistory();
+		model.addAttribute("bookingDetailsList",bookingDetailsList);
+		return "adminBookingHistory";
 	}
 
 	/*

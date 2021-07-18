@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.project.dao.AdminDao;
 import com.project.dao.CustomerDao;
 import com.project.models.AdminData;
+import com.project.models.CompleteBookingDetails;
 import com.project.models.Customer;
 import com.project.models.Route;
 
@@ -76,5 +77,12 @@ public class CustomerService {
 		customer.setPassword(Password);
 
 		customerDao.addNewUserFromAdmin(customer);
+	}
+
+
+
+	public List<CompleteBookingDetails> getUserBookingHistory(int userId) {
+		List<CompleteBookingDetails> userBookingDetailsList=customerDao.getUserBookingHistory(userId);
+		return userBookingDetailsList;
 	}
 }

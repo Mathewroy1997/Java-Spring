@@ -14,6 +14,7 @@ import org.springframework.jdbc.core.RowMapper;
 import com.project.models.AdminData;
 import com.project.models.BusCategory;
 import com.project.models.BusDetails;
+import com.project.models.CompleteBookingDetails;
 import com.project.models.Customer;
 import com.project.models.Route;
 import com.project.models.RouteDetails;
@@ -343,5 +344,26 @@ public class AdminDao {
 		String sql = "delete from tripdetails where tripId=" + tripId;
 		return jdbctemplate.update(sql);
 		
+	}
+	public List<CompleteBookingDetails> getBookingHistory() {
+		String query = "select * from completebookingdata ";
+		return jdbctemplate.query(query, new RowMapper<CompleteBookingDetails>() {
+			public CompleteBookingDetails mapRow(ResultSet rs, int row) throws SQLException {
+				CompleteBookingDetails adminBookingHistory = new CompleteBookingDetails();
+				
+				adminBookingHistory.setUserId(rs.getInt("userId"));
+				adminBookingHistory.setDate(rs.getString("date"));
+				adminBookingHistory.setRouteId(rs.getInt("routeId"));
+				adminBookingHistory.setDeparture(rs.getString("departure"));
+				adminBookingHistory.setDestination(rs.getString("destination"));
+				adminBookingHistory.setTripId(rs.getInt("tripId"));
+				adminBookingHistory.setBusId(rs.getInt("busId"));
+				adminBookingHistory.setBusType(rs.getString("busType"));
+				adminBookingHistory.setPassengerName(rs.getString("name"));
+				adminBookingHistory.setPassengerAge(rs.getInt("age"));
+				adminBookingHistory.setPassengerId(rs.getString("id"));
+				return adminBookingHistory;
+			}
+		});
 	}
 }

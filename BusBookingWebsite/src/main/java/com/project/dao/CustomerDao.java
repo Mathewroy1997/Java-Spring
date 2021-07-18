@@ -16,6 +16,7 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 //import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 
+import com.project.models.CompleteBookingDetails;
 import com.project.models.Customer;
 import com.project.models.MasterPassengerTable;
 import com.project.models.Passenger;
@@ -284,5 +285,27 @@ public class CustomerDao {
 		String sql = "INSERT INTO masterpassenger SELECT * FROM temporary_passengers;";
 		return jdbctemplate.update(sql);
 		
+	}
+
+	public List<CompleteBookingDetails> getUserBookingHistory(int userId) {
+		String query = "select * from completebookingdata where userid=" + userId + "";
+		return jdbctemplate.query(query, new RowMapper<CompleteBookingDetails>() {
+			public CompleteBookingDetails mapRow(ResultSet rs, int row) throws SQLException {
+				CompleteBookingDetails userBookingHistory = new CompleteBookingDetails();
+				
+				userBookingHistory.setUserId(rs.getInt("userId"));
+				userBookingHistory.setDate(rs.getString("date"));
+				userBookingHistory.setRouteId(rs.getInt("routeId"));
+				userBookingHistory.setDeparture(rs.getString("departure"));
+				userBookingHistory.setDestination(rs.getString("destination"));
+				userBookingHistory.setTripId(rs.getInt("tripId"));
+				userBookingHistory.setBusId(rs.getInt("busId"));
+				userBookingHistory.setBusType(rs.getString("busType"));
+				userBookingHistory.setPassengerName(rs.getString("name"));
+				userBookingHistory.setPassengerAge(rs.getInt("age"));
+				userBookingHistory.setPassengerId(rs.getString("id"));
+				return userBookingHistory;
+			}
+		});
 	}
 }

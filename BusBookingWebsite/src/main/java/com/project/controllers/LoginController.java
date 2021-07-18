@@ -89,11 +89,7 @@ public class LoginController {
 
 			return "invalidLoginAttempt";
 		} 
-		/*
-			 * else if (flag == 1) { return "adminHome";
-			 * 
-			 * }
-			 */ 
+		
 		else {
 			
 			Customer customer;
@@ -101,7 +97,7 @@ public class LoginController {
 			m.addAttribute("username", username);
 			m.addAttribute("userId",customer.getUserid());
 			m.addAttribute("customer",customer);
-			return "welcome";
+			return "userHome";
 		}
 	}
 

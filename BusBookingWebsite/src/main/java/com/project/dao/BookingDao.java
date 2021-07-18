@@ -1,11 +1,14 @@
 package com.project.dao;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCallback;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.project.models.BusDetails;
@@ -106,7 +109,7 @@ public class BookingDao {
 				
 					busDetails.setBusId(resultSet.getInt("busId"));
 					busDetails.setBusType(resultSet.getString("category"));
-					 busDetails.setBusRatePerKm(resultSet.getInt("rate/km"));
+					 busDetails.setBusRatePerKm(resultSet.getInt("ratePerKm"));
 					 busDetails.setBusTotalSeats(resultSet.getInt("seats"));
 					 
 					 
@@ -120,11 +123,29 @@ public class BookingDao {
 			});
 	}
 
-	public int setPassengerDetialisToTemperoryTable(int userId, String date, int routeId, int tripId,
-			String passengerName, String passengerAge, String passengerId) {
-		String sql = "insert into temporary_passengersdetails(userid,date,routeId,tripId,name,age,id) values(" + userId + "," + "'" + date + "'," + ""+routeId+","+"" + tripId + ","
-				+ "'" + passengerName + "'," + "'" + passengerAge + "'," +"" +passengerId + ")";
-		return jdbctemplate.update(sql);
+	public Boolean setPassengerDetialisToTemperoryTable(TemperoryPassengersDetails allBookingData) {
+		String query="insert into temporary_passengersdetails(userId,date,routeId,departure,destination,tripId,busId,busType,name,age,id) values(?,?,?,?,?,?,?,?,?,?,?)";
+		return jdbctemplate.execute(query,new PreparedStatementCallback<Boolean>(){
+		public Boolean doInPreparedStatement(PreparedStatement ps)
+		throws SQLException, DataAccessException {
+
+
+		ps.setInt(1,allBookingData.getUserId());
+		ps.setString(2,allBookingData.getDate());
+		ps.setInt(3,allBookingData.getRouteId());
+		ps.setString(4,allBookingData.getDeparture());
+		ps.setString(5,allBookingData.getDestination());
+		ps.setInt(6,allBookingData.getTripId());
+		ps.setInt(7,allBookingData.getBusId());
+		ps.setString(8,allBookingData.getBusType());
+		ps.setString(9,allBookingData.getPassengerName());
+		ps.setInt(10,allBookingData.getPassengerAge());
+		ps.setString(11,allBookingData.getPassengerId());
+		
+		return ps.execute();
+
+		}
+		});
 		
 	}
 
@@ -156,7 +177,7 @@ public class BookingDao {
 	}
 
 	public int movePassengerTemperoryDetailsToPermanaent() {
-		String sql = "INSERT INTO completebookingdata SELECT * FROM temporary_passengersdetails;";
+		String sql = "INSERT INTO completebookingdata (userId,date,routeId,departure,destination,tripId,busId,busType,name,age,id) SELECT userId,date,routeId,departure,destination,tripId,busId,busType,name,age,id FROM temporary_passengersdetails";
 		return jdbctemplate.update(sql);
 		
 	}

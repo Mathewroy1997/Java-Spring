@@ -4,7 +4,36 @@ public class TemperoryPassengersDetails {
 	private int userId;
 	private String date;
 	private int routeId;
+	private String departure;
+	private String destination;
 	private int tripId;
+	private int busId;
+	private String busType;
+	
+	public String getDeparture() {
+		return departure;
+	}
+	public void setDeparture(String departure) {
+		this.departure = departure;
+	}
+	public String getDestination() {
+		return destination;
+	}
+	public void setDestination(String destination) {
+		this.destination = destination;
+	}
+	public int getBusId() {
+		return busId;
+	}
+	public void setBusId(int busId) {
+		this.busId = busId;
+	}
+	public String getBusType() {
+		return busType;
+	}
+	public void setBusType(String busType) {
+		this.busType = busType;
+	}
 	private String passengerName;
 	private int passengerAge;
 	private String passengerId;

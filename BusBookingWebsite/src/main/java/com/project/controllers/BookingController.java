@@ -28,6 +28,7 @@ public class BookingController {
 
 	@RequestMapping(value = "newBookingPage", method = RequestMethod.POST)
 	public String homeToBookingPage(HttpServletRequest request, Model m) {
+		bookingService.TruncateTemperoryPassengerTable();
 
 		int userId = Integer.parseInt(request.getParameter("userId"));
 
@@ -152,7 +153,7 @@ public class BookingController {
 		int totalPrice=Integer.parseInt(request.getParameter("totalPrice"));
 		int userTickets=Integer.parseInt(request.getParameter("userTickets"));
 		
-		bookingService.setPassengerDetialisToTemperoryTable(userId,date,routeId,tripId,passengerNames,passengerAges,passengerIds);
+		bookingService.setPassengerDetialisToTemperoryTable(userId,date,routeId,departure,destination,tripId,busId,busType,passengerNames,passengerAges,passengerIds);
 		List<TemperoryPassengersDetails> temperoryPassengerList=bookingService.setTemperoryPassengerList(); 
 		model.addAttribute("date", date);
 		model.addAttribute("departure", departure);

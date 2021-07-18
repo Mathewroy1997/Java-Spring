@@ -88,15 +88,29 @@ public class BookingService {
 		return totalPrice;
 	}
 
-	public void setPassengerDetialisToTemperoryTable(int userId, String date, int routeId, int tripId,
-			String[] passengerNames, String[] passengerAges, String[] passengerIds) {
+	public void setPassengerDetialisToTemperoryTable(int userId, String date, int routeId,String departure,String destination, int tripId,
+			int busId,String busType,String[] passengerNames, String[] passengerAges, String[] passengerIds) {
 		int totalPassengers=passengerAges.length;
+		TemperoryPassengersDetails allBookingData=new TemperoryPassengersDetails();
+		allBookingData.setUserId(userId);
+		allBookingData.setDate(date);
+		allBookingData.setRouteId(routeId);
+		allBookingData.setDeparture(departure);
+		allBookingData.setDestination(destination);
+		allBookingData.setTripId(tripId);
+		allBookingData.setBusId(busId);
+		allBookingData.setBusType(busType);
 		for(int i=0;i<totalPassengers;i++) {
 			String passengerName=passengerNames[i];
 			String passengerAge=passengerAges[i];
+			int passengerAge1=Integer.parseInt(passengerAge);
 			String passengerId=passengerIds[i];
-			bookingDao.setPassengerDetialisToTemperoryTable(userId, date, routeId, tripId, passengerName, passengerAge,
-					passengerId);
+			
+			allBookingData.setPassengerName(passengerName);
+			allBookingData.setPassengerAge(passengerAge1);
+			allBookingData.setPassengerId(passengerId);
+			
+			bookingDao.setPassengerDetialisToTemperoryTable(allBookingData);
 		}
 		
 

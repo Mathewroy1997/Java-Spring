@@ -8,6 +8,7 @@ import com.project.dao.AdminDao;
 import com.project.models.AdminData;
 import com.project.models.BusCategory;
 import com.project.models.BusDetails;
+import com.project.models.CompleteBookingDetails;
 import com.project.models.Customer;
 import com.project.models.Route;
 import com.project.models.RouteDetails;
@@ -174,6 +175,11 @@ public class AdminService {
 		adminDao.deleteTripDetails(tripId);
 		
 		
+	}
+
+	public List<CompleteBookingDetails> getBookingHistory() {
+		List<CompleteBookingDetails> bookingHistoryList=adminDao.getBookingHistory();
+		return bookingHistoryList;
 	}
 	
 	
