@@ -12,15 +12,22 @@
 <head>
 <div class="holiday">
 <h1>Holiday Travels</h1><p>
-
 </div>
 <div class="topnav">
 <a href="logout" >Sign-out</a>
+
 </div>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
 <body>
 confirmed.
+<input type="hidden" name="username" value=${username }>
+<input type="hidden" name="userId" value=${userId }>
+<form action="backToUserHome">
+<input type="hidden" name="userId" value=${userId }>
+<input type="hidden" name="username" value=${username }>
+<input type="submit" value="Back To Home">
+</form>
 </body>
 </html>

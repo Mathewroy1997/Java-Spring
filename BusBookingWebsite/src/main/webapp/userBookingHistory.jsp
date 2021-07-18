@@ -13,11 +13,11 @@
 </head>
 <body>
 	<div class="holiday">
-		<h1>Holiday Travels</h1>
-		<p>
-	</div>
+<h1>Holiday Travels</h1><p>
+</div>
 	<div class="topnav">
 		<a href="logout">Sign-out</a>
+		
 		</div>
 Booking History
 <table border="2" width="70%" cellpadding="2">  
@@ -41,6 +41,10 @@ Booking History
   
    </c:forEach>  
    </table>  		
-
+<form action="backToUserHome">
+<input type="hidden" name="userId" value=${userId }>
+<input type="hidden" name="username" value=${username }>
+<input type="submit" value="Back To Home">
+</form>
 </body>
 </html>

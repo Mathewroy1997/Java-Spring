@@ -200,10 +200,7 @@ public class AdminController {
 		}
 	}
 
-	@RequestMapping("backToAdminHome")
-	public String backToAdminHome() {
-		return "adminHome";
-	}
+	
 
 	@RequestMapping("updateAdmin")
 	public String updateAdmin(Model adminModel, Model model) {

@@ -13,10 +13,10 @@
 <body>
 <div class="holiday">
 <h1>Holiday Travels</h1><p>
-
 </div>
 <div class="topnav">
 <a href="logout" >Sign-out</a>
+
 
 </div>
 
@@ -49,6 +49,15 @@ BusID:${busId }&emsp;&emsp; Bus Category:${busType }&emsp;&emsp;
    <input type="hidden" name="userTickets" value=${userTickets }  >
    <input type="hidden" name="tripId" value=${tripId }  >
    <input type="submit" value="Proceed To Payment">
+   <input type="hidden" name="username" value=${username }>
+   
+  <input type="hidden" name="userId" value=${userId }>
+
    </form>
+   <form action="backToUserHome">
+<input type="hidden" name="userId" value=${userId }>
+<input type="hidden" name="username" value=${username }>
+<input type="submit" value="Back To Home">
+</form>
 </body>
 </html>

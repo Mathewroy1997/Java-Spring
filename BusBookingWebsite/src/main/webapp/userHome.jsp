@@ -16,6 +16,7 @@
 </div>
 <div class="topnav">
 <a href="logout" >Sign-out</a>
+
 </div>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
@@ -23,14 +24,16 @@
 <body>
 welcome back <%= request.getAttribute("username") %>. <br>
 
-<h2>Holiday Travels</h2>
+
 
 <form action="userBookingHistory" method="post">
 <input type="hidden" name="userId" value=${userId }>
+<input type="hidden" name="username" value=${username }>
 <input type="submit" value="View your tickets">
 </form>
 <form action="newBookingPage" method="post">
 <input type="hidden" name="userId" value=${userId }>
+<input type="hidden" name="username" value=${username }>
 <input type="submit" value="Book New ticket">
 </form>
 

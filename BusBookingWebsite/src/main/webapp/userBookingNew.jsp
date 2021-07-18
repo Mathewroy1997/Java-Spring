@@ -9,16 +9,18 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
-<body><div class="holiday">
+<body>
+<div class="holiday">
 <h1>Holiday Travels</h1><p>
-
 </div>
 <div class="topnav">
 <a href="logout" method="post">Sign-out</a>
+
 </div>
 Find your bus: <br>
 <form action="checkRouteAndDateAvailability" method="post">
 <input type="hidden" name="userId" value=${userId }>
+<input type="hidden" name="username" value=${username }>
 Boarding point
 <select  name="userSelectedDeparture">
   <c:forEach items="${departurePointsList}" var="routeDetails"  >
@@ -40,5 +42,11 @@ Destination
 
 <input type="submit" value="Next:">
 </form>
+<form action="backToUserHome">
+<input type="hidden" name="userId" value=${userId }>
+<input type="hidden" name="username" value=${username }>
+<input type="submit" value="Back To Home">
+</form>
+
 </body>
 </html>

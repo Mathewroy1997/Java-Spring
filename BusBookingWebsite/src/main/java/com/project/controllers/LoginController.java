@@ -53,7 +53,7 @@ public class LoginController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 
-	public String login(HttpServletRequest request, Model m) {
+	public String login(HttpServletRequest request, Model model) {
 
 		String username = request.getParameter("username");
 
@@ -68,7 +68,7 @@ public class LoginController {
 			if (flag == 0) {
 				String error = "Invalid Credentials";
 
-				m.addAttribute("error", error);
+				model.addAttribute("error", error);
 
 				return "invalidLoginAttempt";
 			} else {
@@ -85,7 +85,7 @@ public class LoginController {
 		if (flag == 0) {
 			String error = "Invalid Credentials";
 
-			m.addAttribute("error", error);
+			model.addAttribute("error", error);
 
 			return "invalidLoginAttempt";
 		} 
@@ -94,9 +94,9 @@ public class LoginController {
 			
 			Customer customer;
 			customer = userIDlist.get(0);
-			m.addAttribute("username", username);
-			m.addAttribute("userId",customer.getUserid());
-			m.addAttribute("customer",customer);
+			model.addAttribute("username", username);
+			model.addAttribute("userId",customer.getUserid());
+			model.addAttribute("customer",customer);
 			return "userHome";
 		}
 	}
@@ -109,6 +109,18 @@ public class LoginController {
 	@RequestMapping(value="logout")
 	public String backToIndex() {
 		return "index";
+	}
+	@RequestMapping(value="backToUserHome")
+	public String backToUserHome(HttpServletRequest request, Model model) {
+		int userId=Integer.parseInt(request.getParameter("userId"));
+		String userName=request.getParameter("username");
+		model.addAttribute("username",userName);
+		model.addAttribute("userId",userId);
+		return "userHome";
+	}
+	@RequestMapping(value="backToAdminHome")
+	public String backToAdminHome() {
+		return "adminHome";
 	}
 
 	

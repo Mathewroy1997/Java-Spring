@@ -17,6 +17,7 @@
 </div>
 <div class="topnav">
 <a href="logout" >Sign-out</a>
+
 </div>
 <form action="goToAddPassengerDetials" method="post">
 
@@ -25,7 +26,7 @@ Date: ${date }&emsp;&emsp; Departure:${departure }&emsp;&emsp; Destination:${des
 BusID:${busId }&emsp;&emsp; Bus Category:${busType }&emsp;&emsp; Seats:${userTickets }&emsp;&emsp; Total Price:${totalPrice }<p>
 
 <input type="submit" value="Fine, enter passenger details">
-
+<input type="hidden" name="username" value=${username }>
 <input type="hidden" name="userTickets" value=${userTickets }  >
 <input type="hidden" name="userId" value=${userId }  >
 <input type="hidden" name="date" value=${date }  >
@@ -38,6 +39,11 @@ BusID:${busId }&emsp;&emsp; Bus Category:${busType }&emsp;&emsp; Seats:${userTic
 <input type="hidden" name="busType" value=${busType }   >
 <input type="hidden" name="totalKm" value=${totalKm }   >
 <input type="hidden" name="totalPrice" value=${totalPrice }   >
+</form>
+<form action="backToUserHome">
+<input type="hidden" name="userId" value=${userId }>
+<input type="hidden" name="username" value=${username }>
+<input type="submit" value="Back To Home">
 </form>
 </body>
 </html>

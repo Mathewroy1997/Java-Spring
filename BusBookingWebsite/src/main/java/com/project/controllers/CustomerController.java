@@ -48,8 +48,11 @@ public class CustomerController {
 	
 	@RequestMapping(value="userBookingHistory", method=RequestMethod.POST)
 	public String userBookingHistory(HttpServletRequest request, Model model) {
+		String username=request.getParameter("username");
+		model.addAttribute("username",username);
 		int userId=Integer.parseInt(request.getParameter("userId"));
 		List<CompleteBookingDetails> userBookingDetailsList=customerService.getUserBookingHistory(userId);
+		model.addAttribute("userId",userId);
 		model.addAttribute("userBookingDetailsList",userBookingDetailsList);
 		return "userBookingHistory";
 	}

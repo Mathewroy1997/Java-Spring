@@ -13,10 +13,10 @@
 <body>
 <div class="holiday">
 <h1>Holiday Travels</h1><p>
-
 </div>
 <div class="topnav">
 <a href="logout" >Sign-out</a>
+
 </div>
 
 Date=${date }&emsp;&emsp;
@@ -42,7 +42,7 @@ Available Buses:
       <form action="passUserEntries" method="post">
      <td><input type="number" name="userTickets" min="1" max="5"></td> 
      <td>
-    
+    <input type="hidden" name="username" value=${username }>
      <input type="hidden" name="userId" value=${userId }>
      <input type="hidden" name="date" value=${date }>
       <input type="hidden" name="routeId" value=${routeId }>
@@ -65,6 +65,10 @@ Available Buses:
   
    </c:forEach>  
    </table>  
-
+<form action="backToUserHome">
+<input type="hidden" name="userId" value=${userId }>
+<input type="hidden" name="username" value=${username }>
+<input type="submit" value="Back To Home">
+</form>
 </body>
 </html>
