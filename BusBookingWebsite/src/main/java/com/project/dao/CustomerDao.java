@@ -163,20 +163,7 @@ public class CustomerDao {
 
 	}
 
-	public List<MasterPassengerTable> getFromMasterPassenger() {
-		return jdbctemplate.query("select * from  masterpassenger", new RowMapper<MasterPassengerTable>() {
-			public MasterPassengerTable mapRow(ResultSet rs, int row) throws SQLException {
-				MasterPassengerTable details = new MasterPassengerTable();
-				details.setUserid(rs.getInt("userid"));
-				details.setDate(rs.getString("date"));
-				details.setTripid(rs.getInt("tripid"));
-				details.setName(rs.getString("name"));
-				details.setAge(rs.getInt("age"));
-				details.setId(rs.getInt("id"));
-				return details;
-			}
-		});
-	}
+	
 
 	public int TruncateTemporaryTable() {
 		String sql = "Truncate table temporary_passengers";

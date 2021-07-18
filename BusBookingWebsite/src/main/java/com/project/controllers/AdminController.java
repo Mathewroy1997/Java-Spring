@@ -74,7 +74,7 @@ public class AdminController {
 
 			return "redirect:/updateBusDetails";
 		} catch (Exception e) {
-			return "admin_InvalidEntries";
+			return "adminInvalidEntries";
 		}
 
 	}
@@ -97,7 +97,7 @@ public class AdminController {
 
 			return "redirect:/updateBusDetails";
 		} catch (Exception e) {
-			return "admin_InvalidEntries";
+			return "adminInvalidEntries";
 		}
 	}
 
@@ -125,7 +125,7 @@ public class AdminController {
 			adminService.changeBusDetails(busId, ratePerKm, seats);
 			return "redirect:/updateBusDetails";
 		} catch (Exception e) {
-			return "admin_InvalidEntries";
+			return "adminInvalidEntries";
 		}
 	}
 
@@ -156,7 +156,7 @@ public class AdminController {
 			adminService.addNewRouteDetails(departure, destination, totalDistanceInKm);
 			return "redirect:/updateRouteDetails";
 		} catch (Exception e) {
-			return "admin_InvalidEntries";
+			return "adminInvalidEntries";
 		}
 	}
 
@@ -184,7 +184,7 @@ public class AdminController {
 			adminService.addNewTripDetails(date, routeId, busId, availableSeats);
 			return "redirect:/updateTripDetails";
 		} catch (Exception e) {
-			return "admin_InvalidEntries";
+			return "adminInvalidEntries";
 		}
 	}
 
@@ -196,7 +196,7 @@ public class AdminController {
 
 			return "redirect:/updateTripDetails";
 		} catch (Exception e) {
-			return "admin_InvalidEntries";
+			return "adminInvalidEntries";
 		}
 	}
 
@@ -228,7 +228,7 @@ public class AdminController {
 
 			return "redirect:/updateAdmin";
 		} catch (DuplicateKeyException duplicate) {
-			return "admin_InvalidEntries";
+			return "adminInvalidEntries";
 		}
 	}
 
@@ -263,7 +263,7 @@ public class AdminController {
 			adminService.setUserDetails(username, firstName, lastName, email, address, phone, password);
 			return "redirect:/manageUsers";
 		} catch (Exception e) {
-			return "admin_InvalidEntries";
+			return "adminInvalidEntries";
 		}
 
 	}

@@ -12,7 +12,7 @@
 
 
 <div class="topnav">
-<a href="hello">Covid Status</a> 
+<a href="covidStatus">Covid Status</a> 
 </div>
 
 <div class="centre">
