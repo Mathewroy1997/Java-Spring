@@ -6,9 +6,7 @@ import java.sql.SQLException;
 
 import java.util.List;
 
-
 import org.springframework.dao.DataAccessException;
-
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCallback;
@@ -25,20 +23,18 @@ public class CustomerDao {
 		this.jdbctemplate = jdbctemplate;
 	}
 
-	
-
-	public Boolean addNewUser(final Customer e) {
+	public Boolean addNewUser( Customer customer) {
 		String query = "insert into userdata(username,password,firstname,lastname,email,address,phone) values(?,?,?,?,?,?,?)";
 		return jdbctemplate.execute(query, new PreparedStatementCallback<Boolean>() {
 			public Boolean doInPreparedStatement(PreparedStatement ps) throws SQLException, DataAccessException {
 
-				ps.setString(1, e.getUsername());
-				ps.setString(2, e.getPassword());
-				ps.setString(3, e.getFirstname());
-				ps.setString(4, e.getLastname());
-				ps.setString(5, e.getEmail());
-				ps.setString(6, e.getAddress());
-				ps.setString(7, e.getPhone());
+				ps.setString(1, customer.getUsername());
+				ps.setString(2, customer.getPassword());
+				ps.setString(3, customer.getFirstname());
+				ps.setString(4, customer.getLastname());
+				ps.setString(5, customer.getEmail());
+				ps.setString(6, customer.getAddress());
+				ps.setString(7, customer.getPhone());
 				return ps.execute();
 
 			}
@@ -51,7 +47,6 @@ public class CustomerDao {
 		return jdbctemplate.update(sql);
 
 	}
-
 
 	public List<Customer> getAllUserData() {
 		String query = "select * from userdata ";
@@ -100,7 +95,7 @@ public class CustomerDao {
 	public int moveDataFromTemporaryToMaster() {
 		String sql = "INSERT INTO masterpassenger SELECT * FROM temporary_passengers;";
 		return jdbctemplate.update(sql);
-		
+
 	}
 
 	public List<CompleteBookingDetails> getUserBookingHistory(int userId) {
@@ -108,7 +103,7 @@ public class CustomerDao {
 		return jdbctemplate.query(query, new RowMapper<CompleteBookingDetails>() {
 			public CompleteBookingDetails mapRow(ResultSet rs, int row) throws SQLException {
 				CompleteBookingDetails userBookingHistory = new CompleteBookingDetails();
-				
+
 				userBookingHistory.setUserId(rs.getInt("userId"));
 				userBookingHistory.setDate(rs.getString("date"));
 				userBookingHistory.setRouteId(rs.getInt("routeId"));

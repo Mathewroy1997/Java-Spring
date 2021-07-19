@@ -88,10 +88,11 @@ public class BookingService {
 		return totalPrice;
 	}
 
-	public void setPassengerDetialisToTemperoryTable(int userId, String date, int routeId,String departure,String destination, int tripId,
-			int busId,String busType,String[] passengerNames, String[] passengerAges, String[] passengerIds) {
-		int totalPassengers=passengerAges.length;
-		TemperoryPassengersDetails allBookingData=new TemperoryPassengersDetails();
+	public void setPassengerDetialisToTemperoryTable(int userId, String date, int routeId, String departure,
+			String destination, int tripId, int busId, String busType, String[] passengerNames, String[] passengerAges,
+			String[] passengerIds) {
+		int totalPassengers = passengerAges.length;
+		TemperoryPassengersDetails allBookingData = new TemperoryPassengersDetails();
 		allBookingData.setUserId(userId);
 		allBookingData.setDate(date);
 		allBookingData.setRouteId(routeId);
@@ -100,39 +101,38 @@ public class BookingService {
 		allBookingData.setTripId(tripId);
 		allBookingData.setBusId(busId);
 		allBookingData.setBusType(busType);
-		for(int i=0;i<totalPassengers;i++) {
-			String passengerName=passengerNames[i];
-			String passengerAge=passengerAges[i];
-			int passengerAge1=Integer.parseInt(passengerAge);
-			String passengerId=passengerIds[i];
-			
+		for (int i = 0; i < totalPassengers; i++) {
+			String passengerName = passengerNames[i];
+			String passengerAge = passengerAges[i];
+			int passengerAge1 = Integer.parseInt(passengerAge);
+			String passengerId = passengerIds[i];
+
 			allBookingData.setPassengerName(passengerName);
 			allBookingData.setPassengerAge(passengerAge1);
 			allBookingData.setPassengerId(passengerId);
-			
+
 			bookingDao.setPassengerDetialisToTemperoryTable(allBookingData);
 		}
-		
 
 	}
 
 	public List<TemperoryPassengersDetails> setTemperoryPassengerList() {
-		List<TemperoryPassengersDetails> temperoryPassengersList=bookingDao.getTemperoryPassengersList();
+		List<TemperoryPassengersDetails> temperoryPassengersList = bookingDao.getTemperoryPassengersList();
 		return temperoryPassengersList;
 	}
 
 	public void reduceSeatsInTripTable(int tripId, int userTickets) {
-		bookingDao.reduceSeatsInTripTable(tripId,userTickets);
-		
+		bookingDao.reduceSeatsInTripTable(tripId, userTickets);
+
 	}
 
 	public void movePassengerTemperoryDetailsToPermanaent() {
 		bookingDao.movePassengerTemperoryDetailsToPermanaent();
-		
+
 	}
 
 	public void TruncateTemperoryPassengerTable() {
-		bookingDao.TruncateTemperoryPassengerTable();	
+		bookingDao.TruncateTemperoryPassengerTable();
 	}
 
 }

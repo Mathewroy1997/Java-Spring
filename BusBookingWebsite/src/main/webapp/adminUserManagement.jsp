@@ -17,8 +17,7 @@
 		<p>
 	</div>
 	<div class="topnav">
-		<a href="logout">Sign-out</a>
-		<a href="backToAdminHome" >Home</a>
+		<a href="logout">Sign-out</a> <a href="backToAdminHome">Home</a>
 	</div>
 	Current Users:
 	<table border="2" width="70%" cellpadding="2">
@@ -54,14 +53,15 @@
 	<br>
 	<form action="addUserFromAdmin">
 
-		First Name<input type="text" name="firstName" required> Last Name<input
-			type="text" name="lastName"> Username<input type="text"
-			name="username" required> Password<input type="text" name="password" required>
-		E-Mail ID<input type="text" name="emailID" required> Address<input
+		First Name<input type="text" name="firstName" required> 
+		LastName<input type="text" name="lastName">
+		 Username<input
+			type="text" name="username" required> Password<input
+			type="text" name="password" required> E-Mail ID<input
+			type="text" name="emailID" required> Address<input
 			type="text" name="address" required> Phone<input type="text"
-			name="phone" required>
-			
-			 <input type="submit" value="Add New User">
+			name="phone" required> <input type="submit"
+			value="Add New User">
 
 	</form>
 

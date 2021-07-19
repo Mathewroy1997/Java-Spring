@@ -11,10 +11,11 @@ import com.project.models.CompleteBookingDetails;
 
 public class ApiDao {
 	private JdbcTemplate jdbctemplate;
+
 	public void setJdbctemplate(JdbcTemplate jdbctemplate) {
 		this.jdbctemplate = jdbctemplate;
-		}
-	
+	}
+
 	public List<CompleteBookingDetails> getBookingDetails() {
 		return jdbctemplate.query("select * from  completebookingdata", new RowMapper<CompleteBookingDetails>() {
 			public CompleteBookingDetails mapRow(ResultSet rs, int row) throws SQLException {
@@ -29,7 +30,5 @@ public class ApiDao {
 			}
 		});
 	}
-
-
 
 }

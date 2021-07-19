@@ -7,13 +7,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 
 import com.project.models.CompleteBookingDetails;
 
@@ -22,44 +20,35 @@ import com.project.service.CustomerService;
 @Controller
 public class CustomerController {
 
-	
-	 
-	
-
-
 	@Autowired
 	CustomerService customerService;
-	
-	
-	@RequestMapping(value="userBookingHistory", method=RequestMethod.POST)
+
+	@RequestMapping(value = "userBookingHistory", method = RequestMethod.POST)
 	public String userBookingHistory(HttpServletRequest request, Model model) {
-		String username=request.getParameter("username");		
-		int userId=Integer.parseInt(request.getParameter("userId"));
-		List<CompleteBookingDetails> userBookingDetailsList=customerService.getUserBookingHistory(userId);
-		
-		model.addAttribute("userId",userId);
-		model.addAttribute("userBookingDetailsList",userBookingDetailsList);
-		model.addAttribute("username",username);
+		String username = request.getParameter("username");
+		int userId = Integer.parseInt(request.getParameter("userId"));
+		List<CompleteBookingDetails> userBookingDetailsList = customerService.getUserBookingHistory(userId);
+
+		model.addAttribute("userId", userId);
+		model.addAttribute("userBookingDetailsList", userBookingDetailsList);
+		model.addAttribute("username", username);
 		return "userBookingHistory";
 	}
-	
-	
-@RequestMapping("/submitNewRegistraion")
+
+	@RequestMapping("/submitNewRegistraion")
 	public String newUserRegistration(HttpServletRequest request, HttpServletResponse response, Model model) {
-		
-		
-		
-		String username=request.getParameter("username");
-		String password=request.getParameter("password");
-		String firstName=request.getParameter("firstName");
-		String lastName=request.getParameter("lastName");
-		String emailId=request.getParameter("emailId");
-		String address=request.getParameter("address");
-		String phone=request.getParameter("phone");
-		
+
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		String firstName = request.getParameter("firstName");
+		String lastName = request.getParameter("lastName");
+		String emailId = request.getParameter("emailId");
+		String address = request.getParameter("address");
+		String phone = request.getParameter("phone");
+
 		try {
-			customerService.addNewUser(username,password,firstName,lastName,emailId,address,phone);
-			
+			customerService.addNewUser(username, password, firstName, lastName, emailId, address, phone);
+
 			return "newUserAdded";
 		} catch (Exception e) {
 
@@ -69,5 +58,5 @@ public class CustomerController {
 		}
 
 	}
-	
+
 }

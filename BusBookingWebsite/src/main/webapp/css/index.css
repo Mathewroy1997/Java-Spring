@@ -1,41 +1,39 @@
 body {
-	
 	background-image: url("../resources/bus.jpg");
-	background-size:cover;
+	background-size: cover;
 }
 /* Style the top navigation bar */
 .topnav {
-  overflow: hidden;
-  background-color: #9eb6cd;
+	overflow: hidden;
+	background-color: #9eb6cd;
 }
 
 /* Style the topnav links */
 .topnav a {
-  float: left;
-  display: block;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
+	float: left;
+	display: block;
+	color: #f2f2f2;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
 }
 
 /* Change color on hover */
 .topnav a:hover {
-  background-color: #000000;
-  color: #ffffff;
+	background-color: #000000;
+	color: #ffffff;
 }
+
 .covid {
 	position: absolute;
-	
 	width: 50%;
 	top: 55%;
-	
 	transform: translate(-50%, -50%);
 	background: white;
 	border-radius: 10px;
 }
 
-.loginSignup{
+.loginSignup {
 	font-family: cursive;
 	border-radius: 10px;
 	color: #1167b1;
@@ -43,7 +41,6 @@ body {
 
 .centre {
 	position: absolute;
-	
 	top: 65%;
 	left: 80%;
 	transform: translate(-50%, -50%);
@@ -56,13 +53,14 @@ body {
 	padding: 0 0 20px 0;
 	border-bottom: 1px solid silver;
 }
+
 .centre h3 {
 	text-align: center;
 	padding: 0 0 20px 0;
 	border-bottom: 1px solid silver;
 }
 
-.signup{
+.signup {
 	text-align: center;
 }
 
@@ -109,17 +107,16 @@ form .txt {
 	transition: .5s;
 }
 
-.txt input:focus ~ label,
- .txt input:valid ~ label {
+.txt input:focus ~ label, .txt input:valid ~ label {
 	top: -5px;
 	color: #2691d9;
 }
 
-.txt input:focus ~ span::before, 
-.txt input:valid ~ span::before {
+.txt input:focus ~ span::before, .txt input:valid ~ span::before {
 	width: 100%;
 }
-input[type="submit"]{
+
+input[type="submit"] {
 	width: 100%;
 	height: 50px;
 	border: 1px solid;
@@ -129,40 +126,42 @@ input[type="submit"]{
 	color: #e9f4fb;
 	font-weight: 700;
 	cursor: pointer;
-	outline: none;	
+	outline: none;
 }
-input[type="submit"]:hover{
+
+input[type="submit"]:hover {
 	border-color: #2691d9;
 	transition: .5s;
-	
 }
 
-.holiday{
-    position:relative;
-    left:450px;    
+.holiday {
+	position: relative;
+	left: 450px;
 }
 
-.holiday h1{
-    font-family: cursive;
-    font-weight: 500;
-    display: inline-block;
-    color: #FFFFFF;
-    font-size: 65px;
-    line-height: 48px;
-    margin-bottom: 26px;
-    position: top;
+.holiday h1 {
+	font-family: cursive;
+	font-weight: 500;
+	display: inline-block;
+	color: #FFFFFF;
+	font-size: 65px;
+	line-height: 48px;
+	margin-bottom: 26px;
+	position: top;
 }
-.container h3{
-    font-family: Brush Script MT;
-    font-weight: 500;
-    display: inline-block;
-    color: #FFFFFF;
-    font-size: 25px;
-    line-height: 48px;
-    margin-bottom: 26px;
-    position: top;
+
+.container h3 {
+	font-family: Brush Script MT;
+	font-weight: 500;
+	display: inline-block;
+	color: #FFFFFF;
+	font-size: 25px;
+	line-height: 48px;
+	margin-bottom: 26px;
+	position: top;
 }
-.invalidCred{
+
+.invalidCred {
 	text-align: center;
 	color: #8B0000;
 }

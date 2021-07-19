@@ -1,14 +1,13 @@
 
 package com.project.models;
 
-
 public class CovidNationalStatus {
 
 	private long activeCases;
 	private long deaths;
 	private long previousDayTests;
 	private long totalCases;
-	
+
 	regionData[] regiondata;
 
 	public long getActiveCases() {
@@ -56,5 +55,5 @@ public class CovidNationalStatus {
 		return "CovidReport [activeCases=" + activeCases + ", deaths=" + deaths + ", previousDayTests="
 				+ previousDayTests + ", totalCases=" + totalCases + ", regionData=" + regiondata + "]";
 	}
-	
+
 }

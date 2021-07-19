@@ -1,6 +1,5 @@
 package com.project.controllers;
 
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,29 +22,28 @@ import com.project.service.ApiService;
 public class ApiController {
 	@Autowired
 	ApiService apiService;
-	
-	@RequestMapping(value="covidStatus")
+
+	@RequestMapping(value = "covidStatus")
 	public ModelAndView getCovidStatus(Model m, ModelMap map) {
-		ModelAndView model= new ModelAndView();
+		ModelAndView model = new ModelAndView();
 		final String uri = "https://api.apify.com/v2/key-value-stores/toDWvRj1JpTXiM8FF/records/LATEST?disableRedirect=true";
-		 
-	    
-	    RestTemplate restTemplate = new RestTemplate();
-	  
-	    CovidNationalStatus api = restTemplate.getForObject(uri, CovidNationalStatus .class);
-	    map.put("api",api);
-	    model.setViewName("covidReport");
-	    return model;
+
+		RestTemplate restTemplate = new RestTemplate();
+
+		CovidNationalStatus api = restTemplate.getForObject(uri, CovidNationalStatus.class);
+		map.put("api", api);
+		model.setViewName("covidReport");
+		return model;
 	}
-	
+
 	@RequestMapping(value = "bookingData", method = RequestMethod.GET)
-    public ResponseEntity<List<CompleteBookingDetails>> listAllUsers() {
-        List<CompleteBookingDetails> users =apiService.getBookingDetails();
-        if(users.isEmpty()){
-            return new ResponseEntity<List<CompleteBookingDetails>>(HttpStatus.NO_CONTENT);//You many decide to return HttpStatus.NOT_FOUND
-        }
-        return new ResponseEntity<List<CompleteBookingDetails>>(users, HttpStatus.OK);
-    }
-		
+	public ResponseEntity<List<CompleteBookingDetails>> listAllUsers() {
+		List<CompleteBookingDetails> users = apiService.getBookingDetails();
+		if (users.isEmpty()) {
+			return new ResponseEntity<List<CompleteBookingDetails>>(HttpStatus.NO_CONTENT);// You many decide to return
+																							// HttpStatus.NOT_FOUND
+		}
+		return new ResponseEntity<List<CompleteBookingDetails>>(users, HttpStatus.OK);
+	}
 
 }

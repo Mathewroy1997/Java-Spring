@@ -5,7 +5,7 @@ public class AvailableBuses {
 	private String busType;
 	private int ratePerSeat;
 	private int availableSeats;
-	
+
 	private int tripId;
 
 	public int getTripId() {

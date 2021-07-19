@@ -12,7 +12,7 @@ public class ApiService {
 	ApiDao apiDao;
 
 	public List<CompleteBookingDetails> getBookingDetails() {
-		List<CompleteBookingDetails> bookingDetails=apiDao.getBookingDetails();
+		List<CompleteBookingDetails> bookingDetails = apiDao.getBookingDetails();
 		return bookingDetails;
 	}
 

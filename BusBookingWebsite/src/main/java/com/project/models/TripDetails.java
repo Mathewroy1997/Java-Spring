@@ -1,13 +1,11 @@
 package com.project.models;
 
-
 public class TripDetails {
 	private int tripId;
 	private String date;
 	private int routeId;
 	private int busId;
 	private int availableSeats;
-	
 
 	public int getTripId() {
 		return tripId;

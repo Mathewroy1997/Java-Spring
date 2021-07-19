@@ -12,8 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
-
 import com.project.models.AdminData;
 import com.project.models.BusCategory;
 import com.project.models.BusDetails;
@@ -25,15 +23,8 @@ import com.project.models.RouteDetails;
 import com.project.models.TripDetails;
 import com.project.service.AdminService;
 
-
 @Controller
 public class AdminController {
-
-	
-
-	
-
-	
 
 	@Autowired
 	AdminService adminService;
@@ -189,8 +180,6 @@ public class AdminController {
 		}
 	}
 
-	
-
 	@RequestMapping("updateAdmin")
 	public String updateAdmin(Model adminModel, Model model) {
 		List<AdminData> adminList = adminService.getAdminData();
@@ -256,13 +245,12 @@ public class AdminController {
 		}
 
 	}
+
 	@RequestMapping("adminBookingHistory")
 	public String bookingHistory(Model model) {
-		List<CompleteBookingDetails> bookingDetailsList=adminService.getBookingHistory();
-		model.addAttribute("bookingDetailsList",bookingDetailsList);
+		List<CompleteBookingDetails> bookingDetailsList = adminService.getBookingHistory();
+		model.addAttribute("bookingDetailsList", bookingDetailsList);
 		return "adminBookingHistory";
 	}
-
-	
 
 }

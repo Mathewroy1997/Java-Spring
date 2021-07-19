@@ -12,26 +12,26 @@ import com.project.models.Customer;
 
 public class LoginDao {
 	private JdbcTemplate jdbctemplate;
+
 	public void setJdbctemplate(JdbcTemplate jdbctemplate) {
 		this.jdbctemplate = jdbctemplate;
-		}
-	
+	}
+
 	public List<AdminData> getData(String username, String password) {
-		String query="select * from admindata where username='"+username+"' and password='"+password+"'";
+		String query = "select * from admindata where username='" + username + "' and password='" + password + "'";
 
+		return jdbctemplate.query(query, new RowMapper<AdminData>() {
+			public AdminData mapRow(ResultSet rs, int row) throws SQLException {
+				AdminData adminData = new AdminData();
 
-		return jdbctemplate.query(query,new RowMapper<AdminData>(){
-		public AdminData mapRow(ResultSet rs, int row) throws SQLException {
-		AdminData adminData=new AdminData();
+				adminData.setUsername(rs.getString("username"));
+				adminData.setPassword(rs.getString("password"));
 
-		adminData.setUsername(rs.getString("username"));
-		adminData.setPassword(rs.getString("password"));
-		
-		return adminData;
-		}
+				return adminData;
+			}
 		});
 	}
-	
+
 	public List<Customer> getUserData(String username, String password) {
 		String query = "select * from userdata where username='" + username + "' and password='" + password + "'";
 
